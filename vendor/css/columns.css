@@ -1,0 +1,12 @@
+.cols {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 1rem;
+  align-items: center;
+}
+
+.scrollable {
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  height: 100vh;
+}

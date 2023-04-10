@@ -1,0 +1,58 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	y="0px" viewBox="0 0 640 640" enable-background="new 0 0 640 640" xml:space="preserve">
+	<!-- Background gradient -->
+	<defs>
+		<linearGradient id="background" x1="0%" y1="0%" x2="100%" y2="0%">
+			<stop offset="0%" style="stop-color:white" />
+			<stop offset="100%" style="stop-color:black" />
+		</linearGradient>
+	</defs>
+	<!-- Background -->
+	<rect x="0" y="0" fill="url(#background)" width="640" height="640" />
+	<!-- Black body -->
+	<path fill="black" stroke="none" d="
+		M 320 35 
+		L 320 600 
+		L 330 600
+		C 330 35 600 50 600 50
+		L 600 35
+		z">
+	</path>
+	<!-- White body -->
+	<path fill="white" stroke="none" d="
+		M 320 35 
+		L 320 600 
+		L 310 600
+		C 310 35 40 50 40 50 
+		L 40 35
+		z">
+	</path>
+	<!-- Black left -->
+	<path fill="black" stroke="none" d="
+		M 40 35 
+		L 40 50
+		C 40 50 10 50 10 35
+	z" />
+	<!-- White right -->
+	<path fill="white" stroke="none" d="
+		M 600 35 
+		L 600 50
+		C 600 50 630 50 630 35
+	z" />
+	<!-- Black end -->
+	<path fill="black" stroke="none" d="
+		M 320 600 
+		L 320 630 
+		C 320 615 305 605 310 600 
+	z" />
+	<!-- White end -->
+	<path fill="white" stroke="none" d="
+		M 320 600 
+		L 320 630 
+		C 320 615 335 605 330 600 
+	z" />
+	<!-- Black eye -->
+	<circle cx="275" cy="75" r="15" stroke="none" fill="black" />
+	<!-- White eye -->
+	<circle cx="365" cy="75" r="15" stroke="none" fill="white" />
+</svg>
