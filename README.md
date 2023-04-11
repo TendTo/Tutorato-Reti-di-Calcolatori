@@ -22,9 +22,10 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 <div class="scrollable">
 
-| Lezione                                                                           | Descrizione                           | Data A-L | Data M-Z |
-| --------------------------------------------------------------------------------- | ------------------------------------- | -------- | -------- |
-| [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Presentazione e introduzione al corso | /        | /        |
+| Lezione                                                                           | Descrizione                                           | Data A-L | Data M-Z |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------- | -------- | -------- |
+| [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Presentazione e introduzione al corso                 | /        | /        |
+| [1](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/1-VirtualBox)   | Utilizzo del software di virtualizzazione VirtualBox. | /        | /        |
 
 </div>
 
@@ -55,4 +56,4 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 - [Gruppo telegram della materia](https://t.me/+CBrlIVdKV2ynosTCF6FXDw)
 - [Gruppo telegram del tutorato](https://t.me/+atIlrFYsi3I5NDc8)
 - [Telegram personale](https://t.me/TendTo)
-- [Github](https://github.com/TendTo)# Tutorato di Ingegneria del Software
+- [Github](https://github.com/TendTo)
