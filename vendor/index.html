@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>{{TITLE}}</title>
+
+    <link rel="stylesheet" href="./css/reveal.css" />
+    <link id="theme" rel="stylesheet" href="./css/black.css" />
+    <link rel="stylesheet" href="./css/columns.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./img/favicon-16x16.png"
+    />
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="./css/github-dark.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section
+          data-markdown="README.md"
+          data-separator="^ *<!-- New section --> *\r?\n"
+          data-separator-vertical="^ *<!-- New subsection --> *\r?\n"
+          data-separator-notes="^> Note:"
+        ></section>
+      </div>
+    </div>
+
+    <script src="./js/reveal.js"></script>
+    <script src="./js/notes.js"></script>
+    <script src="./js/markdown.js"></script>
+    <script src="./js/highlight.js"></script>
+    <script src="./js/math.js"></script>
+    <script src="./js/menu.js"></script>
+    <script src="./js/mermaid-load.js" type="module"></script>
+
+    <script>
+      window.addEventListener("load", () => {
+        if (typeof window.loadMermaid !== "undefined") window.loadMermaid();
+        Reveal.initialize({
+          width: 1280,
+          height: 720,
+          slideNumber: true,
+          hash: true,
+          menu: {
+            path: "./css",
+          },
+          plugins: [
+            RevealMarkdown,
+            RevealHighlight,
+            RevealNotes,
+            RevealMath.MathJax3,
+            RevealMenu,
+          ],
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -314,6 +314,7 @@ node_modules/
 .sass-cache
 lezioni/**/*.html
 index.html
+!vendor/index.html
 
 # Vscode
 .vscode/
