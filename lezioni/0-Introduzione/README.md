@@ -81,24 +81,6 @@ Ci si concentrerà particolarmente sulla parte di laboratorio.
 
 ### Possibili argomenti da trattare
 
-<div class="cols">
-
-1. Modello OSI
-2. Livello applicativo
-   - HTTP
-3. Livello trasporto
-   - UDP
-   - TCP
-   - Confronto TCP Tahoe vs TCP Reno
-
-<br/>
-
-4. Livello rete
-   - IPv4
-   - Reti e sottoreti
-5. Laboratorio
-   - Virtualizzazione
-   - Configurazione di reti
-   - Programmazione di reti
-
-</div>
+- Virtualizzazione
+- Configurazione di reti
+- Programmazione socket
