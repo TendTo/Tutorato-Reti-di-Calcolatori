@@ -99,7 +99,7 @@ Per poterci connettere alla VM, dobbiamo effettuare un port forwarding.
 
 <!-- New subsection -->
 
-### Connessione ssh
+### Connessione ssh con NAT
 
 Dall'host OS, possiamo connetterci alla VM tramite ssh.
 
@@ -160,4 +160,131 @@ La scelta influenza la raggiungibilità delle VM e la loro connessione ad altre 
 
 <img src="./img/host_only_mode.webp" width="80%"/></img>
 
+<!-- New section -->
+
+## Passaggi chiave
+
+Di seguito ci sarà una serie di passaggi o di controlli da fare per verificare la correttezza della configurazione di VirtualBox.
+
+Assicuratevi che il passaggio sia fatto sulla macchina corretta guardando il prompt della shell: host (il vostro computer) o vm (la macchina virtuale).
+
 <!-- New subsection -->
+
+### Rete host-only
+
+Dopo aver effettuato tutti gli eventuali aggiornamenti ed installazioni che necessitano internet, generalmente si userà la rete **host-only**.
+
+Bisogna assicurarsi che Virtualbox abbia creato tale rete.
+
+![Host-only network](./img/host_only_setting.jpeg)
+
+<!-- New subsection -->
+
+### Interfaccia di rete host-only
+
+A quel punto, sulla VM, si deve impostare l'interfaccia di rete corretta.
+Il nome deve essere lo stesso della rete creata in precedenza.
+
+Se state facendo il setup di una macchina clonata, assicuratevi di cambiare il MAC address, altrimenti riceverà lo stesso indirizzo ip dell'originale.
+
+<!-- .element: class="fragment" -->
+
+![Host-only network interface](./img/host_only_vm.png)
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+### Conoscere l'indirizzo ip della VM
+
+Per poter connettere la VM, è necessario conoscere il suo indirizzo ip.
+Questo può essere fatto con il comando `ip a`.
+
+```shell
+user@vm:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue ...
+    ...
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 ...
+    link/ether 0a:00:27:00:00:00 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.56.24/24 brd 192.168.56.255 scope global enp0s3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::800:27ff:fe00:3754/64 scope link
+       valid_lft forever preferred_lft forever
+```
+
+L'interfaccia è la `enp0s3`, e gli indirizzi sono `192.168.56.24` per IpV4 e `fe80::800:27ff:fe00:2754` per IpV6.
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+#### Check della connessione
+
+A questo punto la VM dovrebbe essere raggiungibile dall'host.
+La connessione può essere verificata con il comando `ping`.
+
+```shell
+# ping <ip VM>
+user@host:~$ ping 192.168.56.24
+```
+
+<!-- New subsection -->
+
+### SSH
+
+SSH è un tool, nonché un protocollo, per poter accedere alla VM da remoto.
+La VM deve fornire un server SSH a cui l'host si connetterà.
+
+Per verificare che il server SSH sia attivo, si può usare il comando `systemctl`.
+Potrebbe essere necessario essere root.
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```shell
+root@vm:~$ systemctl status ssh
+ssh.service - OpenBSD Secure Shell server
+    Loaded: loaded (/lib/systemd/system/ssh.service; enabled)
+    Active: active (running) since Fri 2021-09-24 15:27:55 CEST; 1h 26min ago
+    ...
+```
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!-- New subsection -->
+
+#### Installazione server SSH
+
+Se il server SSH non è installato, può essere fatto con il comando `apt`.
+Bisogna assicurarsi di avere i privilegi di root.  
+Inoltre sarà necessario accedere ad internet per effettuare il download.
+Quindi la VM dovrà essere connessa utilizzando la rete NAT.
+
+```shell
+root@vm:~$ apt update # Aggiornamento dei pacchetti, se non ancora fatto
+root@vm:~$ apt install openssh-server
+```
+
+<!-- New subsection -->
+
+#### Check della connessione ssh
+
+A questo punto la VM dovrebbe essere raggiungibile dall'host tramite ssh.
+La connessione può essere verificata con il comando `ssh`.
+
+```shell
+# ssh <user>@<ip VM>
+user@host:~$ ssh user@192.168.56.24
+```
+
+La prima volta che effettuate la connessione vi verrà chiesto di accettare la chiave pubblica (fingerprint) del server ssh.
+Per proseguire basta digitare `yes`.
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+### Connessione con VsCode remote ssh
+
+VsCode offre l'estensione [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) che fornisce una connessione ssh agevolata.
+
+[Ulteriori dettagli](https://code.visualstudio.com/docs/remote/ssh-tutorial)
