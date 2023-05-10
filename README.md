@@ -13,7 +13,10 @@ Tutorato del corso di [Reti di Calcolatori](http://web.dmi.unict.it/corsi/l-31/i
 
 ### Orario
 
-Il tutorato verrà erogato [To be determined].
+Il tutorato verrà erogato
+
+- Venerdì, dalle 10:30 alle 13:00.
+
 Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5NDc8).
 
 <!-- New section -->
@@ -22,11 +25,11 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 <div class="scrollable">
 
-| Lezione                                                                           | Descrizione                                           | Data A-L | Data M-Z |
-| --------------------------------------------------------------------------------- | ----------------------------------------------------- | -------- | -------- |
-| [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Presentazione e introduzione al corso                 | /        | /        |
-| [1](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/1-VirtualBox)   | Utilizzo del software di virtualizzazione VirtualBox. | /        | /        |
-| [2](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/2-Socket)       | Punto di contatto fra programmi nella rete.       | /        | /        |
+| Lezione                                                                           | Titolo       | Data |
+| --------------------------------------------------------------------------------- | ------------ | ---- |
+| [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Introduzione |      |
+| [1](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/1-VirtualBox)   | VirtualBox   |      |
+| [2](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/2-Socket)       | Socket       |      |
 
 </div>
 
@@ -34,8 +37,10 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 ## Esercizi
 
-| Esercizio | Descrizione | Data |
-| --------- | ----------- | ---- |
+| Esercizio                                                                                               | Descrizione                       | Trasporto | Ip   | Data |
+| ------------------------------------------------------------------------------------------------------- | --------------------------------- | --------- | ---- | ---- |
+| [udp](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp)           | Semplice client-server            | UDP       | IpV4 |      |
+| [upd-auth](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp-auth) | Sistema di autenticazione su file | UDP       | IpV6 |      |
 
 <!-- New section -->
 
