@@ -182,10 +182,9 @@ Bisogna assicurarsi che Virtualbox abbia creato tale rete.
 
 ### Interfaccia di rete host-only
 
-A quel punto, sulla VM, si deve impostare l'interfaccia di rete corretta.
-Il nome deve essere lo stesso della rete creata in precedenza.
+A quel punto si deve impostare l'interfaccia di rete che userà la VM.
 
-Se state facendo il setup di una macchina clonata, assicuratevi di cambiare il MAC address, altrimenti riceverà lo stesso indirizzo ip dell'originale.
+Se clonate una macchina, assicuratevi di cambiare il MAC address.
 
 <!-- .element: class="fragment" -->
 
@@ -287,4 +286,23 @@ Per proseguire basta digitare `yes`.
 
 VsCode offre l'estensione [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) che fornisce una connessione ssh agevolata.
 
+Nel connettervi alla VM, non utilizzate l'account di root, ma quello utente, con la sua password.
+Se vi dovesse servire agire con i permessi di amministratore, potete cambiare utente da terminale usando il comando `su`.
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```shell
+# Da user a root
+user@vm:~$ su
+Password:
+# Da root a user
+root@vm:/home/user$ su user
+Password:
+user@vm:~$
+```
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
 [Ulteriori dettagli](https://code.visualstudio.com/docs/remote/ssh-tutorial)
+
+<!-- .element: class="fragment" data-fragment-index="1" -->

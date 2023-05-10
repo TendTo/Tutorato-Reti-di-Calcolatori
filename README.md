@@ -26,6 +26,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | --------------------------------------------------------------------------------- | ----------------------------------------------------- | -------- | -------- |
 | [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Presentazione e introduzione al corso                 | /        | /        |
 | [1](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/1-VirtualBox)   | Utilizzo del software di virtualizzazione VirtualBox. | /        | /        |
+| [2](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/2-Socket)       | Punto di contatto fra programmi nella rete.       | /        | /        |
 
 </div>
 
