@@ -26,6 +26,8 @@ int socket(int domain, int type, int protocol);
   - **SOCK_DGRAM** per UDP
 - `protocol`: protocollo di comunicazione:
   - **0** per il protocollo di default
+  - **IPPROTO_TCP** per TCP
+  - **IPPROTO_UDP** per UDP
 
 <!-- New subsection -->
 
@@ -138,5 +140,3 @@ sequenceDiagram
 
     Client-->>Client: close()
 ```
-
-##

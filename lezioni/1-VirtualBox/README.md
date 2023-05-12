@@ -14,7 +14,7 @@ Le macchine virtuali sono software che permettono di emulare un intero computer.
 
 ### Benefici della virtualizzazione
 
-- Eseguire più sistemi diversi contemporaneamente\*
+- Eseguire più sistemi diversi contemporaneamente
 - Semplificare l'installazione ed utilizzo di software specifici
 - Disponibilità e disaster recovery
 - Debuggare e testare configurazioni di rete o architetture distribuite
@@ -287,9 +287,32 @@ Per proseguire basta digitare `yes`.
 VsCode offre l'estensione [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) che fornisce una connessione ssh agevolata.
 
 Nel connettervi alla VM, non utilizzate l'account di root, ma quello utente, con la sua password.
-Se vi dovesse servire agire con i permessi di amministratore, potete cambiare utente da terminale usando il comando `su`.
 
-<!-- .element: class="fragment" data-fragment-index="1" -->
+<!-- .element: class="fragment" -->
+
+Al primo avvio sarà necessario attendere per l'installazione del server VsCode sulla VM.
+
+<!-- .element: class="fragment" -->
+
+[Ulteriori dettagli](https://code.visualstudio.com/docs/remote/ssh-tutorial)
+
+<!-- .element: class="fragment" -->
+
+<!-- New section -->
+
+## Tips and tricks
+
+Serie di consigli e trucchi per utilizzare al meglio le macchine virtuali e VsCode.
+
+<!-- New subsection -->
+
+### Permessi di amministratore
+
+Quando si effettua il login tramite ssh, si dovrebbe utilizzare sempre un utente non privilegiato.
+Se vi dovesse servire agire con i permessi di amministratore, potete:
+
+- premettere il comando con `sudo` (es. `sudo apt update`). Verrà chiesta la password dell'utente.
+- cambiare utente da terminale usando il comando `su`. Verrà chiesta la password di root.
 
 ```shell
 # Da user a root
@@ -297,12 +320,83 @@ user@vm:~$ su
 Password:
 # Da root a user
 root@vm:/home/user$ su user
-Password:
 user@vm:~$
+```
+
+<!-- New subsection -->
+
+### Aggiungere un host alla config di ssh
+
+Invece di inserire ogni volta la stringa `user@ip` per connettersi alla VM, è possibile aggiungere un host alla configurazione di ssh.
+
+Questa operazione può essere fatta sia dal menù di connessione di VsCode, selezionando  
+`+ Add New SSH Host...`  
+sia manualmente, editando il file `~/.ssh/config`.
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```shell
+# ~/.ssh/config
+Host vm                     # Nome mostrato nella lista di VsCode
+    HostName 192.168.56.24  # Ip della VM
+    User user               # Utente con cui connettersi
 ```
 
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
-[Ulteriori dettagli](https://code.visualstudio.com/docs/remote/ssh-tutorial)
+<!-- New subsection -->
 
-<!-- .element: class="fragment" data-fragment-index="1" -->
+### Risparmiare tempo con i cloni
+
+Se avete bisogno di creare più VM identiche, potete effettuare delle clonazioni, così da evitare di ripetere il setup più volte.
+
+In questo caso, connettendosi con VsCode alla VM originale, effettuerete il setup del server VsCode e potreste anche installare eventuali estensioni, in particolare quella di [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).
+Tutte le macchine clone si ritroveranno tutto il necessario già pronto.
+
+<!-- .element: class="fragment" -->
+
+Ricordatevi di cambiare il MAC address delle VM clonate.
+
+<!-- .element: class="fragment" -->
+
+<!-- New section -->
+
+## Comandi shell utili
+
+Lista di comandi utili da terminale suddivisi per macro categorie.
+
+<!-- New subsection -->
+
+### Comandi di rete e ssh
+
+- `ip a`: mostra le interfacce di rete e i relativi indirizzi ip
+- `ip r`: mostra la tabella di routing
+- `ping <ip>`: invia un pacchetto icmp echo request all'ip specificato
+- `ssh <user>@<ip>`: connessione ssh all'ip specificato
+- `scp <file locale> <user>@<ip>:<dest remota>`: copia il file locale in remoto
+- `scp <user>@<ip>:<file remoto> <dest locale>`: copia il file remoto in locale
+
+<!-- New subsection -->
+
+### Comandi di sistema
+
+- `ls`: mostra i file e le cartelle presenti nella cartella corrente
+- `ls -la`: lista estesa
+- `mkdir <cartella>`: crea una nuova cartella
+- `cd <cartella>`: entra nella cartella
+- `rm <file>`: rimuove il file
+- `rm -r <cartella>`: rimuove la cartella e tutto il suo contenuto
+- `mv <file> <destinazione>`: rinomina il file o lo sposta
+- `cp <file> <destinazione>`: copia il file
+- `cat <file>`: mostra il contenuto del file
+- `nano <file>`: apre il file con l'editor nano
+
+<!-- New subsection -->
+
+### Comandi di servizio
+
+- `systemctl status <nome servizio>`: mostra lo stato del servizio
+- `systemctl start <nome servizio>`: avvia il servizio
+- `systemctl stop <nome servizio>`: ferma il servizio
+- `systemctl restart <nome servizio>`: riavvia il servizio
+- `systemctl enable <nome servizio>`: avvia il servizio all'avvio della macchina
