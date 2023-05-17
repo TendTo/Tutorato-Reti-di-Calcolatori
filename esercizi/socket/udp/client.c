@@ -14,11 +14,15 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
+#define MAX_MSG_SIZE 2000
+#define PORT 2000
+#define IP_ADDR "192.168.56.101"
+
 int main(void)
 {
     int socket_desc;
     struct sockaddr_in server_addr;
-    char server_message[2000], client_message[2000];
+    char server_message[MAX_MSG_SIZE], client_message[MAX_MSG_SIZE];
     socklen_t server_struct_length = sizeof(server_addr);
 
     // Azzera tutte le strutture dati. '\0' e 0 sono equivalenti
@@ -40,8 +44,8 @@ int main(void)
     // Si impostano le informazioni del server
     // In questo esempio porta e indirizzo sono hard-coded
     server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(2000);
-    server_addr.sin_addr.s_addr = inet_addr("192.168.56.101");
+    server_addr.sin_port = htons(PORT);
+    server_addr.sin_addr.s_addr = inet_addr(IP_ADDR);
 
     // Prendiamo l'input dell'utente e lo si salva nel buffer client_message
     printf("Enter message: ");

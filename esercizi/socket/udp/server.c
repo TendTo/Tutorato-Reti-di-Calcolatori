@@ -16,6 +16,7 @@
 
 #define SERVER_RESP "Server's answer: "
 #define MAX_MSG_SIZE 1000
+#define PORT 2000
 
 int main(void)
 {
@@ -45,7 +46,7 @@ int main(void)
     // Si impostano le informazioni del server
     // In questo esempio la porta è hard-coded
     server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(2000);
+    server_addr.sin_port = htons(PORT);
     server_addr.sin_addr.s_addr = INADDR_ANY; // Il server accetta connessioni da qualsiasi indirizzo
 
     // Si associa il socket all'indirizzo e alla porta
