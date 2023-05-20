@@ -7,9 +7,9 @@
  * Utilizza ipv6.
  * @version 0.1
  * @date 2023-05-11
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 #include <stdlib.h>
 #include <string.h>
@@ -67,7 +67,7 @@ bool login(User u, FILE *f)
     return true;
 }
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
     int sockfd, n;
     struct sockaddr_in6 server_addr, client_addr;

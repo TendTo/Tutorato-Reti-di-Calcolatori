@@ -27,7 +27,7 @@ typedef struct
     char password[MAX_PASSWORD_SIZE];
 } User;
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
     int sockfd, n;
     struct sockaddr_in6 server_addr;
