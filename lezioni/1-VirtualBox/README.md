@@ -168,6 +168,14 @@ Di seguito ci sarà una serie di passaggi o di controlli da fare per verificare 
 
 Assicuratevi che il passaggio sia fatto sulla macchina corretta guardando il prompt della shell: host (il vostro computer) o vm (la macchina virtuale).
 
+<!-- .element: class="fragment" -->
+
+Alcune operazioni richiedono privilegi di amministratore.
+Se è questo il caso, il prompt della shell mostrerà l'utente _root_
+Per eseguire tali operazioni, potete aggiungere `sudo` prima del comando o cambiare utente con `su`, diventando _root_.
+
+<!-- .element: class="fragment" -->
+
 <!-- New subsection -->
 
 ### Rete host-only
@@ -400,3 +408,163 @@ Lista di comandi utili da terminale suddivisi per macro categorie.
 - `systemctl stop <nome servizio>`: ferma il servizio
 - `systemctl restart <nome servizio>`: riavvia il servizio
 - `systemctl enable <nome servizio>`: avvia il servizio all'avvio della macchina
+
+<!-- New section -->
+
+## Guest additions
+
+Le guest additions sono un software opzionale che aggiunge diverse funzionalità alle VM create con VirtualBox.
+
+Vedremo nello specifico come installarle su un guest debian.
+È sempre consigliabile fare queste operazioni sulla macchina virtuale originale, prima di effettuare cloni.
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+### Installazione le dipendenze sulla macchina virtuale
+
+Il primo passo consiste nell'assicurarsi che la VM abbia accesso ad internet.
+La scheda di rete deve essere di tipo NAT, bridged o simili.
+
+Successivamente si possono installare i pacchetti necessari.
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```shell
+root@vm:~$ apt update
+root@vm:~$ apt install build-essential dkms linux-headers-$(uname -r)
+```
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!-- New subsection -->
+
+### Inserire il disco delle guest additions
+
+La _.iso_ delle guest addition può essere scaricata dal [sito ufficiale](https://download.virtualbox.org/virtualbox/).  
+La versione da scaricare è quella che appare nella sezione `Help > About VirtualBox`.
+
+Una volta scaricata, la _.iso_ può essere inserta nella VM.
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+![Guest additions iso](./img/guest_additions_iso.png)
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!-- New subsection -->
+
+### Montare ed installare
+
+A questo punto è possibile montare il disco e installare le guest additions.
+
+```shell
+root@vm:~$ mkdir -p /mnt/cdrom
+root@vm:~$ mount /dev/cdrom /mnt/cdrom
+```
+
+L'ultimo passaggio sarà quello di eseguire lo script di installazione
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```shell
+root@vm:~$ sh /mnt/cdrom/VBoxLinuxAdditions.run --nox11
+```
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+Al prossimo riavvio, le guest additions saranno attive.
+Per verificare che siano installate, si può usare il comando `lsmod`.
+
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+```shell
+root@vm:~$ lsmod | grep vbox
+vboxsf                 81920  0
+vboxguest              40960  1 vboxsf
+```
+
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+<!-- New section -->
+
+## Cartelle condivise
+
+Una funzionalità molto comoda messa a disposizione da VirtualBox è la possibilità di condividere una cartella tra host e guest.
+
+In questa modalità, una cartella presente sull'host sarà visibile anche sulla VM.
+In base alle impostazioni, sarà possibile leggere, scrivere o eseguire i file presenti, in modo che i cambiamenti siano visibili a tutte le macchine con accesso alla cartella.
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!-- New subsection -->
+
+### Permessi
+
+Per assicurarsi di avere i permessi per la gestione della cartella condivisa, sarà sufficiente aggiungere l'utente corrente alla lista degli utenti del gruppo `vboxsf`.
+
+```shell
+root@vm:~$ usermod -aG vboxsf user
+```
+
+<!-- New subsection -->
+
+### Aggiungere una cartella condivisa
+
+La cartella condivisa temporanea è una cartella che viene creata e distrutta ad ogni avvio della VM.
+
+Per creare una cartella condivisa temporanea, bisogna andare nelle impostazioni della VM, nella sezione `Shared Folders`, e aggiungere una nuova cartella condivisa.
+
+![Shared folder](./img/shared_folder.png)
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+### Opzioni
+
+Le opzioni disponibili sono:
+
+- **Folder Path**: percorso della cartella dell'host da condividere
+- **Folder Name**: nome della cartella condivisa. Verrà usata per montarla nella VM
+- **Mount Point**: percorso della cartella in cui verrà montata la cartella condivisa. Va lasciato vuoto per il montaggio automatico
+- **Read Only**: rende la cartella condivisa in sola lettura per la VM
+- **Auto-mount**: prova a montare la cartella condivisa all'avvio della VM, in `/media/sf_<folder name>`
+- **Make Permanent**: rende la cartella condivisa permanente. Sarà disponibile anche dopo il riavvio della VM
+
+<!-- New subsection -->
+
+### Montaggio manuale
+
+Se la cartella condivisa non viene montata automaticamente, è possibile farlo manualmente.
+
+```shell
+# Ci si assicura che il mount point sia un percorso valido
+root@vm:~$ mkdir -p <mount point>
+# Si monta la cartella condivisa
+root@vm:~$ mount -t vboxsf -o uid=$UID <folder name> <mount point>
+```
+
+Questi passaggi dovranno essere ripetuti ad ogni avvio della VM.
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+### Montaggio manuale all'avvio
+
+Fare in modo che la cartella venga montata all'avvio della VM richiede qualche passaggio in più:
+
+```shell
+# Ottenere il proprio UID
+user@vm:~$ echo $UID
+# Editare il file /etc/fstab
+root@vm:~$ nano /etc/fstab
+```
+
+```shell
+# /etc/fstab
+# Aggiungere la seguente riga, con le informazioni separate da un tab
+<folder name>   <mount point>   vboxsf  uid=<$UID ottenuto prima>    0   0
+```
