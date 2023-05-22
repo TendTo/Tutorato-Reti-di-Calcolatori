@@ -31,11 +31,12 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 <div class="scrollable">
 
-| Lezione                                                                           | Titolo       | Data |
-| --------------------------------------------------------------------------------- | ------------ | ---- |
-| [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Introduzione |      |
-| [1](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/1-VirtualBox)   | VirtualBox   |      |
-| [2](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/2-Socket)       | Socket       |      |
+| Lezione                                                                           | Titolo       | Data       |
+| --------------------------------------------------------------------------------- | ------------ | ---------- |
+| [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Introduzione | 12/05/2023 |
+| [1](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/1-VirtualBox)   | VirtualBox   | 12/05/2023 |
+| [2](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/2-Socket)       | Socket       |            |
+| [3](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/3-Network)      | Network      |            |
 
 </div>
 
@@ -43,10 +44,10 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 ## Esercizi
 
-| Esercizio                                                                                               | Descrizione                       | Trasporto | Ip   | Data |
-| ------------------------------------------------------------------------------------------------------- | --------------------------------- | --------- | ---- | ---- |
-| [udp](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp)           | Semplice client-server            | UDP       | IpV4 |      |
-| [upd-auth](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp-auth) | Sistema di autenticazione su file | UDP       | IpV6 |      |
+| Esercizio                                                                                               | Descrizione                       | Trasporto | Ip   | Data       |
+| ------------------------------------------------------------------------------------------------------- | --------------------------------- | --------- | ---- | ---------- |
+| [udp](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp)           | Semplice client-server            | UDP       | IpV4 | 12/05/2023 |
+| [upd-auth](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp-auth) | Sistema di autenticazione su file | UDP       | IpV6 |            |
 
 <!-- New section -->
 
