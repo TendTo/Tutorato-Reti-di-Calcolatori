@@ -10,8 +10,9 @@ Gli indirizzi IPv4 sono dei numeri lunghi 32 bit che identificano univocamente u
 Generalmente sono scritti in notazione puntata, dove ogni numero rappresenta un byte (8 bit).
 
 $$
-\underbrace{192}_{8\ bit}.\underbrace{168}_{8\ bit}.\underbrace{1}_{8\ bit}.\underbrace{1}_{8\ bit} \\
-\ \\
+\underbrace{192}_{8\ bit}.\underbrace{168}_{8\ bit}.\underbrace{1}_{8\ bit}.\underbrace{1}_{8\ bit}
+\newline \
+\newline
 \underbrace{\underbrace{11000000}_{8\ bit}.\underbrace{10101000}_{8\ bit}.\underbrace{00000001}_{8\ bit}.\underbrace{00000001}_{8\ bit}}_{32\ bit}
 $$
 
@@ -36,7 +37,8 @@ Il CIDR è un sistema di notazione che permette di specificare la lunghezza del 
 
 $$
 \underbrace{192.168.1}_{24\ \text{bit di mask}}.1\ /\underbrace{24}_{\text{mask}} \\
-\ \\
+\newline \
+\newline
 \underbrace{11000000.10101000.00000001}_{24\ \text{bit di mask}}.\underbrace{00000001}_{8\ \text{bit liberi}}\ /\underbrace{24}_{\text{mask}}
 $$
 
@@ -45,18 +47,15 @@ $$
 ### Indirizzi speciali
 
 Gli indirizzi speciali sono indirizzi che non possono essere assegnati a dispositivi, ma hanno un significato particolare.
+Questi sono alcuni degli indirizzi speciali più comuni.
 
-| Indirizzo        | Descrizione   |
-| ---------------- | ------------- |
-| $0.0.0.0$        | Accetta tutti |
-| $127.0.0.0/8$    | Loopback      |
-| $169.254.0.0/16$ | Locali        |
-| $192.0.0.0/24$   | Locali        |
-| $10.0.0.0/8$     | Locali        |
-| $172.16.0.0/12$  | Locali        |
-| $192.168.0.0/16$ | Locali        |
-| $224.0.0.0/4$    | Multicast     |
-| $x.x.x.255/y$    | Broadcast     |
+| Indirizzo                        | Descrizione   |
+| -------------------------------- | ------------- |
+| $127.0.0.0/8$                    | Loopback      |
+| $10.0.0.0/8$                     | Locali        |
+| $192.0.0.0/24$, $192.168.0.0/16$ | Locali        |
+| $224.0.0.0/4$                    | Multicast     |
+| $x.x.x.255/y$                    | Broadcast     |
 
 <!-- New section -->
 
@@ -65,7 +64,7 @@ Gli indirizzi speciali sono indirizzi che non possono essere assegnati a disposi
 Gli indirizzi IPv6 sono dei numeri lunghi 128 bit che identificano univocamente un dispositivo all'interno di una rete.
 
 $$
-\underbrace{\underbrace{\underbrace{2}_{4 \ bit}001}_{16\ bit}:0db8:85a3:0000:0000:8a2e:0370:7334}_{128\ bit}
+\underbrace{\underbrace{\underbrace{2}_{4 \ bit}001}_{16\ bit}:0db8:85a3:0000:0000:8a2e:0370:7334}\_{128\ bit}
 $$
 
 <!-- New subsection -->
@@ -75,14 +74,16 @@ $$
 La notazione compressa permette di omettere gli zeri iniziali di ogni gruppo di 4 cifre.
 
 $$
-2001:0db8:85a3:0000:0000:8a2e:0370:7334 \\
+2001:0db8:85a3:0000:0000:8a2e:0370:7334
+\newline
 2001:db8:85a3:0:0:8a2e:370:7334
 $$
 
 Inoltre, è possibile omettere una sola sequenza di zeri consecutivi.
 
 $$
-2001:0db8:85a3:0000:0000:8a2e:0370:7334 \\
+2001:0db8:85a3:0000:0000:8a2e:0370:7334
+\newline
 2001:db8:85a3::8a2e:370:7334
 $$
 
@@ -91,6 +92,7 @@ $$
 ### Indirizzi speciali
 
 Gli indirizzi speciali sono indirizzi che non possono essere assegnati a dispositivi, ma hanno un significato particolare.
+Questi sono alcuni degli indirizzi speciali più comuni.
 
 | Indirizzo       | Descrizione      |
 | --------------- | ---------------- |
@@ -186,10 +188,7 @@ Modificare il file _/etc/network/interfaces_
 
 ```python
 # Router /etc/network/interfaces
-# The first one should already be set
-allow-hotplug enp0s3
-iface enp0s3 inet dhcp
-
+# ...
 auto enp0s8
 iface enp0s8 inet static
     address 10.0.1.1
@@ -200,6 +199,10 @@ iface enp0s9 inet static
     address 10.0.5.1
     netmask 255.255.255.0
 ```
+
+<!-- New subsection -->
+
+#### Usare il routing
 
 Per permettere al router di comportarsi come tale, e quindi di inoltrare i pacchetti diretti ad altre macchine, è necessario abilitare tale comportamento dal file _/etc/sysctl.conf_, rimuovendo il commento dalla riga _net.ipv4.ip_forward=1_.
 
@@ -337,6 +340,10 @@ Impostare un'interfaccia come up o down
 ip link set dev enp0s8 up
 ```
 
+<!-- New subsection -->
+
+#### Routing
+
 Aggiungere, sostituire o rimuovere una route per una rete, specificando l'interfaccia o l'ip
 
 ```bash
@@ -384,6 +391,8 @@ iface enp0s8 inet static
     per-down route del -net 10.0.1.0 netmask 255.255.255.0 gw 10.0.1.1 dev enp0s8
 ```
 
+<!-- New subsection -->
+
 ### Impostare gli hostnames
 
 Per aggiungere dei nomi da associare agli ip, si può modificare il file _/etc/hosts_, aggiungendo le coppie **ip-hostname** sotto le righe già presenti
@@ -396,5 +405,7 @@ Per aggiungere dei nomi da associare agli ip, si può modificare il file _/etc/h
 10.0.0.1 router
 192.168.1.2 server
 ```
+
+<!-- New section -->
 
 ## Challenge
