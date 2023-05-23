@@ -44,18 +44,63 @@ $$
 
 <!-- New subsection -->
 
+### Albero delle sotto-reti
+
+Una rete, individuata dalla parte dell'ip fissata dalla maschera, può essere ulteriormente divisa in sotto-reti che condividono la stessa sequenza iniziale, ma con una maschera più lunga.
+
+```mermaid
+graph TD
+r{{rete\n192.168.1.0/24}}
+s1{{sotto-rete\n192.168.1.0/25}}
+s2{{sotto-rete\n192.168.1.128/25}}
+s3{{sotto-rete\n192.168.1.0/26}}
+s4{{sotto-rete\n192.168.1.64/26}}
+s5{{sotto-rete\n192.168.1.128/26}}
+s6{{sotto-rete\n192.168.1.192/26}}
+s7{{sotto-rete\n192.168.1.0/27}}
+s8{{sotto-rete\n192.168.1.32/27}}
+s9{{sotto-rete\n192.168.1.64/27}}
+s10{{sotto-rete\n192.168.1.96/27}}
+s11{{sotto-rete\n192.168.1.128/27}}
+s12{{sotto-rete\n192.168.1.160/27}}
+s13{{sotto-rete\n192.168.1.192/27}}
+s14{{sotto-rete\n192.168.1.224/27}}
+s15{{sotto-rete\n192.168.1.0/28}}
+s16{{sotto-rete\n192.168.1.16/28}}
+
+    r --> s1
+    r --> s2
+    s1 --> s3
+    s1 --> s4
+    s2 --> s5
+    s2 --> s6
+    s3 --> s7
+    s3 --> s8
+    s4 --> s9
+    s4 --> s10
+    s5 --> s11
+    s5 --> s12
+    s6 --> s13
+    s6 --> s14
+    s7 --> s15
+    s7 --> s16
+
+```
+
+<!-- New subsection -->
+
 ### Indirizzi speciali
 
 Gli indirizzi speciali sono indirizzi che non possono essere assegnati a dispositivi, ma hanno un significato particolare.
 Questi sono alcuni degli indirizzi speciali più comuni.
 
-| Indirizzo                        | Descrizione   |
-| -------------------------------- | ------------- |
-| $127.0.0.0/8$                    | Loopback      |
-| $10.0.0.0/8$                     | Locali        |
-| $192.0.0.0/24$, $192.168.0.0/16$ | Locali        |
-| $224.0.0.0/4$                    | Multicast     |
-| $x.x.x.255/y$                    | Broadcast     |
+| Indirizzo                        | Descrizione |
+| -------------------------------- | ----------- |
+| $127.0.0.0/8$                    | Loopback    |
+| $10.0.0.0/8$                     | Locali      |
+| $192.0.0.0/24$, $192.168.0.0/16$ | Locali      |
+| $224.0.0.0/4$                    | Multicast   |
+| $x.x.x.255/y$                    | Broadcast   |
 
 <!-- New section -->
 
@@ -121,7 +166,7 @@ i((internet\n192.168.1.2))
 
 <!-- New subsection -->
 
-### Create the virtual machines
+### Creare le macchine virtuali
 
 Prima di tutto è necessario creare le tre macchine virtuali.
 Per velocizzare il processo, è possibile crearne una e clonarla due volte, prima di aver fatto alcuna configurazione.
@@ -370,18 +415,39 @@ Modificare il file _/etc/network/interfaces_.
 Si può usare qualsiasi editor di testo disponibile, ma probabilmente troverete già installati **vi** o **nano**.
 
 ```python
+# /etc/network/interfaces
 auto <interface>
 iface <interface> inet static       # se impostato a 'dhcp', l'ip verrà assegnato dinamicamente
-    address <ip>                    # ip della macchina legato a questa interfaccia
+    address <ip>                    # ip della macchina legato a questa interfaccia. Si può aggiungere anche la mask /n
     netmask <mask>                  # maschera della rete (la parte /n)
     gateway <router ip>             # [SOLO SU UNA INTERFACCIA] imposta il gateway di default
     network <network>               # [OPZIONALE] definizione dalla rete. Default: ip/mask
     broadcast <broadcast address>   # [OPZIONALE] indirizzo di broadcast. Default: ip.255
     post-up <route up>              # [OPZIONALE] operazioni da fare quando l'interfaccia è messa su
     per-down <route down>           # [OPZIONALE] operazioni da fare quando l'interfaccia è messa giù
+```
 
+<!-- New subsection -->
+
+#### Esempi di file di configurazione
+
+File _/etc/network/interfaces_:
+
+```python
+auto enp0s3
+iface enp0s3 inet dhcp
+```
+
+```python
 auto enp0s8
 iface enp0s8 inet static
+    address 10.0.1.2/24
+    gateway 10.0.1.1
+```
+
+```python
+auto enp0s9
+iface enp0s9 inet static
     address 10.0.1.2
     netmask 255.255.255.0
     gateway 10.0.1.1
