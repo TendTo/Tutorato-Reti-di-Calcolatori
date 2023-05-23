@@ -440,6 +440,44 @@ root@vm:~$ apt install build-essential dkms linux-headers-$(uname -r)
 
 <!-- New subsection -->
 
+### Abilitare il copia-incolla da terminale
+
+Se si lavora con una macchina virtuale senza interfaccia grafica, quindi solo con il terminale, la funzione di copia-incolla non sarà abilitata di default dopo aver installato le guest additions.
+Sarà invece necessario installare alcuni pacchetti aggiuntivi.
+
+```shell
+root@vm:~$ apt x-window-system-core xclip
+```
+
+La nuova shell potrebbe utilizzare il layout della tastiera americano.
+Per cambiarlo, si può usare il comando `setxkbmap`.
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```shell
+user@vm:~$ setxkbmap it
+```
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!-- New subsection -->
+
+#### Entrare nella nuova shell
+
+Per poter verificare che tutto sia andato a buon fine, è necessario completare gli step successivi relativi all'installazione delle guest additions.
+
+Abilitando la nuova shell con `startx`, sarà possibile copiare i testi dall'host ed incollarli nella VM con il tasto centrale del mouse (o premendo entrambi i tasti contemporaneamente).
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```shell
+user@vm:~$ startx
+```
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!-- New subsection -->
+
 ### Inserire il disco delle guest additions
 
 La _.iso_ delle guest addition può essere scaricata dal [sito ufficiale](https://download.virtualbox.org/virtualbox/).  
