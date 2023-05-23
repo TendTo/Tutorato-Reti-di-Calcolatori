@@ -27,12 +27,26 @@ typedef struct
     char password[MAX_PASSWORD_SIZE];
 } User;
 
+typedef enum
+{
+    REGISTER = 'r',
+    LOGIN = 'l',
+    DELETE = 'd',
+    EXIT = 'e'
+} Operation;
+
+typedef struct
+{
+    Operation op;
+    User u;
+} Message;
+
 int main(int argc, char *argv[])
 {
     int sockfd, n;
     struct sockaddr_in6 server_addr;
     socklen_t sock_len = sizeof(struct sockaddr_in6);
-    char msg[1000];
+    char buffer[1000];
 
     if (argc < 2)
     {
@@ -51,30 +65,51 @@ int main(int argc, char *argv[])
     server_addr.sin6_port = htons(atoi(argv[2]));
     inet_pton(AF_INET6, argv[1], &server_addr.sin6_addr);
 
-    // Domanda username e password all'utente
-    User u;
-    printf("Inserisci username: ");
-    fgets(u.username, sizeof(u.username), stdin);
-    u.username[strcspn(u.username, "\n")] = '\0';
-    printf("Inserisci password: ");
-    fgets(u.password, sizeof(u.password), stdin);
-    u.password[strcspn(u.password, "\n")] = '\0';
-
-    // Invia username e password
-    if (sendto(sockfd, &u, sizeof(u), 0, (struct sockaddr *)&server_addr, sock_len) < 0)
+    while (1)
     {
-        perror("Error in sending data!");
-        return 1;
+        // Operazione da effettuare
+        Message msg;
+        printf("Inserisci operazione da effettuare:\nr: registrazione\nl: login\nd: delete\ne: exit\n");
+        msg.op = getchar();
+        getchar();
+
+        switch (msg.op)
+        {
+        case REGISTER:
+        case LOGIN:
+        case DELETE:
+            // Domanda username e password all'utente
+            printf("Inserisci username: ");
+            fgets(msg.u.username, sizeof(msg.u.username), stdin);
+            msg.u.username[strcspn(msg.u.username, "\n")] = '\0';
+            printf("Inserisci password: ");
+            fgets(msg.u.password, sizeof(msg.u.password), stdin);
+            msg.u.password[strcspn(msg.u.password, "\n")] = '\0';
+
+            // Invia username e password
+            if (sendto(sockfd, &msg, sizeof(msg), 0, (struct sockaddr *)&server_addr, sock_len) < 0)
+            {
+                perror("Error in sending data!");
+                return 1;
+            }
+
+            // Riceve la risposta dal server
+            if (recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *)&server_addr, &sock_len) < 0)
+            {
+                perror("Error in receiving data!");
+                return 1;
+            }
+            printf("Risposta dal server: %s\n", buffer);
+
+            break;
+        case EXIT:
+            printf("Arrivederci!\n");
+            close(sockfd);
+            return 0;
+        default:
+            printf("%d\n", (int) msg.op);
+        }
     }
 
-    // Riceve la risposta dal server
-    if (recvfrom(sockfd, msg, sizeof(msg), 0, (struct sockaddr *)&server_addr, &sock_len) < 0)
-    {
-        perror("Error in receiving data!");
-        return 1;
-    }
-    printf("Risposta dal server: %s\n", msg);
-
-    close(sockfd);
     return 0;
 }
