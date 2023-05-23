@@ -46,8 +46,12 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 | Esercizio                                                                                               | Descrizione                       | Trasporto | Ip   | Data       |
 | ------------------------------------------------------------------------------------------------------- | --------------------------------- | --------- | ---- | ---------- |
-| [udp](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp)           | Semplice client-server            | UDP       | IpV4 | 12/05/2023 |
-| [upd-auth](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp-auth) | Sistema di autenticazione su file | UDP       | IpV6 |            |
+| [udp](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp)           | Semplice client-server            | UDP       | IPv4 | 12/05/2023 |
+| [upd-auth](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp-auth) | Sistema di autenticazione su file | UDP       | IPv6 |            |
+| [tcp](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/tcp)           | Semplice client-server            | TCP       | IPv4 |            |
+| [tcp-ipv6](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/tcp-ipv6) | Semplice client-server con IPv6   | TCP       | IPv6 |            |
+| [tcp-fork](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/tcp-fork) | Server che utilizza le fork       | TCP       | IPv4 |            |
+| [ntp](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/ntp)           | Implementazione di NTP            | UDP       | IPv4 |            |
 
 <!-- New section -->
 
