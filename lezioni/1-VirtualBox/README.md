@@ -411,6 +411,58 @@ Lista di comandi utili da terminale suddivisi per macro categorie.
 
 <!-- New section -->
 
+## Sniffing di rete
+
+Capire meglio come funziona la rete e tutti i protocolli che vengono utilizzati diventa più facile quando si ha modo di osservare il traffico di rete.
+
+Vi sono vari tool in grado di ottenere questo risultato.
+Noi vedremo una combinazione fra le funzionalità di VirtualBox e [Wireshark](https://www.wireshark.org/) per visualizzare i file [_.pcap_](https://en.wikipedia.org/wiki/Pcap).
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+### Abilitare la cattura del traffico
+
+VirtualBox prevede l'opzione di catturare tutto il traffico che coinvolge una macchina virtuale, salvandolo in un file _.pcap_.  
+Il comando deve essere fatto quando la macchina è spenta, e si applicherà al prossimo avvio.
+
+La sintassi è la seguente:
+
+```shell
+VBoxManage modifyvm <nome vm> --nictrace<numero scheda di rete> on --nictracefile<numero scheda di rete> /path/file.pcap
+```
+
+Ad esempio
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```shell
+user@host:~$ VBoxManage modifyvm "MyVM" --nictrace1 on --nictracefile1 file.pcap
+```
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+Ricordate di disattivare la cattura quando avete finito
+
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+```shell
+user@vm:~$ VBoxManage modifyvm "MyVM" --nictrace1 off --nictracefile1 file.pcap
+```
+
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+<!-- New subsection -->
+
+### Leggere il file _.pcap_
+
+Una volta ottenuto il file _.pcap_, è possibile aprirlo con [Wireshark](https://www.wireshark.org/) o con qualsiasi altro tool in grado di leggere questo formato, come [tcpdump](https://www.tcpdump.org/).
+
+![Wireshark](./img/wireshark.png)
+
+<!-- New section -->
+
 ## Guest additions
 
 Le guest additions sono un software opzionale che aggiunge diverse funzionalità alle VM create con VirtualBox.
