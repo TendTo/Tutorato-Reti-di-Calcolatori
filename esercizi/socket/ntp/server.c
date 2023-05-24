@@ -116,7 +116,7 @@ int main(int argc, char const *argv[])
 {
     if (argc < 2 || atoi(argv[1]) == 0)
     {
-        fprintf(stderr, "use: %s port", argv[0]);
+        fprintf(stderr, "use: %s port\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 

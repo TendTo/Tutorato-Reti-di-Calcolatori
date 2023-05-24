@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 {
     if (argc < 3 || atoi(argv[2]) == 0)
     {
-        fprintf(stderr, "use: %s address port", argv[0]);
+        fprintf(stderr, "use: %s address port\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 

@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     socklen_t server_struct_length = sizeof(server_addr);
 
     if (argc < 2) {
-        fprintf(stderr, "use: %s address", argv[0]);
+        fprintf(stderr, "use: %s address\n", argv[0]);
         return 1;
     }
 

@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
     if (argc < 2)
     {
-        fprintf(stderr, "use: %s address", argv[0]);
+        fprintf(stderr, "use: %s address\n", argv[0]);
         return 1;
     }
 
