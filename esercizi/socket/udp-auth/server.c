@@ -4,6 +4,8 @@
  * @brief Server che si occupa dell'autenticazione.
  * Verrà creato un file di testo 'database.txt' che conterrà le coppie username,password.
  * Gli utenti si possono registrare al server, a patto che il loro username sia univoco.
+ * Il login verifica che l'utente sia registrato e che la password sia corretta.
+ * Il delete elimina l'utente dal database, a patto che sia registrato e che username e password siano corretti.
  * Utilizza ipv6.
  * @version 0.1
  * @date 2023-05-11
@@ -52,16 +54,17 @@ typedef struct
 } Message;
 
 /**
- * @brief Controlla se l'utente è già presente nel file utilizzando il suo username.
+ * @brief Effettua il login di un utente con username e password.
+ * Se password è NULL, controlla se l'utente è già presente nel file utilizzando il suo username.
  *
  * @param username username dell'utente da cercare
+ * @param password password dell'utente che vuole fare il login. Se NULL, si verifica solo se l'utente è presente
  * @param file file in cui cercare l'utente
  * @return true se l'utente è presente, false altrimenti
  */
 bool login_user(const char username[], const char password[], FILE *f)
 {
     char riga[MAX_LINE_SIZE];
-    bool found = false;
 
     if (password != NULL)
         printf("Tentativo di login di %s,%s\n", username, password);
@@ -75,15 +78,13 @@ bool login_user(const char username[], const char password[], FILE *f)
         int sep_pos = strcspn(riga, SEPARATOR);
         riga[strcspn(riga, "\n")] = '\0';
         riga[sep_pos] = '\0';
+
         char *r_username = riga;
         char *r_password = riga + sep_pos + 1;
         if (strcmp(r_username, username) == 0 && (password == NULL || strcmp(r_password, password) == 0))
-        {
-            found = true;
-            break;
-        }
+            return true;
     }
-    return found;
+    return false;
 }
 
 /**
@@ -126,10 +127,6 @@ bool delete_user(User *u, FILE *f)
     // Crea un file temporaneo, copiando tutti gli utenti tranne quello da cancellare
     FILE *tmp = tmpfile();
 
-    // Cancella il contenuto del database
-    FILE *f2 = fopen("database.txt", "w");
-    fclose(f2);
-
     rewind(f);
     char riga[MAX_LINE_SIZE];
 
@@ -142,6 +139,10 @@ bool delete_user(User *u, FILE *f)
             fprintf(tmp, "%s", riga);
     }
     fflush(tmp);
+
+    // Cancella il contenuto del database
+    FILE *f2 = fopen("database.txt", "w");
+    fclose(f2);
 
     // Sostituisce il file originale con quello temporaneo
     rewind(tmp);
@@ -196,7 +197,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in6 server_addr, client_addr;
     socklen_t sock_len = sizeof(struct sockaddr_in6);
     socklen_t client_sock_len = sock_len;
-    char buffer[MAX_BUFFER_SIZE];
+    Message msg;
 
     if (argc < 2)
     {
@@ -228,14 +229,12 @@ int main(int argc, char *argv[])
         perror("Errore nell'apertura del file");
         return 1;
     }
-
+    // recvfrom => c | nume utente | password
     while (1)
     {
-        if ((n = recvfrom(sockfd, buffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *)&client_addr, &client_sock_len)) > 0)
+        // Si va a salvare il messaggio ricevuto direttamente nella struttura Message
+        if ((n = recvfrom(sockfd, &msg, sizeof(Message), 0, (struct sockaddr *)&client_addr, &client_sock_len)) > 0)
         {
-            Message msg;
-            memcpy(&msg, buffer, sizeof(Message));
-
             char *server_response;
             if (!validate_input(msg.u.username) || !validate_input(msg.u.password))
                 server_response = ILLEGAL_CHAR_MESSAGE;

@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     socklen_t sock_len = sizeof(struct sockaddr_in6);
     char buffer[1000];
 
-    if (argc < 2)
+    if (argc < 3)
     {
         printf("Use: %s udp_server_ipv6 listening_PORT", argv[0]);
         return 1;
@@ -82,6 +82,7 @@ int main(int argc, char *argv[])
             printf("Inserisci username: ");
             fgets(msg.u.username, sizeof(msg.u.username), stdin);
             msg.u.username[strcspn(msg.u.username, "\n")] = '\0';
+
             printf("Inserisci password: ");
             fgets(msg.u.password, sizeof(msg.u.password), stdin);
             msg.u.password[strcspn(msg.u.password, "\n")] = '\0';
@@ -107,7 +108,7 @@ int main(int argc, char *argv[])
             close(sockfd);
             return 0;
         default:
-            printf("%d\n", (int) msg.op);
+            printf("%d\n", (int)msg.op);
         }
     }
 
