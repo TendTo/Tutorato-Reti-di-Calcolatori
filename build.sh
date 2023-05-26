@@ -12,7 +12,10 @@
 #% OPTIONS
 #%    -d, --directory         Path to the directory that contains the 'lezioni' subdirectories.
 #%                            If set to an empty string, the current directory will be used.
-#%                            Defaults to 'lezioni',
+#%                            Defaults to 'lezioni'
+#%    -e, --exercise          Path to the directory that contains the 'esercizi' subdirectories.
+#%                            If set to an empty string, the current directory will be used.
+#%                            Defaults to 'esercizi'
 #%    -m, --markdown          Path to the markdown file to look for in each folder.
 #%                            Defaults to 'README.md'.
 #%    -c, --clean             Remove all the generated html files.
@@ -82,6 +85,11 @@ function parse_args
     # Positional args
     args=()
 
+    # Optional args
+    dir="lezioni"
+    markdown="README.md"
+    exercise="esercizi"
+
     # Named args
     while [ $# -gt 0 ]; do
         param="$1"
@@ -106,6 +114,10 @@ function parse_args
                 dir="$1"
                 shift
             ;;
+            -e | --exercise )
+                exercise="$1"
+                shift
+            ;;
             -m | --markdown )
                 markdown="$1"
                 shift
@@ -119,20 +131,13 @@ function parse_args
     # Restore positional args
     set -- "${args[@]}"
 
-    # Set defaults
-    if [[ -z "$dir" ]]; then
-        dir="lezioni"
-    fi
-    if [[ -z "$markdown" ]]; then
-        markdown="README.md"
-    fi
-
 }
 
 function clean
 {
     find "$dir" -name "*.html" -type f -delete
     find "$dir" -name "*.class" -type f -delete
+    find "$exercise" -type f -executable -delete
     rm -f "$root_dir/index.html"
 }
 
