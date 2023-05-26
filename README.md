@@ -18,11 +18,6 @@ Il tutorato verrà erogato
 - AL: Giovedì, 15:00 - 18:00
 - MZ: Giovedì, 10:00 - 13:00
 
-I ricevimenti saranno:
-
-- Martedì, 08:00 - 10:00
-- Mercoledì, 08:00 - 10:00
-
 Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5NDc8).
 
 <!-- New section -->
