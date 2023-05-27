@@ -327,9 +327,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    while (wait(NULL) > 0)
-    {
-    }
+    while (wait(NULL) > 0);
 
     semctl(semid, 0, IPC_RMID);
     return 0;

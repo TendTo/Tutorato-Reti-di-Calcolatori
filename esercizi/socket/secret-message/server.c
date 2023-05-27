@@ -37,17 +37,12 @@
 #ifdef DEBUG
 #include <error.h>
 #include <errno.h>
-#define debug(fun)                                  \
-    do                                              \
-    {                                               \
-        int res = fun;                              \
-        if (res < 0)                                \
-        {                                           \
-            error_at_line(EXIT_FAILURE, errno,      \
-                          __FILE__, __LINE__, "%s", \
-                          #fun);                    \
-            exit(EXIT_FAILURE);                     \
-        }                                           \
+#define debug(fun)                                                              \
+    do                                                                          \
+    {                                                                           \
+        int res = fun;                                                          \
+        if (res < 0)                                                            \
+            error_at_line(EXIT_FAILURE, errno, __FILE__, __LINE__, "%s", #fun); \
     } while (0)
 #else
 #define debug(fun) fun
