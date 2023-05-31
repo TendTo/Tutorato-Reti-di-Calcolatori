@@ -44,6 +44,22 @@ $$
 
 <!-- New subsection -->
 
+### Notazione della maschera
+
+Se posta alla fine di un indirizzo, generalmente si usa la versione con lo slash.
+Se invece viene scritta da sola, si usa la notazione puntata.
+
+| Notazione | Esempio                             |
+| --------- | ----------------------------------- |
+| Slash     | /24                                 |
+| Puntata   | 255.255.255.0                       |
+| Binaria   | 11111111.11111111.11111111.00000000 |
+| Slash     | /25                                 |
+| Puntata   | 255.255.255.128                     |
+| Binaria   | 11111111.11111111.11111111.10000000 |
+
+<!-- New subsection -->
+
 ### Albero delle sotto-reti
 
 Una rete, individuata dalla parte dell'ip fissata dalla maschera, può essere ulteriormente divisa in sotto-reti che condividono la stessa sequenza iniziale, ma con una maschera più lunga.
@@ -68,22 +84,22 @@ s14{{sotto-rete\n192.168.1.224/27}}
 s15{{sotto-rete\n192.168.1.0/28}}
 s16{{sotto-rete\n192.168.1.16/28}}
 
-    r --> s1
-    r --> s2
-    s1 --> s3
-    s1 --> s4
-    s2 --> s5
-    s2 --> s6
-    s3 --> s7
-    s3 --> s8
-    s4 --> s9
-    s4 --> s10
-    s5 --> s11
-    s5 --> s12
-    s6 --> s13
-    s6 --> s14
-    s7 --> s15
-    s7 --> s16
+    r -- 0 --> s1
+    r -- 1 --> s2
+    s1 -- 0 --> s3
+    s1 -- 1 --> s4
+    s2 -- 0 --> s5
+    s2 -- 1 --> s6
+    s3 -- 0 --> s7
+    s3 -- 1 --> s8
+    s4 -- 0 --> s9
+    s4 -- 1 --> s10
+    s5 -- 0 --> s11
+    s5 -- 1 --> s12
+    s6 -- 0 --> s13
+    s6 -- 1 --> s14
+    s7 -- 0 --> s15
+    s7 -- 1 --> s16
 
 ```
 
@@ -110,6 +126,24 @@ Gli indirizzi IPv6 sono dei numeri lunghi 128 bit che identificano univocamente 
 
 $$
 \underbrace{\underbrace{\underbrace{2}_{4 \ bit}001}_{16\ bit}:0db8:85a3:0000:0000:8a2e:0370:7334}\_{128\ bit}
+\newline \
+\newline
+\underbrace{0}\_{0000}
+\underbrace{1}\_{0001}
+\underbrace{2}\_{0010}
+\underbrace{3}\_{0011}
+\underbrace{4}\_{0100}
+\underbrace{5}\_{0101}
+\underbrace{6}\_{0110}
+\underbrace{7}\_{0111}
+\underbrace{8}\_{1000}
+\underbrace{9}\_{1001}
+\underbrace{a}\_{1010}
+\underbrace{b}\_{1011}
+\underbrace{c}\_{1100}
+\underbrace{d}\_{1101}
+\underbrace{e}\_{1110}
+\underbrace{f}\_{1111}
 $$
 
 <!-- New subsection -->
@@ -130,6 +164,110 @@ $$
 2001:0db8:85a3:0000:0000:8a2e:0370:7334
 \newline
 2001:db8:85a3::8a2e:370:7334
+$$
+
+<!-- New subsection -->
+
+### Maschere in IPv6
+
+Le maschere in IPv6 sono rappresentate da un numero che indica il numero di bit che compongono l'identificativo della rete.
+
+$$
+\underbrace{2001:db8:85a3::8a2e}_{96 \text{ bit di maschera}}:370:7334/96
+$$
+
+Bisogna stare attenti a ricordare che ogni cifra esadecimale corrisponde a 4 bit.
+La maschera potrebbe anche dividere la cifra nel mezzo.
+
+$$
+\underbrace{2001:db8:85a3::8a2e:0\underbrace{3}_{001}}_{103 \text{ bit di maschera}}\underbrace{ }_{1}70:7334/103
+$$
+
+<!-- New subsection -->
+
+### Albero delle sotto-reti
+
+Anche in IPv6 è possibile dividere una rete in sotto-reti, seguendo le stesse regole di IPv4 con una struttura ad albero.
+
+```mermaid
+graph TD
+r{{rete\n2:4::FFF0:0000:0000/96}}
+s1{{2:4::FFF0:0000:0000/97}}
+s2{{2:4::FFF0:8000:0000/97}}
+
+s3{{2:4::FFF0:0000:0000/98}}
+s4{{2:4::FFF0:4000:0000/98}}
+s5{{2:4::FFF0:8000:0000/98}}
+s6{{2:4::FFF0:c000:0000/98}}
+
+s7{{2:4::FFF0:0000:0000/99}}
+s8{{2:4::FFF0:2000:0000/99}}
+s9{{2:4::FFF0:4000:0000/99}}
+s10{{2:4::FFF0:6000:0000/99}}
+s11{{2:4::FFF0:8000:0000/99}}
+s12{{2:4::FFF0:a000:0000/99}}
+s13{{2:4::FFF0:c000:0000/99}}
+s14{{2:4::FFF0:e000:0000/99}}
+
+    r -- 0 --> s1
+    r -- 1 --> s2
+    s1 -- 0 --> s3
+    s1 -- 1 --> s4
+    s2 -- 0 --> s5
+    s2 -- 1 --> s6
+    s3 -- 0 --> s7
+    s3 -- 1 --> s8
+    s4 -- 0 --> s9
+    s4 -- 1 --> s10
+    s5 -- 0 --> s11
+    s5 -- 1 --> s12
+    s6 -- 0 --> s13
+    s6 -- 1 --> s14
+```
+
+<!-- New subsection -->
+
+### Differenziare le reti noti il numero di host
+
+Un altro metodo più semplice per differenziare le reti è quello di notare il numero di host che si vuole avere in ogni rete.
+Stabilito il numero di bit necessari ad identificarli, il resto dell'indirizzo sarà utilizzato per identificare la rete.
+Va però invertito l'ultimo bit catturato della maschera rispetto all'ip originale.  
+Finché tutte le reti hanno una maschera differente, non ci saranno conflitti.
+
+<!-- New subsection -->
+
+#### Esempio
+
+Si vuole dividere la rete 2:4::FFF0:0:0/96 in 4 reti con 500.000, 50.000, 2.500.000 e 700.000 di host.
+
+$0002:0004:0000:0000:0000:FFF0:0000:0000$
+
+$$
+\lceil\log_2{500000}\rceil = 19 \to 128 - 19 = 109
+\newline
+\underbrace{0002:0004:0000:0000:0000:FFF0:000}_{108 \text{ bit}}\underbrace{8}_{1000}:0000 / 109
+$$
+
+$$
+\lceil\log_2{50000}\rceil = 16 \to 128 - 16 = 112
+\newline
+\underbrace{0002:0004:0000:0000:0000:FFF0:000}_{108 \text{ bit}}\underbrace{1}_{0001}:0000 / 112
+$$
+
+<!-- New subsection -->
+
+#### Esempio - continuazione
+
+$$
+\lceil\log_2{2500000}\rceil = 22 \to 128 - 22 = 106
+\newline
+\underbrace{0002:0004:0000:0000:0000:FFF0:00}_{104 \text{ bit}}\underbrace{4}_{0100}0:0000 / 106
+$$
+
+$$
+\lceil\log_2{700000}\rceil = 20 \to 128 - 20 = 108
+\newline
+\underbrace{0002:0004:0000:0000:0000:FFF0:00}_{104 \text{ bit}}\underbrace{1}_{0001}0:0000 / 108
 $$
 
 <!-- New subsection -->
@@ -475,3 +613,5 @@ Per aggiungere dei nomi da associare agli ip, si può modificare il file _/etc/h
 <!-- New section -->
 
 ## Challenge
+
+- Sistemare il routing per ipv6
