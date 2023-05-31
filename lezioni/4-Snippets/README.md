@@ -23,7 +23,7 @@ struct sockaddr_in = server_addr;
 // ...
 server_addr.sin_family = AF_INET;
 server_addr.sin_port = htons(atoi(argv[1]));
-server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+server_addr.sin_addr.s_addr = INADDR_ANY;
 ```
 
 <!-- New subsection -->
@@ -134,6 +134,111 @@ send(sockfd, buffer, sizeof(buffer), 0);
 recv(sockfd, buffer, sizeof(buffer), 0);
 // ...
 close(sockfd);
+```
+
+<!-- New section -->
+
+## Strutture dati ed enumerazioni
+
+Gestione di strutture dati più complesse ed enumerazioni.
+
+<!-- New subsection -->
+
+### Struttura dati
+
+```c
+struct Struttura {
+    char name[1024];
+    int age;
+};
+// È possibile creare un alias per la struttura
+typedef struct Struttura Struttura;
+// O direttamente
+typedef struct {
+    char name[1024];
+    int age;
+} Struttura;
+```
+
+<!-- New subsection -->
+
+### Enum
+
+```c
+enum Elenco {
+    CASE_1,
+    CASE_2 = 'b',
+    CASE_3 = 123123
+};
+// È possibile creare un alias per l'enum
+typedef enum Elenco Elenco;
+// O direttamente
+typedef enum {
+    CASE_1,
+    CASE_2,
+    CASE_3
+} Elenco;
+```
+
+<!-- New section -->
+
+## Invio di messaggi tramite struct
+
+Una semplice stringa potrebbe non essere sufficiente per la comunicazione, o necessitare ulteriore parsing.
+
+Per ovviare al problema, si può valutare il vantaggio di inviare un messaggio tramite una struct, che può contenere più informazioni in maniera ordinata.
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+### Strutture dati
+
+```c
+typedef enum {
+    REGISTER = 'r',
+    LOGIN = 'l',
+    DELETE = 'd',
+    EXIT = 'e',
+} Operation;
+
+typedef struct {
+    Operation operation; // L'operazione da eseguire è un char nascosto dall'enum
+    char username[1024]; // Username
+    char password[1024]; // Password
+} Message;
+```
+
+<!-- New subsection -->
+
+### Invio del messaggio
+
+```c
+Message message;
+// Potrei anche leggere un char da stdin con getchar()
+message.operation = REGISTER;
+strcpy(message.username, "username");
+strcpy(message.password, "password");
+send(sockfd, &message, sizeof(message), 0);
+```
+
+<!-- New subsection -->
+
+### Ricezione del messaggio
+
+```c
+Message message;
+recv(sockfd, &message, sizeof(message), 0);
+switch (message.operation) { // Si decide cosa fare in base all'operazione
+    case REGISTER:
+        break;
+    case LOGIN:
+        break;
+    case DELETE:
+        break;
+    case EXIT:
+        break;
+}
 ```
 
 <!-- New section -->
@@ -333,50 +438,6 @@ waitpid(pid, NULL, 0); // Aspetta la terminazione di un processo figlio con pid
 
 <!-- New section -->
 
-## Strutture dati ed enumerazioni
-
-Gestione di strutture dati più complesse ed enumerazioni.
-
-<!-- New subsection -->
-
-### Struttura dati
-
-```c
-struct Struttura {
-    char name[1024];
-    int age;
-};
-// È possibile creare un alias per la struttura
-typedef struct Struttura Struttura;
-// O direttamente
-typedef struct {
-    char name[1024];
-    int age;
-} Struttura;
-```
-
-<!-- New subsection -->
-
-### Enum
-
-```c
-enum Elenco {
-    CASE_1,
-    CASE_2 = 'b',
-    CASE_3 = 123123
-};
-// È possibile creare un alias per l'enum
-typedef enum Elenco Elenco;
-// O direttamente
-typedef enum {
-    CASE_1,
-    CASE_2,
-    CASE_3
-} Elenco;
-```
-
-<!-- New section -->
-
 ## Thread
 
 Gestione di thread.
@@ -556,3 +617,7 @@ int main() {
     return 0;
 }
 ```
+
+## Da aggiungere
+
+- [ ] VirtualBox scripting
