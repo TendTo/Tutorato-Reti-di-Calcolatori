@@ -49,6 +49,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [tcp-fork](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/tcp-fork)             | Server che utilizza le fork               | TCP       | IPv4 |            |
 | [ntp](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/ntp)                       | Implementazione di NTP                    | UDP       | IPv4 |            |
 | [secret-message](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/secret-message) | Compito "Messaggio segreto" (Aprile 2023) | UDP       | IPv4 |            |
+| [napster](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/napster) | Compito "Messaggio segreto" (Aprile 2023) | UDP       | IPv4 |            |
 
 <!-- New section -->
 
