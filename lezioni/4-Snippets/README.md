@@ -243,6 +243,32 @@ switch (message.operation) { // Si decide cosa fare in base all'operazione
 
 <!-- New section -->
 
+## I/O
+
+Gestione di standard output e input.
+
+<!-- New subsection -->
+
+### Lettura stringa con prompt
+
+```c
+char buffer[1024];
+printf("Inserisci del testo: "); // Mostra il prompt all'utente
+fgets(buffer, sizeof(buffer), stdin);
+buffer[strcspn(buffer, "\n")] = '\0'; // Rimuove \n
+```
+
+<!-- New section -->
+
+### Lettura di un carattere
+
+```c
+char c = getchar();
+getchar(); // Rimuove \n dallo standard input
+```
+
+<!-- New section -->
+
 ## File
 
 Gestione dei file.
@@ -621,3 +647,4 @@ int main() {
 ## Da aggiungere
 
 - [ ] VirtualBox scripting
+- [ ] Uno snippet standard per gestire l'invio in broadcast
