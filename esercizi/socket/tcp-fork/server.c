@@ -35,7 +35,7 @@ void child_process(int sockfd_conn, struct sockaddr_in *client_addr)
 
     printf("[>] Msg from client: %s\n", client_message);
 
-    // Simuliamo un'operaione che richiede un po' di tempo per essere svolta
+    // Simuliamo un'operazione che richiede un po' di tempo per essere svolta
     sleep(10);
 
     // Si invia il messaggio al client
