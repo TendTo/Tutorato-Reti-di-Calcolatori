@@ -429,6 +429,7 @@ reboot
 
 Per comodità, è possibile configurare il nome della macchina in modo che sia più facile riconoscerla.
 Basta modificare il file _/etc/hostname_.
+Se lo fate, è bene aggiornare il file _/etc/hosts_ così che il nuovo nome della macchina sia associato all'ip di loopback.
 
 ```python
 # Client /etc/hostname
@@ -604,6 +605,7 @@ Per aggiungere dei nomi da associare agli ip, si può modificare il file _/etc/h
 ```python
 127.0.0.1       localhost
 ::1             localhost ip6-localhost
+127.0.0.1       <hostname>
 
 # <ip> <hostnames>
 10.0.0.1 router
