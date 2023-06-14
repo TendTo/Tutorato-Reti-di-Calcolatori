@@ -63,6 +63,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 ## Risorse
 
 - [Syllabus](https://web.dmi.unict.it/corsi/l-31/insegnamenti/?cod=19084)
+- [CIDR visualizer IPv4](https://cidr.xyz/)
 
 <!-- New section -->
 
