@@ -31,7 +31,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Introduzione | 12/05/2023 |
 | [1](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/1-VirtualBox)   | VirtualBox   | 12/05/2023 |
 | [2](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/2-Socket)       | Socket       | 26/05/2023 |
-| [3](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/3-Network)      | Network      |            |
+| [3](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/3-Network)      | Network      | 08/06/2023 |
 | [4](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/4-Snippets)     | Snippets     |            |
 
 </div>

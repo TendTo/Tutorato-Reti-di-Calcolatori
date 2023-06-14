@@ -47,7 +47,7 @@ struct sockaddr_in addr4;
 socklen_t addrlen = sizeof(addr4);
 
 // memset() per impostare tutti i byte a 0
-memset(addr4, 0, addrlen);
+memset(&addr4, 0, addrlen);
 addr4.sin_family = AF_INET;
 // htons() per la conversione da host a network byte order
 addr4.sin_port = htons(8080);
@@ -68,7 +68,7 @@ struct sockaddr_in6 addr6;
 socklen_t addrlen = sizeof(addr6);
 
 // memset() per impostare tutti i byte a 0
-memset(addr6, 0, addrlen);
+memset(&addr6, 0, addrlen);
 addr6.sin6_family = AF_INET6;
 // htons() per la conversione da host a network byte order
 addr6.sin6_port = htons(8080);
