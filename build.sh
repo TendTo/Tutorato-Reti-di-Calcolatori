@@ -137,7 +137,7 @@ function clean
 {
     find "$dir" -name "*.html" -type f -delete
     find "$dir" -name "*.class" -type f -delete
-    find "$exercise" -type f -executable -delete
+    find "$exercise" -type f -executable -not -name "*.sh" -not -name "*.bat" -delete
     rm -f "$root_dir/index.html"
 }
 
