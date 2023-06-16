@@ -292,14 +292,20 @@ Per fare un po' di pratica e vedere i concetti base, effettueremo il setup di un
 
 ```mermaid
 flowchart LR
-r{{router\n10.0.1.1\n10.0.5.1}}
-c[client\n10.0.1.2]
-s[server\n10.0.5.2]
-i((internet\n192.168.1.2))
 
-    r <--192.168.1.0/24--> i
-    c <--10.0.1.0/24--> r
-    s <--10.0.5.0/24--> r
+r{{router\n10.0.1.254\n192.168.1.254}}
+
+subgraph Lan1_10.0.1.0/24
+    c[client\n10.0.1.1]
+end
+
+
+subgraph Lan2_192.168.1.0/24
+    s[server\n192.168.1.1]
+end
+
+r --10.0.1.254--- Lan1_10.0.1.0/24
+r --192.168.1.254--- Lan2_192.168.1.0/24
 ```
 
 <!-- New subsection -->
@@ -309,7 +315,7 @@ i((internet\n192.168.1.2))
 Prima di tutto è necessario creare le tre macchine virtuali.
 Per velocizzare il processo, è possibile crearne una e clonarla due volte, prima di aver fatto alcuna configurazione.
 
-Da questo momento in po, per comodità, le tre macchine verranno chiamate **client**, **router** e **server**.
+Da questo momento in poi, per comodità, le tre macchine verranno chiamate **client**, **router** e **server**.
 
 <!-- .element: class="fragment" -->
 
@@ -317,8 +323,8 @@ Da questo momento in po, per comodità, le tre macchine verranno chiamate **clie
 
 #### Configurazione delle schede di rete
 
-Le tre macchine dovranno essere poste in reti interne differenti: una condivisa tra client e router ed una tra router e server.
-Per potersi connettere ad internet, infine, il server dovrà avere una terza interfaccia che utilizza NAT.
+Le tre macchine dovranno essere poste in reti interne differenti: una condivisa tra client e router ed una tra router e server.  
+Se si vuole anche abilitare la connessione ad internet, il router dovrà avere una terza interfaccia che utilizza NAT.
 
 ![VirtualBox](./img/vbox_network.jpg)
 
@@ -338,7 +344,7 @@ Per comodità utilizzeremo le interfacce enp0s3 per client, server e router. Que
 
 #### Client
 
-La scheda di rete del client dovrà essere configurata in modo da usare la rete interna **client**.
+La scheda di rete del client dovrà essere configurata in modo da usare la rete interna **lan1**.
 
 Modificando il file _/etc/network/interfaces_ con nano o vi, è possibile configurare l'interfaccia in modo che utilizzi un ip statico.
 
@@ -346,9 +352,8 @@ Modificando il file _/etc/network/interfaces_ con nano o vi, è possibile config
 # Client /etc/network/interfaces
 auto enp0s3
 iface enp0s3 inet static
-    address 10.0.1.2
-    netmask 255.255.255.0
-    gateway 10.0.1.1
+    address 10.0.1.1/24
+    gateway 10.0.1.254
 ```
 
 Fare il reboot della macchina per applicare le modifiche.
@@ -361,26 +366,23 @@ reboot
 
 #### Router
 
-Le tre schede di rete del router dovrebbero essere impostate a
+Le due schede di rete del router dovrebbero essere impostate a
 
-1. la rete esterna tramite NAT
-2. la rete interna **client**
-3. la rete interna **server**
+1. la rete interna **lan1**
+1. la rete interna **lan2**
 
 Modificare il file _/etc/network/interfaces_
 
 ```python
 # Router /etc/network/interfaces
 # ...
+auto enp0s3
+iface enp0s3 inet static
+    address 10.0.1.254/24
+
 auto enp0s8
 iface enp0s8 inet static
-    address 10.0.1.1
-    netmask 255.255.255.0
-
-auto enp0s9
-iface enp0s9 inet static
-    address 10.0.5.1
-    netmask 255.255.255.0
+    address 192.168.1.254/24
 ```
 
 <!-- New subsection -->
@@ -402,9 +404,26 @@ reboot
 
 <!-- New subsection -->
 
+#### Tabelle di routing
+
+Se la topologia della rete è più complicata, potrebbe essere necessario inoltrare il pacchetto attraverso più router.  
+Ogni router dovrebbe conoscere la route per raggiungere ogni altra macchina della rete. 
+Per le reti a cui non ha direttamente accesso, la route potrebbe dover essere impostata manualmente.
+
+```python
+# Router /etc/network/interfaces
+# ...
+# Con questa regola di routing
+# i pacchetti che diretti alla lan 172.0.1.0/24
+# saranno inoltrati al router 10.0.1.253
+up ip route add 172.0.1.0/24 via 10.0.1.253
+```
+
+<!-- New subsection -->
+
 #### Server
 
-La scheda di rete del server dovrà essere configurata in modo da usare la rete interna **server**.
+La scheda di rete del server dovrà essere configurata in modo da usare la rete interna **lan2**.
 
 Modificare il file _/etc/network/interfaces_
 
@@ -412,9 +431,8 @@ Modificare il file _/etc/network/interfaces_
 # Server /etc/network/interfaces
 auto enp0s3
 iface enp0s3 inet static
-    address 10.0.5.2
-    netmask 255.255.255.0
-    gateway 10.0.5.1
+    address 192.168.1.1/24
+    gateway 192.168.1.254
 ```
 
 Riavviare la macchina per applicare le modifiche.
@@ -425,33 +443,10 @@ reboot
 
 <!-- New subsection -->
 
-### Configurare il nome della macchina
-
-Per comodità, è possibile configurare il nome della macchina in modo che sia più facile riconoscerla.
-Basta modificare il file _/etc/hostname_.
-Se lo fate, è bene aggiornare il file _/etc/hosts_ così che il nuovo nome della macchina sia associato all'ip di loopback.
-
-```python
-# Client /etc/hostname
-client
-```
-
-```python
-# Router /etc/hostname
-router
-```
-
-```python
-# Server /etc/hostname
-server
-```
-
-<!-- New subsection -->
-
 ### Configurare gli hostnames
 
 Invece di dover inserire ogni volta gli ip delle altre macchine, è possibile configurare gli hostnames.
-Aggiungendo le coppie **ip-hostname** al file _/etc/hosts/_ è possibile associare il nome di una macchina all'ip corrispondente.
+Aggiungendo le coppie **ip-hostname** al file _/etc/hosts_ è possibile associare il nome di una macchina all'ip corrispondente.
 
 ```python
 # Client /etc/hosts/
@@ -473,6 +468,35 @@ Aggiungendo le coppie **ip-hostname** al file _/etc/hosts/_ è possibile associa
 
 <!-- New subsection -->
 
+### Configurare il nome della macchina
+
+Per comodità, è possibile configurare il nome della macchina in modo che sia più facile riconoscerla.
+Basta modificare il file _/etc/hostname_.
+Se lo fate, è bene aggiornare il file _/etc/hosts_ così che il nuovo nome della macchina sia associato all'ip di loopback.
+
+```python
+# Client /etc/hostname
+client
+# Client /etc/hosts
+127.0.0.1 client
+```
+
+```python
+# Router /etc/hostname
+router
+# Router /etc/hosts
+127.0.0.1 router
+```
+
+```python
+# Server /etc/hostname
+server
+# Server /etc/hosts
+127.0.0.1 server
+```
+
+<!-- New subsection -->
+
 ### Risultati
 
 Se tutti i passaggi sono stati eseguiti correttamente, ora dovrebbe essere possibile pingare le macchine tra loro.
@@ -480,9 +504,9 @@ Usando il comando **traceroute** è possibile avere una visione più chiara dell
 
 ```shell
 # dal client
-traceroute 10.0.5.2
+traceroute 192.168.1.1
 # dal server
-traceroute 10.0.1.2
+traceroute 10.0.1.1
 ```
 
 <!-- New subsection -->
