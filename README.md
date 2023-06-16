@@ -1,6 +1,4 @@
-<img width="80" height="80" src="icon.png" alt="Icona del corso" style="float:left;">
-
-# Tutorato di Reti di Calcolatori
+# <img src="icon.png" align="left" width="35" height="35" alt="Icona del corso"> Tutorato di Reti di Calcolatori
 
 <!-- New section -->
 
