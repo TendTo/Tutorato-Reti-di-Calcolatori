@@ -15,8 +15,13 @@ Tutorato del corso di [Reti di Calcolatori](http://web.dmi.unict.it/corsi/l-31/i
 
 Il tutorato verrà erogato
 
-- AL: Giovedì, 15:00 - 18:00
-- MZ: Giovedì, 10:00 - 13:00
+- **Lunedì, 15:00 - 18:00**
+- **Mercoledì, 15:00 - 18:00**
+
+Ci sarà inoltre ricevimento
+
+- **Lunedì, 08:00 - 10:00 e 14:00 - 15:00**
+- **Mercoledì, 08:00 - 10:00 e 14:00 - 15:00**
 
 Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5NDc8).
 
