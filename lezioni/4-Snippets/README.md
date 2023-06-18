@@ -70,17 +70,45 @@ Gestione di socket UDP o TCP.
 
 <!-- New subsection -->
 
+### Impostazioni della socket
+
+```c
+int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+int optval[1] = {1};
+size_t optlen = sizeof(optval);
+// Abilita il riutilizzo della socket. Evita l'errore "Address already in use"
+setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, optval, optlen);
+// Ottiene lo stato di una impostazione sulla socket.
+// Se diversa da 0, l'opzione è abilitata
+getsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, optval, &optlen);
+if (optval != 0)
+    print("SO_REUSEADDR enabled on sockfd %d!\n", sockfd);
+```
+
+<!-- New subsection -->
+
+#### Opzioni comuni di `setsockopt`
+
+| Opzione        | Descrizione                                  | Esempio di valore            |
+| -------------- | -------------------------------------------- | ---------------------------- |
+| `SO_REUSEADDR` | Abilita il riutilizzo dell'indirizzo locale. | `int optval[1] = {1}`        |
+| `SO_BROADCAST` | Abilita il broadcasting sulla socket.        | `int optval[1] = {1}`        |
+| `SO_RCVTIMEO`  | Timeout di ricezione.                        | `struct timeval tv = {5, 0}` |
+| `SO_SNDTIMEO`  | Timeout di invio.                            | `struct timeval tv = {5, 0}` |
+
+<!-- New subsection -->
+
 ### Server UDP
 
 ```c
 struct sockaddr_in server_addr, client_addr;
-socklen_t client_len = sizeof(client_addr);
+socklen_t addr_len = sizeof(client_addr);
 // Inizializzazione di server_addr
 int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
 bind(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr));
 // ...
-recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *)&client_addr, &client_len);
-sendto(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *)&client_addr, client_len);
+recvfrom(sockfd, buff, sizeof(buff), 0, (struct sockaddr *)&client_addr, &addr_len);
+sendto(sockfd, buff, sizeof(buff), 0, (struct sockaddr *)&client_addr, addr_len);
 // ...
 close(sockfd);
 ```
@@ -91,11 +119,12 @@ close(sockfd);
 
 ```c
 struct sockaddr_in server_addr;
+socklen_t addr_len = sizeof(server_addr);
 // Inizializzazione di server_addr
 int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
 // ...
-sendto(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *)&server_addr, sizeof(server_addr));
-recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *)&server_addr, sizeof(server_addr));
+sendto(sockfd, buff, sizeof(buff), 0, (struct sockaddr *)&server_addr, addr_len);
+recvfrom(sockfd, buff, sizeof(buff), 0, (struct sockaddr *)&server_addr, &addr_len);
 // ...
 close(sockfd);
 ```
@@ -134,6 +163,45 @@ send(sockfd, buffer, sizeof(buffer), 0);
 recv(sockfd, buffer, sizeof(buffer), 0);
 // ...
 close(sockfd);
+```
+
+<!-- New subsection -->
+
+### Broadcasting su subnet
+
+```c
+struct sockaddr_in broadcast_addr;
+size_t addr_len = sizeof(broadcast_addr);
+// Indirizzo di broadcast nella subnet 192.168.1.0/24
+inet_pton(AF_INET, "192.168.1.255", &broadcast_addr.sin_addr);
+//...
+// Abilita il broadcasting sulla socket
+int optval[1] = {1};
+size_t optlen = sizeof(optval);
+setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, optval, optlen);
+//...
+sendto(sockfd, buff, sizeof(buff), 0, (struct sockaddr *)&broadcast_addr, addr_len);
+```
+
+<!-- New subsection -->
+
+### Broadcasting su rete
+
+```c
+struct sockaddr_in broadcast_addr;
+size_t addr_len = sizeof(broadcast_addr);
+// Indirizzo di broadcast generico: 255.255.255.255
+broadcast_addr.sin_addr.s_addr = INADDR_BROADCAST;
+//...
+// Abilita il broadcasting sulla socket
+int optval[1] = {1};
+size_t optlen = sizeof(optval);
+setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, optval, optlen);
+// Effettua il binding della socket su una scheda di rete
+char netif[1] = "eth0";
+setsockopt(sockfd, SOL_SOCKET, SO_BINDTODEVICE, &netif, sizeof(netif));
+//...
+sendto(sockfd, buff, sizeof(buff), 0, (struct sockaddr *)&broadcast_addr, addr_len);
 ```
 
 <!-- New section -->
@@ -258,13 +326,39 @@ fgets(buffer, sizeof(buffer), stdin);
 buffer[strcspn(buffer, "\n")] = '\0'; // Rimuove \n
 ```
 
-<!-- New section -->
+<!-- New subsection -->
 
 ### Lettura di un carattere
 
 ```c
 char c = getchar();
 getchar(); // Rimuove \n dallo standard input
+```
+
+<!-- New subsection -->
+
+### Stampa di una stringa
+
+```c
+printf("Hello, world!\n");
+// Stampa di stringhe con variabili
+char name[1024] = "Mario";
+printf("Hello, %s!\n", name);
+// Interi, float e double
+int age = 24; float height = 1.80; double weight = 70.5;
+printf("age: %d, height: %f, weight: %lf\n", age, height, weight);
+```
+
+<!-- New subsection -->
+
+### Stampa su altri stream
+
+```c
+// Stampa sullo standard error invece che sullo standard output.
+// stderr è un FILE *, e potrebbe essere qualsiasi altro stream, inclusi file.
+fprintf(stderr, "Errore!\n");
+// Supporta le stesse funzioni di printf
+fprintf(stderr, "age: %d, height: %f, weight: %lf\n", age, height, weight);
 ```
 
 <!-- New section -->
@@ -336,6 +430,8 @@ int len = strlen(str);
 ### Tokenizzazione
 
 ```c
+// La funzione strtok modifica la stringa originale
+// aggiungendo \0 al posto del token!
 char *token = strtok(str, " ");
 while (token != NULL) {
     // Token assumerà il valore di ogni parola della stringa fino a NULL
@@ -349,6 +445,8 @@ while (token != NULL) {
 
 ```c
 strcpy(str, "Hello, world!"); // str = "Hello, world!"
+// Copia solo i primi n caratteri
+strncpy(str, "Hello, world!", 5); // str = "Hello"
 ```
 
 <!-- New subsection -->
@@ -366,6 +464,7 @@ strcat(str, "world!");  // str = "Hello, world!"
 
 ```c
 sprintf(str, "Hello, %s! I am %d years old!", "world", 24);
+// str = "Hello, world! I am 24 years old!"
 ```
 
 <!-- New subsection -->
@@ -580,9 +679,117 @@ semctl(semid, 0, IPC_RMID);
 
 <!-- New section -->
 
+## Virtualbox script
+
+Script per la creazione e gestione di macchine virtuali con Virtualbox.
+
+<!-- New subsection -->
+
+### Creazione di una macchina virtuale
+
+```shell
+# Creazione della macchina virtuale da 0
+vboxmanage createvm --name "Debian" --ostype "Debian_64" --register
+vboxmanage modifyvm "Debian" --memory 1024 --vram 128 --cpus 2
+vboxmanage storagectl "Debian" --name "SATA Controller" --add sata --controller IntelAHCI
+vboxmanage storageattach "Debian" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium "Debian.vdi"
+vboxmanage storagectl "Debian" --name "IDE Controller" --add ide
+vboxmanage storageattach "Debian" --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium "debian-10.3.0-amd64-netinst.iso"
+vboxmanage modifyvm "Debian" --boot1 dvd --boot2 disk --boot3 none --boot4 none
+vboxmanage modifyvm "Debian" --nic1 bridged --bridgeadapter1 "Intel(R) Dual Band Wireless-AC 8265"
+vboxmanage startvm "Debian"
+```
+
+<!-- New subsection -->
+
+### Clone di una macchina virtuale
+
+```shell
+# Clone della macchina virtuale. Clone completo.
+vboxmanage clonevm "Debian" --name "Debian2" --register
+vboxmanage startvm "Debian2"
+# Clone della macchina virtuale. Clone linkato.
+vboxmanage snapshot "Debian" take "DebianSnapshot" --description "DebianSnapshot"
+vboxmanage clonevm "Debian" --snapshot "DebianSnapshot" --name "Debian3" --options link --register
+vboxmanage startvm "Debian3"
+```
+
+<!-- New subsection -->
+
+### Gestione di una macchina virtuale
+
+```shell
+# Avvio della macchina virtuale
+vboxmanage startvm "Debian"
+# Arresto della macchina virtuale
+vboxmanage controlvm "Debian" poweroff
+# Sospensione della macchina virtuale
+vboxmanage controlvm "Debian" savestate
+# Riavvio della macchina virtuale
+vboxmanage controlvm "Debian" reset
+# Rimozione della macchina virtuale
+vboxmanage unregistervm "Debian" --delete
+# Rimozione dello snapshot
+vboxmanage snapshot "Debian" delete "DebianSnapshot"
+```
+
+<!-- New subsection -->
+
+### Eseguire comandi sulla macchina virtuale
+
+```shell
+# Esecuzione di un comando sulla macchina virtuale
+vboxmanage guestcontrol "Debian" run --exe "/bin/ls" --username "root" --password "root" --wait-stdout --wait-stderr -- ls -l .
+# Copia di un file sulla macchina virtuale (guest additions)
+vboxmanage guestcontrol "Debian" copyto --username "root" --password "root" "host/file.txt" "/vm/file.txt"
+# Copia di un file dalla macchina virtuale (guest additions)
+vboxmanage guestcontrol "Debian" copyfrom --username "root" --password "root" "/vm/file.txt" "host/file.txt"
+```
+
+<!-- New subsection -->
+
+### Gestione delle interfacce di rete
+
+```shell
+# Creazione di una nuova interfaccia di rete
+vboxmanage modifyvm "Debian" --nic1 intnet --intnet1 lan1 --nic2 intnet --intnet2 lan2
+# Mettere up una interfaccia di rete
+vboxmanage guestcontrol "Debian" run --exe /sbin/ip --username "root" --password "root" --wait-stdout -- ip link set enp0s8 up
+# Impostare un indirizzo ip su una interfaccia di rete
+vboxmanage guestcontrol "Debian" run --exe /sbin/ip  --username root --password root --wait-stdout -- ip addr add 192.168.1.254/24 dev enp0s8
+# Abilitare il forwarding su una macchina virtuale
+vboxmanage guestcontrol "Debian" run --exe /usr/sbin/sysctl --username "root" --password "root" --wait-stdout -- sysctl -w net.ipv4.ip_forward=1
+```
+
+<!-- New section -->
+
 ## Varie ed eventuali
 
 Alcuni snippet vari un po' più avanzati che potrebbero tornare utili.
+
+<!-- New subsection -->
+
+### Controllare se un ip appartiene alla subnet di una delle interfacce di rete
+
+```c
+#include <ifaddrs.h>
+int is_in_same_lan(char ip[]){
+    struct ifaddrs *ifaddr, *ifa;
+    getifaddrs(&ifaddr); // Controllare che l'output non sia -1!
+    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
+        if (ifa->ifa_addr == NULL || ifa->ifa_addr->sa_family != AF_INET)
+            continue;
+        int mask = ((struct sockaddr_in *)ifa->ifa_netmask)->sin_addr.s_addr;
+        int ip_server = ((struct sockaddr_in *)ifa->ifa_addr)->sin_addr.s_addr;
+        if ((ip & mask) == (ip_server & mask)) {
+            freeifaddrs(ifaddr);
+            return 1;
+        }
+    }
+    freeifaddrs(ifaddr);
+    return 0;
+}
+```
 
 <!-- New subsection -->
 
@@ -643,8 +850,3 @@ int main() {
     return 0;
 }
 ```
-
-## Da aggiungere
-
-- [ ] VirtualBox scripting
-- [ ] Uno snippet standard per gestire l'invio in broadcast

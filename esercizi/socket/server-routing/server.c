@@ -33,14 +33,16 @@ int is_ip_in_lan(in_addr_t ip)
     getifaddrs(&ifap);
     for (ifa = ifap; ifa; ifa = ifa->ifa_next)
     {
-        if (ifa->ifa_addr->sa_family == AF_INET)
-        {
-            int mask = ((struct sockaddr_in *)ifa->ifa_netmask)->sin_addr.s_addr;
-            int ip_server = ((struct sockaddr_in *)ifa->ifa_addr)->sin_addr.s_addr;
-            if ((ip & mask) == (ip_server & mask))
-                return 1;
+        if (ifa->ifa_addr->sa_family != AF_INET)
+            continue;
+        int mask = ((struct sockaddr_in *)ifa->ifa_netmask)->sin_addr.s_addr;
+        int ip_server = ((struct sockaddr_in *)ifa->ifa_addr)->sin_addr.s_addr;
+        if ((ip & mask) == (ip_server & mask)) {
+            freeifaddrs(ifap);
+            return 1;
         }
     }
+    freeifaddrs(ifap);
     return 0;
 }
 
