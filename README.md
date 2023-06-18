@@ -56,7 +56,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [secret-message](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/secret-message) | Compito "Messaggio segreto" (Aprile 2023)                                                                  | UDP       | IPv4 |            |
 | [napster](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/napster)               | Compito Luglio 2021                                                                                        | UDP/TCP   | IPv4 |            |
 | [chat-token](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/chat-token)         | Compito Luglio 2020                                                                                        | UDP       | IPv4 |            |
-| [server-router](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/server-router)   | Socket + [Networking](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/network) | UDP       | IPv4 |            |
+| [server-router](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/server-routing)   | Socket + [Networking](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/network/server-routing) | UDP       | IPv4 |            |
 
 <!-- New section -->
 
