@@ -802,8 +802,8 @@ int is_in_same_lan(char ip[]){
 #define debug(fun)                                                              \
     do                                                                          \
     {                                                                           \
-        int res = fun;                                                          \
-        if (res < 0)                                                            \
+        int __RES__ = fun;                                                      \
+        if (__RES__ < 0)                                                        \
             error_at_line(EXIT_FAILURE, errno, __FILE__, __LINE__, "%s", #fun); \
     } while (0)
 #else
