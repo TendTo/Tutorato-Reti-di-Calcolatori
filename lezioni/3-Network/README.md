@@ -586,7 +586,8 @@ iface <interface> inet static       # se impostato a 'dhcp', l'ip verrà assegna
     gateway <router ip>             # [SOLO SU UNA INTERFACCIA] imposta il gateway di default
     network <network>               # [OPZIONALE] definizione dalla rete. Default: ip/mask
     broadcast <broadcast address>   # [OPZIONALE] indirizzo di broadcast. Default: ip.255
-    post-up <route up>              # [OPZIONALE] operazioni da fare quando l'interfaccia è messa su
+    up <route up>                   # [OPZIONALE] operazioni da fare quando l'interfaccia è messa su
+    post-up <route up>              # [OPZIONALE] operazioni da fare dopo che l'interfaccia è messa su
     per-down <route down>           # [OPZIONALE] operazioni da fare quando l'interfaccia è messa giù
 ```
 
@@ -606,6 +607,7 @@ auto enp0s8
 iface enp0s8 inet static
     address 10.0.1.2/24
     gateway 10.0.1.1
+    up ip route add 192.168.1.1/24 via 10.0.1.254
 ```
 
 ```python
