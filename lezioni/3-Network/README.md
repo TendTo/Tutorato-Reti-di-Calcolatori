@@ -407,7 +407,7 @@ reboot
 #### Tabelle di routing
 
 Se la topologia della rete è più complicata, potrebbe essere necessario inoltrare il pacchetto attraverso più router.  
-Ogni router dovrebbe conoscere la route per raggiungere ogni altra macchina della rete. 
+Ogni router dovrebbe conoscere la route per raggiungere ogni altra macchina della rete.
 Per le reti a cui non ha direttamente accesso, la route potrebbe dover essere impostata manualmente.
 
 ```python
@@ -636,6 +636,87 @@ Per aggiungere dei nomi da associare agli ip, si può modificare il file _/etc/h
 # <ip> <hostnames>
 10.0.0.1 router
 192.168.1.2 server
+```
+
+<!-- New section -->
+
+## Troubleshooting
+
+Anche se vorremmo che tutto funzionasse al primo colpo, non è sempre così.
+Vediamo alcuni passaggi che possono essere utili per individuare e risolvere i problemi.
+
+<!-- New subsection -->
+
+### Verificare la configurazione di rete da VirtualBox
+
+La prima cosa da controllare è che le macchine siano collegate alla rete corretta.  
+Se due macchine non sono inserite nella stessa rete interna, non potranno mai raggiungersi direttamente.
+
+![VirtualBox](./img/vbox_network.jpg)
+
+<!-- New subsection -->
+
+### Verificare la configurazione di rete dei router da VirtualBox
+
+Per poter svolgere il loro compito, i router devono avere tante interfacce quante sono le reti per cui devono inoltrare i pacchetti.
+
+L'ordine in cui sono collegate le interfacce è importante, perché determina quale interfaccia sarà collegata a quale rete.
+
+<!-- New subsection -->
+
+### Verificare la configurazione IP
+
+Dopo aver configurato l'ip di una macchina, usando i comandi da riga di comando `ip a add` o modificando il file _/etc/network/interfaces_, è una buona idea accertarsi, che la configurazione sia stata applicata correttamente.
+
+Per farlo, si può usare il comando _ip a_.
+
+```bash
+ip a
+```
+
+<!-- New subsection -->
+
+### Verificare la configurazione di routing
+
+Dopo aver configurato le rotte di una macchina, usando i comandi da riga di comando `ip r add `o modificando il file _/etc/network/interfaces_, è una buona idea accertarsi, che la configurazione sia stata applicata correttamente.
+
+Per farlo, si può usare il comando _ip r_.
+
+```bash
+ip r
+```
+
+<!-- New subsection -->
+
+### Utilizzare il comando ping
+
+Il comando _ping_ è un ottimo strumento per verificare la connettività tra due macchine.
+
+```bash
+ping <ip>
+```
+
+Il primo step è verificare che le macchine nella stessa rete siano raggiungibili.
+In particolare, che il router sia raggiungibile da tutte le macchine collegate ad esso.
+
+<!-- New subsection -->
+
+#### Problemi con il ping
+
+Se la risposta è che l'host è irraggiungibile, allora probabilmente manca il gateway di default.
+
+Se non si riceve risposta, la macchina di destinazione potrebbe essere spenta, o il router potrebbe non aver abilitato il forwarding dei pacchetti.
+
+Un'altra opzione sarebbe che il destinatario non abbia modo di fare il percorso inverso per rispondere al ping (magari non ha un gateway impostato).
+
+<!-- New subsection -->
+
+### Utilizzare il comando traceroute
+
+Il comando _traceroute_ è un ottimo strumento che permette di tracciare il percorso che un pacchetto compie per raggiungere una destinazione.
+
+```bash
+traceroute <ip>
 ```
 
 <!-- New section -->
