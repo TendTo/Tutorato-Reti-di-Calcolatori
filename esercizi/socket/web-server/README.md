@@ -35,7 +35,7 @@ s ->>+ d : /index.html
 alt file trovato
     d -->> s : index.html
 else
-    d -->> s :
+    d -->> s : ""
 end
 deactivate d
 s ->> s: template(index.html)
