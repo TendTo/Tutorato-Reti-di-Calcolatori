@@ -38,6 +38,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [2](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/2-Socket)       | Socket       | 26/05/2023 |
 | [3](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/3-Network)      | Network      | 08/06/2023 |
 | [4](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/4-Snippets)     | Snippets     |            |
+| [5](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/5-Esercizi)     | Snippets     |            |
 
 </div>
 
