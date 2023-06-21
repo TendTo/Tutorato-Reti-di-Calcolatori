@@ -31,14 +31,14 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 <div class="scrollable">
 
-| Lezione                                                                           | Titolo       | Data       |
-| --------------------------------------------------------------------------------- | ------------ | ---------- |
-| [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Introduzione | 12/05/2023 |
-| [1](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/1-VirtualBox)   | VirtualBox   | 12/05/2023 |
-| [2](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/2-Socket)       | Socket       | 26/05/2023 |
-| [3](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/3-Network)      | Network      | 08/06/2023 |
-| [4](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/4-Snippets)     | Snippets     |            |
-| [5](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/5-Esercizi)     | Snippets     |            |
+| Lezione                                                                           | Titolo          | Data       |
+| --------------------------------------------------------------------------------- | --------------- | ---------- |
+| [0](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/0-Introduzione) | Introduzione    | 12/05/2023 |
+| [1](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/1-VirtualBox)   | VirtualBox      | 12/05/2023 |
+| [2](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/2-Socket)       | Socket          | 26/05/2023 |
+| [3](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/3-Network)      | Network         | 08/06/2023 |
+| [4](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/4-Snippets)     | Snippets        |            |
+| [5](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/lezioni/5-Esercizi)     | Esercizi teoria |            |
 
 </div>
 
@@ -57,8 +57,9 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [secret-message](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/secret-message) | Compito "Messaggio segreto" (Aprile 2023)                                                                                    | UDP       | IPv4 |            |
 | [napster](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/napster)               | Compito Luglio 2021                                                                                                          | UDP/TCP   | IPv4 |            |
 | [chat-token](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/chat-token)         | Compito Luglio 2020                                                                                                          | UDP       | IPv4 |            |
-| [server-router](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/server-routing)  | Socket + [Networking](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/network/server-routing)    | UDP       | IPv4 |            |
-| [web-server](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/web-server)         | HTTP + socket + [Networking](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/network/web-server) | TCP       | IPv4 |            |
+| [server-router](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/server-routing)  | Socket + [Networking](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/network/server-routing)    | UDP       | IPv4 | 19/06/2023 |
+| [web-server](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/web-server)         | HTTP + socket + [Networking](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/network/web-server) | TCP       | IPv4 | 19/06/2023 |
+| [chatvm](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/chatvm)                 | Compito                                                                                                                      | TCP       | IPv4 | 21/06/2023 |
 
 <!-- New section -->
 

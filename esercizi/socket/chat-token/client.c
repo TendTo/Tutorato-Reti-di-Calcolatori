@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
     // Preparazione indirizzo del client
     client_addr.sin_family = AF_INET;
     client_addr.sin_port = htons(atoi(argv[1]));
-    inet_pton(AF_INET, argv[2], &client_addr.sin_addr); // Accetto connessioni solo dal server
+    inet_pton(AF_INET, "0.0.0.0", &client_addr.sin_addr);
 
     // Preparazione indirizzo del server
     server_addr.sin_family = AF_INET;
