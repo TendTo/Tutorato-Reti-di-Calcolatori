@@ -151,6 +151,31 @@ close(sockfd);
 
 <!-- New subsection -->
 
+#### Server TCP con fork
+
+```c
+int sockfd, new_sockfd;
+// ...
+while ((new_sockfd = connect(sockfd, (struct sockaddr *)&client_addr, &len)) > 0)
+{
+    int pid = fork();
+    if (pid == 0) // processo figlio
+    {
+        close(sockfd);      // chiusura della socket dell'accept
+        // TODO: gestione della connessione
+        close(new_sockfd);  // chiusura della nuova socket
+        exit(EXIT_SUCCESS); // terminazione del processo figlio
+    }
+    else if (pid > 0) // processo padre
+    {
+        close(new_sockfd); // chiusura della nuova socket, torna all'accept
+        continue;
+    }
+}
+```
+
+<!-- New subsection -->
+
 ### Client TCP
 
 ```c
@@ -369,7 +394,7 @@ Gestione dei file.
 
 <!-- New subsection -->
 
-### Lettura
+### Lettura riga per riga
 
 ```c
 FILE *fp = fopen("file.txt", "r");
@@ -382,12 +407,74 @@ fclose(fp);
 
 <!-- New subsection -->
 
-### Scrittura
+### Lettura carattere per carattere
+
+```c
+FILE *fp = fopen("file.txt", "r");
+char c;
+while ((c = fgetc(fp)) != EOF) {
+    // ...
+}
+fclose(fp);
+```
+
+<!-- New subsection -->
+
+### Lettura a blocchi
+
+```c
+FILE *fp = fopen("file.txt", "r");
+char buffer[1024];
+while (fread(buffer, sizeof(char), 1024 fp)) {
+    // ...
+}
+fclose(fp);
+```
+
+<!-- New subsection -->
+
+### Scrittura stringa
+
+```c
+FILE *fp = fopen("file.txt", "w");
+char str[] = "Hello, world!\n";
+fputs(str, fp);
+fclose(fp);
+```
+
+<!-- New subsection -->
+
+### Scrittura formattata
 
 ```c
 // "w" sovrascrive l'intero file, usare "a" per append
 FILE *fp = fopen("file.txt", "w");.
 fprintf(fp, "Hello, world! I am %d years old!\n", 24);
+fclose(fp);
+```
+
+<!-- New subsection -->
+
+### Scrittura a blocchi
+
+```c
+FILE *fp = fopen("file.txt", "w");
+char buffer[1024];
+fwrite(buffer, sizeof(char), 1024, fp);
+fclose(fp);
+```
+
+<!-- New subsection -->
+
+### Assicurarsi che un file esista
+
+```c
+FILE *fp = fopen("file.txt", "a");
+if (fp == NULL)
+{
+    perror("fopen");
+    exit(EXIT_FAILURE);
+}
 fclose(fp);
 ```
 
@@ -403,7 +490,7 @@ while (fgets(line, sizeof(line), fp) != NULL) {
     if (/* condizione per rimuovere la riga */) {
         continue;
     }
-    fprintf(fp_tmp, "%s", line);
+    fputs(line, fp_tmp);
 }
 fclose(fp);
 fclose(fp_tmp);
@@ -766,6 +853,35 @@ vboxmanage guestcontrol "Debian" run --exe /usr/sbin/sysctl --username "root" --
 ## Varie ed eventuali
 
 Alcuni snippet vari un po' più avanzati che potrebbero tornare utili.
+
+<!-- New subsection -->
+
+### Signup con username univoco
+
+Ogni riga contiene un username, un ip e una porta.  
+L'username deve essere univoco.
+
+```shell
+# database.txt
+user1 192.168.1.2 3000
+```
+
+```c
+int signup(const char username[], const char ip[], int port)
+{
+    char line[128];
+    FILE *db = fopen("database.txt", "r+"); // Controllo che db != NULL
+    while (fgets(line, sizeof(line), db))
+        if (strcmp(username, strtok(line, " ")) == 0) // Trovato conflitto
+        {
+            fclose(db);
+            return 0; // Username già presente, operazione fallita
+        }
+    fprintf(db, "%s %s %d\n", username, ip, port); // Registrazione utente
+    fclose(db);
+    return 1; // Utente registrato con successo
+}
+```
 
 <!-- New subsection -->
 
