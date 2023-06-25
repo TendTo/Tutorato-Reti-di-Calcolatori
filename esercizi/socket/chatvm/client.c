@@ -1,3 +1,25 @@
+/**
+ * @file client.c
+ * @author Tend (casablancaernesto@gmail.com)
+ * @brief Gli studenti del corso di Reti di Calcolatori del DMI – UNICT, hanno deciso,
+ * di loro spontanea volontà, di realizzare una chat virtuale,
+ * con prestazioni superiori a ChatGPT,
+ * al fine di dar vita a 6 linguaggi di programmazione (C, C++, Java, Python, R, Matlab) tramite 6 macchine virtuali.
+ * Ognuno dei 6 linguaggi è legato ad una specifica VMClient.
+ * Un server, chiamato ServerVMPascal, gestirà la comunicazione tra le varie VMClient.
+ * Un operatore umano scriverà nella riga di comando di una VMClient (legata ad un linguaggio X) un numero intero n compreso tra 1 e 6
+ * e una stringa di massimo 20 caratteri: queste informazioni che dovranno essere inviate al ServerVM-Pascal,
+ * il quale dovrà semplicemente inoltrare la sola stringa agli n linguaggi più vicini al linguaggio X di partenza.
+ * Ogni VMClient visualizzerà a schermo la stringa ricevuta.
+ * Notare che, il ServerVM-Pascal conterrà al suo interno una matrice (o qualsiasi altra struttura) di distanze,
+ * con valori compresi tra 10 e 255, che definiscono la distanza virtuale tra i vari linguaggi di programmazione.
+ * La scelta dei protocolli da utilizzare è a discrezione dello studente.
+ * @version 0.1
+ * @date 2023-06-21
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -61,7 +83,7 @@ void receiver_process(struct sockaddr_in *client_addr)
 /**
  * @brief Non appena avviato, il processo padre si registra con il server, inviando la coppia
  * <linguaggio di programmazione> <porta su cui è in ascolto>.
- * 
+ *
  * Successivamente, si mette in attesa di input da tastiera
  * per poi inviare al server messaggi nel formato
  * <n> <string>
