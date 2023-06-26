@@ -93,9 +93,8 @@ void receiver_process(struct sockaddr_in *client_addr)
  */
 void sender_process(struct sockaddr_in *server_addr, const char language[], const char port[])
 {
-    char input[MSG_SIZE + 4];
     int sockfd;
-    char msg[MSG_SIZE];
+    char input[MSG_SIZE + 4], msg[MSG_SIZE];
 
     memset(msg, 0, MSG_SIZE);
     sprintf(msg, "%s %s", language, port);
@@ -121,7 +120,7 @@ void sender_process(struct sockaddr_in *server_addr, const char language[], cons
  *
  * Il client deve conoscere l'indirizzo e la porta del server, a cui invierà un messaggio dal formato
  * n string
- * con n: numero [10, 255], string di massimo 20 caratteri
+ * con n: numero [1, 6], string di massimo 20 caratteri
  *
  * Tutti i client rimarranno in ascolto su una porta prestabilita per ricevere eventuali comunicazioni dal server
  * come risultato del messaggio di un altro client
@@ -154,12 +153,12 @@ int main(int argc, char *argv[])
 
     int pid = fork();
 
-    if (pid == 0)
+    if (pid == 0) // figlio
     {
         receiver_process(&client_addr);
         exit(EXIT_SUCCESS);
     }
-    else if (pid > 0)
+    else if (pid > 0) // padre
     {
         sender_process(&server_addr, argv[1], argv[2]);
         exit(EXIT_SUCCESS);

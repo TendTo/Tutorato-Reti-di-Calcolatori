@@ -265,7 +265,7 @@ void send_message_to_languages(char *languages[], int n, char message[])
         char *language = strtok(line, " "); // estrae il linguaggio
         for (int i = 0; i < n; i++)         // per ogni linguaggio da contattare
         {
-            if (strcmp(language, languages[i]) != 0) // controlla che il linguaggio corrente sia quello da contattare
+            if (strcmp(language, languages[i]) != 0) // controlla che il linguaggio corrente sia fra quelli da contattare
                 continue;
 
             char *ip = strtok(NULL, " ");       // estrae l'ip
@@ -324,7 +324,7 @@ void child_process(int sockfd, struct sockaddr_in *client_addr, int languages_ma
 
         printf("Messaggio da inoltrare ai %d linguaggi più vicini: %s\n", n, message);
 
-        if (n < 0 || n > N_LANGUAGES)
+        if (n <= 0 || n >= N_LANGUAGES)
         {
             fprintf(stderr, "Errore: identificativo di linguaggio non valido\n");
             continue;
