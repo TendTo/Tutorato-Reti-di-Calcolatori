@@ -48,6 +48,8 @@ struct sockaddr_in6 = server_addr;
 server_addr.sin6_family = AF_INET6;
 server_addr.sin6_port = htons(atoi(argv[1]));
 server_addr.sin6_addr = in6addr_any;
+// Se si utilizzano ip link local
+server_addr.sin6_scope_id = if_nametoindex("enp0s3");
 ```
 
 <!-- New subsection -->
@@ -60,6 +62,8 @@ struct sockaddr_in6 = server_addr;
 server_addr.sin6_family = AF_INET6;
 server_addr.sin6_port = htons(atoi(argv[2]));
 inet_pton(AF_INET6, argv[1], &server_addr.sin6_addr);
+// Se si utilizzano ip link local
+server_addr.sin6_scope_id = if_nametoindex("enp0s3");
 ```
 
 <!-- New section -->
@@ -853,6 +857,47 @@ vboxmanage guestcontrol "Debian" run --exe /usr/sbin/sysctl --username "root" --
 ## Varie ed eventuali
 
 Alcuni snippet vari un po' più avanzati che potrebbero tornare utili.
+
+<!-- New subsection -->
+
+### Ordinare un array di interi
+
+```c
+#include <stdlib.h>
+
+int compare(const void *a, const void *b)
+{
+    return *(const int *)a - *(const int *)b;
+}
+
+int main()
+{
+    int array[5] = {3, 1, 0, 2, 4};
+    qsort(array, 5, sizeof(int), compare);
+    // qsort(array, sizeof(array) / sizeof(*array), sizeof(*array), compare);
+}
+```
+
+<!-- New subsection -->
+
+### Ordinare un array di stringhe
+
+```c
+#include <stdlib.h>
+#include <string.h>
+
+int compare(const void *a, const void *b)
+{
+    return strcmp(*(const char **)a, *(const char **)b);
+}
+
+int main()
+{
+    char *array[6] = {"ciao", "come", "stai", "amico" "mio" "caro"};
+    qsort(array, 6, sizeof(char*), compare);
+    // qsort(array, sizeof(array) / sizeof(*array), sizeof(*array), compare);
+}
+```
 
 <!-- New subsection -->
 
