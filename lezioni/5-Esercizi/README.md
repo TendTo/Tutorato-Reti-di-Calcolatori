@@ -343,13 +343,13 @@ T_p &= \frac{L}{V} &= \frac{10^5}{2 \cdot 10^8} &= 5 \cdot 10^{-4} \text{ s}
 T_{tf} &= \frac{I + P}{BW} &= \frac{800 + 7200}{12 \cdot 10^6} &\approx 6 \cdot 10^{-4} \text{ s}
 \newline
 \newline
-T_{ta} &= \frac{P}{BW} &= \frac{7200}{12 \cdot 10^6} &= 6 \cdot 10^{-4} \text{ s}
+T_{ta} &= \frac{I}{BW} &= \frac{800}{12 \cdot 10^6} &\approx 6 \cdot 10^{-5} \text{ s}
 \newline
 \newline
-T_t &= 2 \cdot T_p + T_{tg} + T_{ta} &= 10^{-3} + 12 \cdot 10^{-4} &= 2.2 \cdot 10^{-3} \text{ s}
+T_t &= 2 \cdot T_p + T_{tg} + T_{ta} &= 10^{-3} + 6.6 \cdot 10^{-4}  &= 1.66 \cdot 10^{-3} \text{ s}
 \newline
 \newline
-N_f &= \left\lfloor \frac{2 \cdot T_p}{T_t} \right\rfloor &= \left\lfloor \frac{10^{-3}}{6 \cdot 10^{-4}} \right\rfloor &\approx \lfloor 1.6 \rfloor = 1
+N_f &= \left\lfloor \frac{2 \cdot T_p}{T_{tf}} \right\rfloor &= \left\lfloor \frac{10^{-3}}{6 \cdot 10^{-4}} \right\rfloor &\approx \lfloor 1.6 \rfloor = 1
 \end{array}
 $$
 
@@ -364,10 +364,10 @@ $$
 BW_e &= \frac{P \cdot 1}{T_t}
 \newline
 \newline
-BW_e &= \frac{7200 \cdot 1}{2.2 \cdot 10^{-3}}
+BW_e &= \frac{7200 \cdot 1}{1.66 \cdot 10^{-3}}
 \newline
 \newline
-BW_e &\approx 3.27 \cdot 10^6 \text{ bps} &= 3.27 \text{ Mbps}
+BW_e &\approx 4.33 \cdot 10^6 \text{ bps} &= 4.33 \text{ Mbps}
 \end{array}
 $$
 
@@ -462,7 +462,7 @@ $$
 
 ### Esercizio 4
 
-$M = 101101 \space 1101 \qquad G = 11011 \qquad |G| - 1 = 4$
+$M = 101101 \space 0000 \qquad G = 11011 \qquad |G| - 1 = 4$
 
 Verificare se il messaggio è stato trasmesso correttamente.
 
@@ -477,6 +477,28 @@ $$
 \space\space 11011
 \newline
 000000 \space 0000 & = 0 \to \text{corretto}
+\end{array}
+$$
+
+<!-- New subsection -->
+
+### Esercizio 5
+
+$M = 1001 \space 110 \qquad G = 1011 \qquad |G| - 1 = 3$
+
+Verificare se il messaggio è stato trasmesso correttamente.
+
+$$
+\begin{array}{ll}
+1001 \space 110
+\newline
+1011
+\newline
+0010 \space 110
+\newline
+\space\space \space\space 10 \space 11
+\newline
+0000 \space 000 & = 0 \to \text{corretto}
 \end{array}
 $$
 
