@@ -61,6 +61,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [web-server](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/web-server)               | HTTP + socket + [Networking](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/network/web-server) | TCP       | IPv4 | 19/06/2023 |
 | [chatvm](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/chatvm)                       | Compito                                                                                                                      | TCP       | IPv4 | 21/06/2023 |
 | [chat-multi-client](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/chat-multi-client) | Compito                                                                                                                      | TCP       | IPv4 |            |
+| [reverse-shell](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/reverse-shell)         | Esercitazione                                                                                                                | TCP       | IPv4 |            |
 
 <!-- New section -->
 
