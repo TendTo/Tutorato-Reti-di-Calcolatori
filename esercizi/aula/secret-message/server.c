@@ -19,7 +19,6 @@ typedef struct
     char secret[SECRET_SIZE];
     char list[LIST_SIZE];
     char ip[INET6_ADDRSTRLEN];
-    bool logged;
 }Message;
 
 void handle(const char* msg)
@@ -37,10 +36,7 @@ bool Login(Message* msg, FILE* fp)
         char* usr = strtok(line, " ");
         char* ip = strtok(NULL, " ");
         if (!strcmp(usr, msg->usr) && !strcmp(ip, msg->ip))
-        {
-            msg->logged = true;
             return true;
-        }
     }
     return false;
 }
@@ -72,13 +68,12 @@ bool Update(Message* msg, FILE* fp)
         char* usr = strtok(line, " ");
         if(strcmp(usr, msg->usr))
             fprintf(fp_tmp, "%s", dup);
+        free(dup);
     }
     fprintf(fp_tmp, "%s %s %s %s\n", msg->usr, msg->ip, msg->secret, msg->list);
     fflush(fp_tmp);
 
-    remove("Database.txt");
     rename("Database_tmp.txt", "Database.txt");
-    fp = fp_tmp; 
     return true; 
 }
 
@@ -95,13 +90,13 @@ char* GetSecret(Message* msg, FILE* fp)
         if(!strcmp(msg->usr_secret, usr_secret))    
         {
             strtok(NULL, " ");
-            char* secret = strtok(NULL, " ");
+            char* secret = malloc(BUFSIZ);
+            secret = strtok(NULL, " ");
 
             char* msg_list = strtok(NULL, "\n");
             char* usr = strtok(msg_list, " ");
             while (usr)
             {
-                printf("%s, %s\n", msg->usr, usr);
                 if (!strcmp(msg->usr, usr)) 
                     return secret;
                 usr = strtok(NULL, " ");

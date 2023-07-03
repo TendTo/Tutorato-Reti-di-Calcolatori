@@ -20,7 +20,6 @@ typedef struct
     char secret[SECRET_SIZE];
     char list[LIST_SIZE];
     char ip[INET6_ADDRSTRLEN];
-    bool logged;
 }Message;
 
 void handle(const char* msg)
@@ -36,7 +35,6 @@ int main(int argc, char* argv[])
     socklen_t len = sizeof(struct sockaddr_in6);
     char buffer[BUFSIZ];
     Message msg;
-    msg.logged = false;
 
     if(argc != 3) handle("Error argc\n");
 
