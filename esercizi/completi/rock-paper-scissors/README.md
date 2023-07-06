@@ -170,7 +170,7 @@ style lC stroke:#00f
 
     r --10.0.4.254--- lA
     r --10.0.2.254--- lB
-    r --10.0.0.127--- lC
+    r --10.0.0.126--- lC
 ```
 
 ### Soluzione: Realizzazione del networking
@@ -221,7 +221,7 @@ iface enp0s3 inet static
 ```shell
 # Client2
 ip addr add 10.0.0.1/25
-ip route add default via 10.0.0.127
+ip route add default via 10.0.0.126
 ```
 
 oppure
@@ -233,7 +233,7 @@ oppure
 auto enp0s3
 iface enp0s3 inet static
     address 10.0.0.1/25
-    gateway 10.0.0.127
+    gateway 10.0.0.126
 ```
 
 #### Router
@@ -244,7 +244,7 @@ ip link set enp0s8 up
 ip link set enp0s9 up
 ip addr add 10.0.4.254/22 dev enp0s3
 ip addr add 10.0.2.254/23 dev enp0s8
-ip addr add 10.0.0.127/25 dev enp0s9
+ip addr add 10.0.0.126/25 dev enp0s9
 sysctl -w net.ipv4.ip_forward=1
 ```
 
@@ -264,7 +264,7 @@ iface enp0s8 inet static
 
 auto enp0s9
 iface enp0s9 inet static
-    address 10.0.0.127/25
+    address 10.0.0.126/25
 ```
 
 ```py
