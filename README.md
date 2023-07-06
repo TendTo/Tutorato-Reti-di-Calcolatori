@@ -63,7 +63,14 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [chat-multi-client](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/chat-multi-client)                     | Compito                                                                                                                      | TCP       | IPv4 |            |
 | [reverse-shell](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/reverse-shell)                             | Esercitazione                                                                                                                | TCP       | IPv4 |            |
 | [rock-paper-scissors-threads](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/rock-paper-scissors-threads) | Esercitazione con thread e semafori                                                                                          | TCP       | IPv4 |            |
-| [rock-paper-scissors](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/rock-paper-scissors-threads)         | Simulazione di compito + Networking                                                                                          | UDP       | IPv4 |            |
+
+<!-- New section -->
+
+## Esercizi completi
+
+| Esercizio                                                                                                                               | Descrizione                         | Trasporto | Ip   |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | --------- | ---- |
+| [rock-paper-scissors](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/rock-paper-scissors-threads) | Simulazione di compito + Networking | UDP       | IPv4 |
 
 <!-- New section -->
 

@@ -1,22 +1,18 @@
 /**
  * @file client.c
  * @author Tend (casablancaernesto@gmail.com)
- * @brief Si richiede di implementare un programma che simuli il gioco della morra cinese in multiplayer.
- * L'architettura sarà composta da un server che si frappone fra due client, che si sfidano ad una partita.
- * Il server si occuperà di gestire le connessioni e di inviare i messaggi ai client.
- * All'inizio del gioco, i due client si connettono al server, che attende la connessione di entrambi.
- * Non appena entrambi sono pronti, il server invia un messaggio ai client, che indica l'inizio del gioco.
- * A questo punto, i due client inviano al server la propria scelta (sasso, carta o forbice).
- * Non è possibile cambiare la propria scelta una volta inviata.
- * Il server verifica chi ha vinto e invia un messaggio ai client, che indica il vincitore.
- * Il punteggio viene anche aggiornato internamente al server.
- * Alla fine del numero di round stabilito, il server invia un messaggio ai client, che indica la fine del gioco.
- * Le connessioni vengono terminate.
+ * @brief Realizzare un programma scritto in c (o c++) che simuli una partita a "Carta-Sasso-Forbice" fra i due Client, con il Server in mezzo a fare da arbitro.
+ * Si assuma che il numero di giocatori sia esattamente 2 e che tutti rispettino il protocollo descritto.
+ * Appena avviato, ogni Client si connette al Server per registrarsi, fornendo anche le informazioni che il Server userà per comunicare durante la partita (nome, ip, porta).
+ * Quando entrambi i Client si sono registrati, il Server avvia la partita, impostando il numero di vite di entrambi i giocatori ad un valore stabilito.
+ * Inizia quindi ad interpellare a turno i due giocatori, chiedendo la loro mossa.
+ * Quando entrambi hanno giocato, il Server comunica il risultato della partita a entrambi i giocatori.
+ * Se non si è verificato un pareggio, toglie una vita a quello che ha perso e ricomincia il ciclo.
+ * Quando un giocatore rimane senza vite, il Server comunica il vincitore ad entrambi e termina la partita.
  * @version 0.1
- * @date 2023-07-03
+ * @date 2023-07-06
  *
  * @copyright Copyright (c) 2023
- *
  */
 #include <stdlib.h>
 #include <stdio.h>
@@ -47,6 +43,7 @@
 #define MAX_MOVE_SIZE 1
 #define CONCLUSION_MSG "La partita si e' conclusa dopo"
 #define INVALID_MOVE_MSG "Mossa non valida"
+#define REQ_MOVE "Fai la tua mossa"
 
 typedef enum
 {
@@ -61,7 +58,6 @@ int main(int argc, char const *argv[])
     struct sockaddr_in server_addr;
     socklen_t server_addr_len = sizeof(server_addr);
     char msg[MAX_BUFFER_SIZE];
-    int n_rounds;
 
     if (argc < 3 || atoi(argv[2]) == 0)
     {
@@ -70,9 +66,7 @@ int main(int argc, char const *argv[])
     }
 
     // Creazione del socket
-    debug(sockfd = socket(AF_INET, SOCK_STREAM, 0));
-    // Permette di riutilizzare la porta anche se già in uso
-    debug(setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int)));
+    debug(sockfd = socket(AF_INET, SOCK_DGRAM, 0));
 
     // Inizializzazione della struttura server_addr
     memset(&server_addr, 0, sizeof(server_addr));
@@ -80,35 +74,33 @@ int main(int argc, char const *argv[])
     server_addr.sin_port = htons(atoi(argv[2]));      // Porta del server
     server_addr.sin_addr.s_addr = inet_addr(argv[1]); // Indirizzo del server
 
-    // Accettazione connessione
-    debug(connect(sockfd, (struct sockaddr *)&server_addr, server_addr_len));
-
+    debug(sendto(sockfd, NULL, 0, 0, (struct sockaddr *)&server_addr, server_addr_len));
     printf("Connessione al server %s:%s effettuata con successo\n", argv[1], argv[2]);
 
     // Inizio partita
-    debug(recv(sockfd, &n_rounds, sizeof(int), 0));
-    printf("Avvio di una partita da %d round\n", n_rounds);
-    while (n_rounds > 0)
+    printf("Avvio della partita\n");
+    while (1)
     {
         Move move;
+
+        // Attesa per essere interpellati dal server
+        debug(recvfrom(sockfd, msg, sizeof(REQ_MOVE), 0, (struct sockaddr *)&server_addr, &server_addr_len));
 
         printf("Inserisci la tua mossa (r = rock, p = paper, s = scissors): ");
         move = getchar();
         while (getchar() != '\n')
             ;
-        debug(send(sockfd, &move, sizeof(Move), 0));
+
+        debug(sendto(sockfd, &move, sizeof(Move), 0, (struct sockaddr *)&server_addr, server_addr_len));
 
         // Attesa del risultato
-        debug(recv(sockfd, msg, MAX_BUFFER_SIZE, 0));
+        debug(recvfrom(sockfd, msg, MAX_BUFFER_SIZE, 0, (struct sockaddr *)&server_addr, &server_addr_len));
         printf("%s\n", msg);
 
-        if (strcmp(msg, INVALID_MOVE_MSG) != 0) // Solo se si è trattata di una mossa valida, si decrementa n_rounds
-            n_rounds--;
+        // Se la stringa contiene la frase "vinto la partita" allora la partita è terminata
+        if (strstr(msg, "vinto la partita") != NULL)
+            break;
     }
-
-    // Messaggio finale
-    debug(recv(sockfd, msg, MAX_BUFFER_SIZE, 0));
-    printf("%s\n", msg);
 
     // Chiusura del socket
     close(sockfd);

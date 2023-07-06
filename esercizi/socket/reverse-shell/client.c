@@ -59,7 +59,7 @@ int main(int argc, char const *argv[])
 
     // Creazione del socket
     debug(sockfd = socket(AF_INET, SOCK_STREAM, 0));
-    // Crea un timeout per la recv
+    // Crea un timeout per la recv. Alcune operazioni potrebbero non restituire nulla
     struct timeval timeout;
     timeout.tv_sec = 3;
     timeout.tv_usec = 0;
