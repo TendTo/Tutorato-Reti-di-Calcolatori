@@ -40,10 +40,62 @@ end
     r --- lA & lB & lC
 ```
 
-<details>
-<summary>
-<b>Possibile soluzione</b>
-</summary>
+[Soluzione](#soluzione-progettazione-della-topologia)
+
+### Realizzazione del networking
+
+Dopo aver abbozzato la topologia su carta, si realizzi il networking definito in precedenza con delle macchine virtuali.  
+Le macchine devono essere in grado di pingare tutte le altre.
+
+[Soluzione](#soluzione-realizzazione-del-networking)
+
+### Programmazione Socket
+
+Realizzare un programma scritto in c (o c++) che simuli una partita a "Carta-Sasso-Forbice" fra i due **Client**, con il **Server** in mezzo a fare da arbitro.
+Si assuma che il numero di giocatori sia esattamente 2 e che tutti rispettino il protocollo descritto.  
+Appena avviato, ogni **Client** si connette al **Server** per registrarsi, fornendo anche le informazioni che il **Server** userà per comunicare durante la partita (ip, porta).  
+Quando entrambi i **Client** si sono registrati, il **Server** avvia la partita, impostando il numero di vite di entrambi i giocatori ad un valore stabilito.
+Inizia quindi ad interpellare a turno i due giocatori, chiedendo la loro mossa.
+Quando entrambi hanno giocato, il **Server** comunica il risultato della partita a entrambi i giocatori.
+Se non si è verificato un pareggio, toglie una vita a quello che ha perso e ricomincia il ciclo.  
+Quando un giocatore rimane senza vite, il **Server** comunica il vincitore ad entrambi e termina la partita.
+
+```mermaid
+sequenceDiagram
+actor c1 as Client1
+participant s as Server
+actor c2 as Client2
+
+c1 ->>+ s: register
+c2 ->>+ s: register
+loop while c1 lives > 0 and c2 lives > 0
+    s ->>+ c1: your turn
+    c1 -->>- s: move
+    s ->>+ c2: your turn
+    c2 -->>- s: move
+alt if c1 wins
+    s ->> s: remove life to c2
+else if c2 wins
+    s ->> s: remove life to c1
+end
+s ->> c1: round result
+s ->> c2: round result
+end
+s ->> c1: game result
+s ->> c2: game result
+```
+
+[Soluzione](#soluzione-programmazione-socket)
+
+---
+
+## Soluzioni
+
+> Prima di leggere le soluzioni, provare a risolvere l'esercizio da soli.
+> Dopo averlo fatto, confrontare la propria soluzione con quella proposta.
+> Ci sono tantissimi modi per risolvere le varie consegne, quindi non c'è da preoccuparsi se la propria soluzione è diversa da quella proposta.
+
+### Soluzione: Progettazione della topologia
 
 ```mermaid
 graph TD
@@ -121,17 +173,7 @@ style lC stroke:#00f
     r --10.0.0.127--- lC
 ```
 
-</details>
-
-### Realizzazione del networking
-
-Dopo aver abbozzato la topologia su carta, si realizzi il networking definito in precedenza con delle macchine virtuali.  
-Le macchine devono essere in grado di pingare tutte le altre.
-
-<details>
-<summary>
-<b>Possibile soluzione</b>
-</summary>
+### Soluzione: Realizzazione del networking
 
 #### Server
 
@@ -231,50 +273,7 @@ iface enp0s9 inet static
 net.ipv4.ip_forward=1
 ```
 
-</details>
-
-### Programmazione Socket
-
-Realizzare un programma scritto in c (o c++) che simuli una partita a "Carta-Sasso-Forbice" fra i due **Client**, con il **Server** in mezzo a fare da arbitro.
-Si assuma che il numero di giocatori sia esattamente 2 e che tutti rispettino il protocollo descritto.  
-Appena avviato, ogni **Client** si connette al **Server** per registrarsi, fornendo anche le informazioni che il **Server** userà per comunicare durante la partita (ip, porta).  
-Quando entrambi i **Client** si sono registrati, il **Server** avvia la partita, impostando il numero di vite di entrambi i giocatori ad un valore stabilito.
-Inizia quindi ad interpellare a turno i due giocatori, chiedendo la loro mossa.
-Quando entrambi hanno giocato, il **Server** comunica il risultato della partita a entrambi i giocatori.
-Se non si è verificato un pareggio, toglie una vita a quello che ha perso e ricomincia il ciclo.  
-Quando un giocatore rimane senza vite, il **Server** comunica il vincitore ad entrambi e termina la partita.
-
-```mermaid
-sequenceDiagram
-actor c1 as Client1
-participant s as Server
-actor c2 as Client2
-
-c1 ->>+ s: register
-c2 ->>+ s: register
-loop while c1 lives > 0 and c2 lives > 0
-    s ->>+ c1: your turn
-    c1 -->>- s: move
-    s ->>+ c2: your turn
-    c2 -->>- s: move
-alt if c1 wins
-    s ->> s: remove life to c2
-else if c2 wins
-    s ->> s: remove life to c1
-end
-s ->> c1: round result
-s ->> c2: round result
-end
-s ->> c1: game result
-s ->> c2: game result
-```
-
-<details>
-<summary>
-<b>Possibile soluzione</b>
-</summary>
+### Soluzione: Programmazione Socket
 
 [server.c](./server.c)  
 [client.c](./client.c)
-
-</details>
