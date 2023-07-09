@@ -2,7 +2,7 @@
 original_vm="Reti"
 snapshot_name="Snapshot"
 credentials="--username root --password root"
-local_path="/home/tend/Programming/Tutorato/Tutorato-Reti-di-Calcolatori/esercizi/completi/rock-paper-scissors"
+local_path="/home/tend/Programming/Tutorato/Tutorato-Reti-di-Calcolatori/esercizi/completi/tris"
 vms=("Server" "Client1" "Client2" "Router")
 c_files=("client" "server")
 
@@ -31,23 +31,23 @@ function setup() {
 
     # Configura il routing e gli indirizzi IP
     echo "Configurazione nodo ${vms[0]}"
-    vboxmanage guestcontrol "${vms[0]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 10.0.4.1/22 dev enp0s3
-    vboxmanage guestcontrol "${vms[0]}" run --exe /sbin/ip $credentials --wait-stdout -- ip route add default via 10.0.4.254
+    vboxmanage guestcontrol "${vms[0]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 172.0.2.1/23 dev enp0s3
+    vboxmanage guestcontrol "${vms[0]}" run --exe /sbin/ip $credentials --wait-stdout -- ip route add default via 172.0.2.254
 
     echo "Configurazione nodo ${vms[1]}"
-    vboxmanage guestcontrol "${vms[1]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 10.0.2.1/23 dev enp0s3
-    vboxmanage guestcontrol "${vms[1]}" run --exe /sbin/ip $credentials --wait-stdout -- ip route add default via 10.0.2.254
+    vboxmanage guestcontrol "${vms[1]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 172.0.0.1/24 dev enp0s3
+    vboxmanage guestcontrol "${vms[1]}" run --exe /sbin/ip $credentials --wait-stdout -- ip route add default via 172.0.0.254
 
     echo "Configurazione nodo ${vms[2]}"
-    vboxmanage guestcontrol "${vms[2]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 10.0.0.1/25 dev enp0s3
-    vboxmanage guestcontrol "${vms[2]}" run --exe /sbin/ip $credentials --wait-stdout -- ip route add default via 10.0.0.126
+    vboxmanage guestcontrol "${vms[2]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 172.0.1.1/24 dev enp0s3
+    vboxmanage guestcontrol "${vms[2]}" run --exe /sbin/ip $credentials --wait-stdout -- ip route add default via 172.0.1.254
 
     echo "Configurazione router ${vms[3]}"
     vboxmanage guestcontrol "${vms[3]}" run --exe /sbin/ip $credentials --wait-stdout -- ip link set enp0s8 up
     vboxmanage guestcontrol "${vms[3]}" run --exe /sbin/ip $credentials --wait-stdout -- ip link set enp0s9 up
-    vboxmanage guestcontrol "${vms[3]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 10.0.4.254/22 dev enp0s3
-    vboxmanage guestcontrol "${vms[3]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 10.0.2.254/23 dev enp0s8
-    vboxmanage guestcontrol "${vms[3]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 10.0.0.126/25 dev enp0s9
+    vboxmanage guestcontrol "${vms[3]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 172.0.2.254/24 dev enp0s3
+    vboxmanage guestcontrol "${vms[3]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 172.0.0.254/24 dev enp0s8
+    vboxmanage guestcontrol "${vms[3]}" run --exe /sbin/ip $credentials --wait-stdout -- ip addr add 172.0.1.254/24 dev enp0s9
     vboxmanage guestcontrol "${vms[3]}" run --exe /usr/sbin/sysctl $credentials  --wait-stdout -- sysctl -w net.ipv4.ip_forward=1
 
     # Copia il file client.c e server.c in tutti i nodi
