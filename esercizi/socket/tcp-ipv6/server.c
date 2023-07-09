@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
     memset(&local_addr, 0, len);
     local_addr.sin6_family = AF_INET6;
-    inet_pton(AF_INET6, "::1", &local_addr.sin6_addr);
+    inet_pton(AF_INET6, "::", &local_addr.sin6_addr);
     local_addr.sin6_port = htons(atoi(argv[1]));
 
     if ((bind(sockfd, (struct sockaddr *)&local_addr, len)) < 0)
