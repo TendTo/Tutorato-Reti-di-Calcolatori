@@ -74,11 +74,31 @@ actor c2 as Client2
 
 c1 ->> s: register
 c2 ->> s: register
-loop while c1 lives > 0 and c2 lives > 0
+loop while c1 lives > 0 or c2 lives > 0
     s ->>+ c1: game state
     c1 -->>- s: move
     s ->>+ c2: game state
     c2 -->>- s: move
+
+    alt c1 lives == 0
+        s ->> c1: game over
+        c1 -x c1: exit
+    else c2 lives == 0
+        s ->> c2: game over
+        c2 -x c2: exit
+    else word guessed by c1
+        s ->> c1: won
+        c1 -x c1: exit
+        s ->> c2: game over
+        c2 -x c2: exit
+        s -x s: exit
+    else word guessed by c2
+        s ->> c1: game over
+        c1 -x c1: exit
+        s ->> c2: win
+        c2 -x c2: exit
+        s -x s: exit
+    end
 end
 ```
 
