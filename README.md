@@ -68,9 +68,11 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 ## Esercizi completi
 
-| Esercizio                                                                                                                               | Descrizione                         | Trasporto | Ip   |
-| --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | --------- | ---- |
+| Esercizio                                                                                                                       | Descrizione                         | Trasporto | Ip   |
+| ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | --------- | ---- |
 | [rock-paper-scissors](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/rock-paper-scissors) | Simulazione di compito + Networking | UDP       | IPv4 |
+| [tris](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/tris)                               | Simulazione di compito + Networking | TCP       | IPv6 |
+| [impiccato](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/impiccato)                     | Compito 10/07/2023                  | UDP       | IPv4 |
 
 <!-- New section -->
 
