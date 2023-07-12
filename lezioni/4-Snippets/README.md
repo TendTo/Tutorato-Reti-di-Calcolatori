@@ -770,6 +770,62 @@ semctl(semid, 0, IPC_RMID);
 
 <!-- New section -->
 
+## SSH
+
+Gestione di SSH.
+
+<!-- New subsection -->
+
+### Connessione a un server SSH
+
+```shell
+ssh <user>@<ip>
+# Esempio
+ssh root@192.168.56.101
+```
+
+<!-- New subsection -->
+
+### Copia di file da locale a remoto
+
+```shell
+scp <file> <user>@<ip>:<path>
+# Esempio, il file server.c viene copiato nella cartella /home/user
+scp server.c user@192.168.56.102:
+# Esempio, il file client.c viene copiato nella cartella /home/user/compiti
+scp client.c root@192.168.56.102:/home/user/compiti
+```
+
+<!-- New subsection -->
+
+### Copia di file da remoto a locale
+
+```shell
+scp <user>@<ip>:<path> <file>
+# Esempio, il file server.c viene copiato nella cartella in cui si trova il terminale
+scp user@192.168.56.101:server.c .
+```
+
+<!-- New subsection -->
+
+### Forwarding di porte
+
+```shell
+ssh -L <porta_locale>:localhost:<porta_remota> <user>@<ip>
+# Esempio, la porta 8080 in locale viene mappata sulla porta 80 della macchina remota
+ssh -L 8080:localhost:80 root@192.168.56.101
+```
+
+<!-- New subsection -->
+
+### Riavvio del servizio SSH
+
+```shell
+systemctl restart ssh
+```
+
+<!-- New section -->
+
 ## Virtualbox script
 
 Script per la creazione e gestione di macchine virtuali con Virtualbox.
