@@ -66,6 +66,12 @@ Il server sceglierà il client che inizierà la partita con modalità a scelta l
 
 Progettare ed implementare **L'impiccato!** tramite socket UDP, considerando l'architettura vista prima.
 
+#### Note e suggerimenti
+
+- Se la parola da indoviare è **CIAO**, ed allo stato attuale è stata indovinata solo la lettera **A**, lo stato del gioco sarà: **_ _ A _**.
+- Nel caso entrambi i client perdano, il server dovrà terminare l'esecuzione.
+- I client dovranno attendere il proprio turno per giocare, probabilmente bloccati da una `recvfrom()`.
+
 ```mermaid
 sequenceDiagram
 actor c1 as Client1
@@ -165,11 +171,11 @@ subgraph l1[Lan1 149.54.0.0/22]
     c1[Client 1\n149.54.0.1]
 end
 
-subgraph l2[Lan2 149.54.4.0/23]
+subgraph l2[Lan2 149.54.4.0/22]
     c2[Client 2\n149.54.4.1]
 end
 
-subgraph l3[Lan3 149.54.8.0/25]
+subgraph l3[Lan3 149.54.8.0/22]
     s[Server\n149.54.8.1]
 end
 
