@@ -802,7 +802,8 @@ scp client.c root@192.168.56.102:/home/user/compiti
 
 ```shell
 scp <user>@<ip>:<path> <file>
-# Esempio, il file server.c viene copiato nella cartella in cui si trova il terminale
+# Esempio, il file server.c viene copiato
+# nella cartella in cui si trova il terminale
 scp user@192.168.56.101:server.c .
 ```
 
@@ -812,7 +813,8 @@ scp user@192.168.56.101:server.c .
 
 ```shell
 ssh -L <porta_locale>:localhost:<porta_remota> <user>@<ip>
-# Esempio, la porta 8080 in locale viene mappata sulla porta 80 della macchina remota
+# Esempio, la porta 8080 in locale 
+# viene mappata sulla porta 80 della macchina remota
 ssh -L 8080:localhost:80 root@192.168.56.101
 ```
 
@@ -823,6 +825,30 @@ ssh -L 8080:localhost:80 root@192.168.56.101
 ```shell
 systemctl restart ssh
 ```
+
+<!-- New subsection -->
+
+### Connettersi ad una VM con rete "host only"
+
+Per potersi conentere tramite ssh ad una VM, è necessario che questa abbia almeno una scheda di rete impostata in modalità "host only".  
+Bisogna assicurarsi che la VM sia accesa, il servisio ssh sia attivo e che la scheda di rete sia abilitata con il dhcp.
+
+```shell
+# Per vedere il nome della scheda di rete
+ip a
+```
+
+```shell
+# nano /etc/network/interfaces
+auto <nome_scheda>
+iface <nome_scheda> inet dhcp
+
+# Esempio
+auto enp0s8
+iface enp0s8 inet dhcp
+```
+
+Dopo aver riavviato la macchina, si può accedere alla VM tramite l'indirizzo IP assegnato alla scheda di rete "host only".
 
 <!-- New section -->
 
