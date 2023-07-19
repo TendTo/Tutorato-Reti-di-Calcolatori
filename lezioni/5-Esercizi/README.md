@@ -371,6 +371,64 @@ BW_e &\approx 4.33 \cdot 10^6 \text{ bps} &= 4.33 \text{ Mbps}
 \end{array}
 $$
 
+<!-- New subsection -->
+
+### Esercizio 3
+
+$$
+\begin{array}{lll}
+\text{Ritardo di propagazione}(T_p) &= 100 \text{ ms} &= 10^{-1} \text{ s}
+\newline
+\text{Band Width andata}(BW_{s \to d}) &= 1 \text{ Mbit/s} &= 10^6 \text{ bit/s}
+\newline
+\text{Band Width ritorno}(BW_{d \to s}) &= 10 \text{ Kbit/s} &= 10^4 \text{ bit/s}
+\newline
+\text{Intestazione}(I) &= 1000 \text{ byte} &= 8000 \text{ bit}
+\newline
+\text{PayLoad}(P) &= 9000 \text{ byte} &= 72000 \text{ bit}
+\newline
+\text{ACK}(A) &= 100 \text{ byte} &= 800 \text{ bit}
+\end{array}
+$$
+
+Con la condizione che la banda minima a livello superiore sia maggiore di 500 Kbps (500000 bps), calcolare la finestra di trasmissione.
+
+$$
+\text{Window}(W) = \text{ ?}
+$$
+
+<!-- New subsection -->
+
+### Formule
+
+$$
+\begin{array}{llll}
+T_{tf} &= \frac{I + P}{BW_{s \to d}} &= \frac{8000 + 72000}{10^6} &= 0.08 \text{ s}
+\newline
+\newline
+T_{ta} &= \frac{I + A}{BW_{d \to s}} &= \frac{8000 + 800}{10^4} &= 0.88 \text{ s}
+\newline
+\newline
+T_t &= 2 \cdot T_p + T_{tf} + T_{ta} &= 0.2 + 0.08 + 0.88 &= 1.16 \text{ s}
+\end{array}
+$$
+
+<!-- New subsection -->
+
+### Ricavare W
+
+$$
+\begin{array}{lll}
+BW_e &= \frac{W \cdot P}{T_t} &\ge 500000
+\newline
+\newline
+W &\ge \left\lceil \frac{500000 \cdot T_t}{P} \right\rceil
+\newline
+\newline
+W &\ge \left\lceil \frac{500000 \cdot 1.16}{72000} \right\rceil &= 9
+\end{array}
+$$
+
 <!-- New section -->
 
 ## Cyclic Redundancy Check (CRC)
