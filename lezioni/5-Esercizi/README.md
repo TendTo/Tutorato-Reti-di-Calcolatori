@@ -272,7 +272,7 @@ $$
 
 <!-- New subsection -->
 
-### Ricavare BW
+### Ricavare BWe
 
 $$
 \begin{array}{ll}
