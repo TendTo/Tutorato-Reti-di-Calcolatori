@@ -225,6 +225,67 @@ P = 293600 \text{ bit}
 P = 36700 \text{ byte}
 $$
 
+<!-- New subsection -->
+
+### Esercizio 2
+
+$$
+\begin{array}{lll}
+\text{Banda}(BW) &= 80 \text{ Mbps} &= 8 \cdot 10^7 \text{ bps}
+\newline
+\text{Ritardo di propagazione}(T_p) &= 10 \text{ ms} &= 10^{-2} \text{ s}
+\newline
+\text{Intestazione}(I) &= 100 \text{ byte} &= 800 \text{ bit}
+\newline
+\text{Payload}(P) &= 900 \text{ byte} &= 7200 \text{ bit}
+\newline
+\text{ACK}(A) &= 200 \text{ byte} &= 1600 \text{ bit}
+\newline
+\text{Timer}(t) &= 200 \text{ ms} &= 2 \cdot 10^{-1} \text{ s}
+\newline
+\text{Perdita andata}(L_{s \to d}) &= 0.01
+\newline
+\text{Perdita ritorno}(L_{d \to s}) &= 0.02
+\end{array}
+$$
+
+$$
+\begin{array}{ll}
+\text{Banda effettiva}(BW_e) &= \text{ ?}
+\end{array}
+$$
+
+<!-- New subsection -->
+
+### Formule
+
+$$
+\begin{array}{llll}
+T_e &= (L_{s \to d} + L_{d \to s}) \cdot t &= (0.01 + 0.02) \cdot 2 \cdot 10^{-1} &= 6 \cdot 10^{-3} \text{ s}
+\newline
+\newline
+T_t &= RTT + T_{tf} + T_{ta} + T_e &= 2 \cdot T_p + \frac{I + P}{BW} + \frac{A}{BW} + T_e
+\newline
+&= (20 + 6) \cdot 10^{-3} + \frac{800 + 7200 + 1600}{8 \cdot 10^7} &= 2.612 \cdot 10^{-2} \text{ s}
+\end{array}
+$$
+
+<!-- New subsection -->
+
+### Ricavare BW
+
+$$
+\begin{array}{ll}
+BW_e &= \frac{P}{T_t}
+\newline
+\newline
+BW_e &= \frac{7200}{2.612 \cdot 10^{-2}}
+\newline
+\newline
+BW_e &\approx 2.76 \cdot 10^5 \text{ bps} &= 276 \text{ Kbps}
+\end{array}
+$$
+
 <!-- New section -->
 
 ## Protocollo go back n
