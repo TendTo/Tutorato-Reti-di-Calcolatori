@@ -264,9 +264,9 @@ $$
 T_e &= (L_{s \to d} + L_{d \to s}) \cdot t &= (0.01 + 0.02) \cdot 2 \cdot 10^{-1} &= 6 \cdot 10^{-3} \text{ s}
 \newline
 \newline
-T_t &= RTT + T_{tf} + T_{ta} + T_e &= 2 \cdot T_p + \frac{I + P}{BW} + \frac{A}{BW} + T_e
+T_t &= RTT + T_{tf} + T_{ta} + T_e &= 2 \cdot T_p + \frac{I + P}{BW} + \frac{I + A}{BW} + T_e
 \newline
-&= (20 + 6) \cdot 10^{-3} + \frac{800 + 7200 + 1600}{8 \cdot 10^7} &= 2.612 \cdot 10^{-2} \text{ s}
+&= (20 + 6) \cdot 10^{-3} + \frac{800 + 7200 + 800 + 1600}{8 \cdot 10^7} &= 2.613 \cdot 10^{-2} \text{ s}
 \end{array}
 $$
 
@@ -279,7 +279,7 @@ $$
 BW_e &= \frac{P}{T_t}
 \newline
 \newline
-BW_e &= \frac{7200}{2.612 \cdot 10^{-2}}
+BW_e &= \frac{7200}{2.613 \cdot 10^{-2}}
 \newline
 \newline
 BW_e &\approx 2.76 \cdot 10^5 \text{ bps} &= 276 \text{ Kbps}
@@ -346,6 +346,9 @@ $$
 \text{Trasferimento frame}(T_{tf}) &= \frac{I + P}{BW} &= \frac{800 + 8000}{10^8} &= 8.8 \cdot 10^{-5} \text{ s}
 \newline
 \newline
+\text{Trasferimento ACK}(T_{ta}) &= \frac{I}{BW} &= \frac{800}{10^8} &= 8 \cdot 10^{-6} \text{ s}
+\newline
+\newline
 \text{Numero di frame in } RTT &= \frac{2 \cdot T_p}{T_f} &= \frac{2 \cdot 10^{-2}}{8.8 \cdot 10^{-5}} &\approx 227.27
 \end{array}
 $$
@@ -358,10 +361,10 @@ Poiché il numero di frame che sarebbe possibile inviare nell'RTT è maggiore o 
 
 $$
 \begin{array}{lll}
-BW_e &= \frac{P \cdot W}{2 \cdot T_p  + T_{tf} + T_{ta}}
+BW_e &= \frac{P \cdot W}{T_t} &= \frac{P \cdot W}{2 \cdot T_p  + T_{tf} + T_{ta}}
 \newline
 \newline
-BW_e &= \frac{8000 \cdot 20}{2 \cdot 10^{-2} + 8.8 \cdot 10^{-5}}
+BW_e &= \frac{8000 \cdot 20}{2 \cdot 10^{-2} + 8.8 \cdot 10^{-5} + 8 \cdot 10^{-6}}
 \newline
 \newline
 BW_e &\approx 8 \cdot 10^6 \text{ bps} &= 8 \text{ Mbps}
