@@ -63,7 +63,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [chat-multi-client](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/chat-multi-client)                     | Compito                                                                                                                      | TCP       | IPv4 |            |
 | [reverse-shell](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/reverse-shell)                             | Esercitazione                                                                                                                | TCP       | IPv4 |            |
 | [rock-paper-scissors-threads](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/rock-paper-scissors-threads) | Esercitazione con thread e semafori                                                                                          | TCP       | IPv4 |            |
-| [dijkstra](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/dijkstra)                                           | Tabelle di routing con Dijkstra                                                                                              | /         | /    |            |
+| [dijkstra](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/dijkstra)                                       | Tabelle di routing con Dijkstra                                                                                              | /         | /    |            |
 
 <!-- New section -->
 
@@ -75,6 +75,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [tris](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/tris)                               | Simulazione di compito + Networking | TCP       | IPv6 |
 | [forza4](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/forza4)                           | Simulazione di compito + Networking | TCP       | IPv4 |
 | [impiccato](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/impiccato)                     | Compito 10/07/2023                  | UDP       | IPv4 |
+| [enoteca](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/enoteca)                       | Compito 06/09/2023                  | TCP       | IPv6 |
 
 <!-- New section -->
 

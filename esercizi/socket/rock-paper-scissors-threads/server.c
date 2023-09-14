@@ -16,7 +16,6 @@
  * @date 2023-07-03
  *
  * @copyright Copyright (c) 2023
- *
  */
 #include <stdlib.h>
 #include <stdio.h>

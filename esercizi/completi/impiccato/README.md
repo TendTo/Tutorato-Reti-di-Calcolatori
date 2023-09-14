@@ -68,7 +68,7 @@ Progettare ed implementare **L'impiccato!** tramite socket UDP, considerando l'a
 
 #### Note e suggerimenti
 
-- Se la parola da indoviare è **CIAO**, ed allo stato attuale è stata indovinata solo la lettera **A**, lo stato del gioco sarà: **_ _ A _**.
+- Se la parola da indovinare è **CIAO**, ed allo stato attuale è stata indovinata solo la lettera **A**, lo stato del gioco sarà: **\_\_A\_**.
 - Nel caso entrambi i client perdano, il server dovrà terminare l'esecuzione.
 - I client dovranno attendere il proprio turno per giocare, probabilmente bloccati da una `recvfrom()`.
 
@@ -114,6 +114,7 @@ end
 
 ## Soluzioni
 
+> **Note**  
 > Prima di leggere le soluzioni, provare a risolvere l'esercizio da soli.
 > Dopo averlo fatto, confrontare la propria soluzione con quella proposta.
 > Ci sono tantissimi modi per risolvere le varie consegne, quindi non c'è da preoccuparsi se la propria soluzione è diversa da quella proposta.
@@ -156,7 +157,7 @@ style s13 stroke:#00f,stroke-width:4px
     s9 -- 0 --> s11
     s9 -- 1 --> s12
     s10 -- 0 --> s13
-    s10 -- 0 --> s14
+    s10 -- 1 --> s14
 ```
 
 ---

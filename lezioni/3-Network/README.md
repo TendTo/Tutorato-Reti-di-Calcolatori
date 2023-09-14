@@ -125,25 +125,25 @@ Questi sono alcuni degli indirizzi speciali più comuni.
 Gli indirizzi IPv6 sono dei numeri lunghi 128 bit che identificano univocamente un dispositivo all'interno di una rete.
 
 $$
-\underbrace{\underbrace{\underbrace{2}_{4 \ bit}001}_{16\ bit}:0db8:85a3:0000:0000:8a2e:0370:7334}\_{128\ bit}
+\underbrace{\underbrace{\underbrace{2}_{4 \ bit}001}_{16\ bit}:0db8:85a3:0000:0000:8a2e:0370:7334}_{128\ bit}
 \newline \
 \newline
-\underbrace{0}\_{0000}
-\underbrace{1}\_{0001}
-\underbrace{2}\_{0010}
-\underbrace{3}\_{0011}
-\underbrace{4}\_{0100}
-\underbrace{5}\_{0101}
-\underbrace{6}\_{0110}
-\underbrace{7}\_{0111}
-\underbrace{8}\_{1000}
-\underbrace{9}\_{1001}
-\underbrace{a}\_{1010}
-\underbrace{b}\_{1011}
-\underbrace{c}\_{1100}
-\underbrace{d}\_{1101}
-\underbrace{e}\_{1110}
-\underbrace{f}\_{1111}
+\underbrace{0}_{0000}
+\underbrace{1}_{0001}
+\underbrace{2}_{0010}
+\underbrace{3}_{0011}
+\underbrace{4}_{0100}
+\underbrace{5}_{0101}
+\underbrace{6}_{0110}
+\underbrace{7}_{0111}
+\underbrace{8}_{1000}
+\underbrace{9}_{1001}
+\underbrace{a}_{1010}
+\underbrace{b}_{1011}
+\underbrace{c}_{1100}
+\underbrace{d}_{1101}
+\underbrace{e}_{1110}
+\underbrace{f}_{1111}
 $$
 
 <!-- New subsection -->
