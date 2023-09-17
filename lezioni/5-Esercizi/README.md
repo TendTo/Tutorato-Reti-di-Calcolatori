@@ -626,6 +626,97 @@ $$
 
 <!-- New section -->
 
+## Codifica di Hamming
+
+La codifica di Hamming è un codice di correzione degli errori che permette di correggere errori su un singolo bit e di rilevare quelli su due.
+
+<!-- New subsection -->
+
+### Esercizio 1
+
+Sia data la seguente word:
+
+$$
+10001011010111101
+$$
+
+Sapendo che vi sono state aggiunte la ridondanza **CRC4** e successivamente la ridondanza della **codifica di Hamming** per la correzione di un singolo bit, descrivere l’operazione che il ricevente andrà fare per determinare se la word ricevuta sia corretta o, in caso di un singolo errore, correggerlo.  
+Il generatore utilizzato è $x^4 + x^3 + 1$.  
+Per la codifica di Hamming i bit vanno considerati da sinistra verso destra.
+
+<!-- New subsection -->
+
+$$
+{\color{blue} 10}0{\color{blue} 0}101 {\color{blue} 1}0101111{\color{blue} 0}1
+\newline
+\begin{array}{ll}
+\newline
+b_1 &=
+d_3 \oplus d_5 \oplus d_7 \oplus d_9 \oplus d_{11} \oplus d_{13} \oplus d_{15} \oplus d_{17} =
+\newline
+&=0 \oplus 1 \oplus 1 \oplus 0 \oplus 0 \oplus 1 \oplus 1 \oplus 1 = {\color{green} 1}
+\newline
+b_2 &= d_3 \oplus d_6 \oplus d_7 \oplus d_{10} \oplus d_{11} \oplus d_{14} \oplus d_{15} =
+\newline
+&= 0 \oplus 0 \oplus 1 \oplus 1 \oplus 0 \oplus 1 \oplus 1 = {\color{green} 0}
+\newline
+b_3 &= d_5 \oplus d_6 \oplus d_7 \oplus d_{12} \oplus d_{13} \oplus d_{14} \oplus d_{15} =
+\newline
+&= 1 \oplus 0 \oplus 1 \oplus 1 \oplus 1 \oplus 1 \oplus 1 = {\color{green} 0}
+\newline
+b_4 &= d_9 \oplus d_{10} \oplus d_{11} \oplus d_{12} \oplus d_{13} \oplus d_{14} \oplus d_{15} =
+\newline
+&= 0 \oplus 1 \oplus 0 \oplus 1 \oplus 1 \oplus 1 \oplus 1 = {\color{green} 1}
+\newline
+b_5 &= d_{17} = {\color{red} 1}
+\end{array}
+$$
+
+<!-- New subsection -->
+
+### Esercizio 1
+
+Il codice di hamming indica che è avvenuto un errore nel bit 16, che però è un bit di ridondanza.
+L'errore non può essere il bit 17 in quanto è "coperto" anche dal bit di controllo 1.  
+Rimuoviamo quindi tutti i bit aggiunti dalla codifica.
+Rimane la word:
+
+$$
+010101011111
+$$
+
+Applichiamo quindi il CRC4 per verificare se ci sono stati errori di trasmissione con il generatore $x^4 + x^3 + 1$.
+
+$$
+11001
+$$
+
+<!-- New subsection -->
+
+### Esercizio 1
+
+$M = 01010101 \space 1111 \qquad G = 11001 \qquad |G| - 1 = 4$
+
+$$
+\begin{array}{ll}
+01010101 \space 1111
+\newline
+\space\space 11001
+\newline
+00110001 \space 1111
+\newline
+\space\space \space\space 11001
+\newline
+00000011 \space 1111
+\newline
+\space\space \space\space \space\space \space\space \space\space \space\space 11 \space 001
+\newline
+00000000 \space 1101 & \ne 0 \to \text{errore}
+\end{array}
+$$
+
+<!-- New section -->
+
 ## Distanza di Hamming
 
 La distanza di Hamming è la distanza tra due parole di uguale lunghezza, definita come il numero di posizioni in cui le due parole differiscono.
