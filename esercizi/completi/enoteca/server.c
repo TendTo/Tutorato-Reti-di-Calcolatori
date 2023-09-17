@@ -30,6 +30,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <stdbool.h>
+#include <time.h>
 #include "definitions.h"
 
 #define DATABASE_FILE "database.txt"
@@ -204,10 +205,12 @@ bool handle_client(int sockfd, Message *msg)
     switch (msg->action)
     {
     case LIST:
+    {
         int product_ids[MAX_COMPANY_PRODUCTS]; // Lista degli id dei prodotti
         memset(product_ids, 0, sizeof(product_ids));
         get_product_ids(product_ids);
         debug(send(sockfd, &product_ids, sizeof(product_ids), 0));
+    }
         return true;
     case BUY:
         return buy_product(&msg->prod);

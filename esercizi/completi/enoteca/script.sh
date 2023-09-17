@@ -72,6 +72,7 @@ function setup() {
     # Copia il file client.c e server.c in tutti i nodi
     echo "Copia dei file client.c e server.c in tutti i nodi, li compila e li rende eseguibili dall'user debian"
     for vm in "${vms[@]}"; do
+        vboxmanage guestcontrol $vm copyto "$local_path/definitions.h" "/home/debian/definitions.h" $credentials
         for file in "${c_files[@]}"; do
             vboxmanage guestcontrol $vm copyto "$local_path/$file.c" "/home/debian/$file.c" $credentials
             vboxmanage guestcontrol $vm run --exe /usr/bin/gcc $credentials --wait-stdout -- "/home/debian/$file.c" -o "/home/debian/$file"
