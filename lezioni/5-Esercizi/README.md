@@ -510,7 +510,7 @@ $M = 101101 \quad G = 1101 \quad |G| - 1 = 4 - 1 = 3$
 
 Calcolare il CRC.
 
-$$
+```math
 \begin{array}{ll}
 101101 \space 000
 \newline
@@ -526,7 +526,7 @@ $$
 \newline
 000000 \space \underbrace{010}_{\text{resto}}
 \end{array}
-$$
+```
 
 <!-- New subsection -->
 
@@ -536,7 +536,7 @@ $M = 1101101 \qquad G = 11010 \qquad |G| - 1 = 4$
 
 Calcolare il CRC.
 
-$$
+```math
 \begin{array}{ll}
 1101101 \space 0000
 \newline
@@ -552,7 +552,7 @@ $$
 \newline
 0000000 \space \underbrace{1100}_{\text{resto}}
 \end{array}
-$$
+```
 
 <!-- New subsection -->
 

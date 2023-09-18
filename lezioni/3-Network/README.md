@@ -9,12 +9,12 @@ Come effettuare il setup di una rete locale.
 Gli indirizzi IPv4 sono dei numeri lunghi 32 bit che identificano univocamente un dispositivo all'interno di una rete.
 Generalmente sono scritti in notazione puntata, dove ogni numero rappresenta un byte (8 bit).
 
-$$
+```math
 \underbrace{192}_{8\ bit}.\underbrace{168}_{8\ bit}.\underbrace{1}_{8\ bit}.\underbrace{1}_{8\ bit}
-\newline \
+\newline \space
 \newline
 \underbrace{\underbrace{11000000}_{8\ bit}.\underbrace{10101000}_{8\ bit}.\underbrace{00000001}_{8\ bit}.\underbrace{00000001}_{8\ bit}}_{32\ bit}
-$$
+```
 
 <!-- New subsection -->
 
@@ -35,12 +35,12 @@ Queste determinano la lunghezza del prefisso che identifica la rete.
 
 Il CIDR è un sistema di notazione che permette di specificare la lunghezza del prefisso che identifica la rete in maniera più flessibile.
 
-$$
+```math
 \underbrace{192.168.1}_{24\ \text{bit di mask}}.1\ /\underbrace{24}_{\text{mask}} \\
-\newline \
+\newline \space
 \newline
 \underbrace{11000000.10101000.00000001}_{24\ \text{bit di mask}}.\underbrace{00000001}_{8\ \text{bit liberi}}\ /\underbrace{24}_{\text{mask}}
-$$
+```
 
 <!-- New subsection -->
 
@@ -124,9 +124,9 @@ Questi sono alcuni degli indirizzi speciali più comuni.
 
 Gli indirizzi IPv6 sono dei numeri lunghi 128 bit che identificano univocamente un dispositivo all'interno di una rete.
 
-$$
+```math
 \underbrace{\underbrace{\underbrace{2}_{4 \ bit}001}_{16\ bit}:0db8:85a3:0000:0000:8a2e:0370:7334}_{128\ bit}
-\newline \
+\newline \space
 \newline
 \underbrace{0}_{0000}
 \underbrace{1}_{0001}
@@ -144,7 +144,7 @@ $$
 \underbrace{d}_{1101}
 \underbrace{e}_{1110}
 \underbrace{f}_{1111}
-$$
+```
 
 <!-- New subsection -->
 
@@ -172,16 +172,16 @@ $$
 
 Le maschere in IPv6 sono rappresentate da un numero che indica il numero di bit che compongono l'identificativo della rete.
 
-$$
+```math
 \underbrace{2001:db8:85a3::8a2e}_{96 \text{ bit di maschera}}:370:7334/96
-$$
+```
 
 Bisogna stare attenti a ricordare che ogni cifra esadecimale corrisponde a 4 bit.
 La maschera potrebbe anche dividere la cifra nel mezzo.
 
-$$
+```math
 \underbrace{2001:db8:85a3::8a2e:0\underbrace{3}_{001}}_{103 \text{ bit di maschera}}\underbrace{ }_{1}70:7334/103
-$$
+```
 
 <!-- New subsection -->
 
@@ -242,33 +242,33 @@ Si vuole dividere la rete 2:4::FFF0:0:0/96 in 4 reti con 500.000, 50.000, 2.500.
 
 $0002:0004:0000:0000:0000:FFF0:0000:0000$
 
-$$
+```math
 \lceil\log_2{500000}\rceil = 19 \to 128 - 19 = 109
 \newline
 \underbrace{0002:0004:0000:0000:0000:FFF0:000}_{108 \text{ bit}}\underbrace{8}_{1000}:0000 / 109
-$$
+```
 
-$$
+```math
 \lceil\log_2{50000}\rceil = 16 \to 128 - 16 = 112
 \newline
 \underbrace{0002:0004:0000:0000:0000:FFF0:000}_{108 \text{ bit}}\underbrace{1}_{0001}:0000 / 112
-$$
+```
 
 <!-- New subsection -->
 
 #### Esempio - continuazione
 
-$$
+```math
 \lceil\log_2{2500000}\rceil = 22 \to 128 - 22 = 106
 \newline
 \underbrace{0002:0004:0000:0000:0000:FFF0:00}_{104 \text{ bit}}\underbrace{4}_{0100}0:0000 / 106
-$$
+```
 
-$$
+```math
 \lceil\log_2{700000}\rceil = 20 \to 128 - 20 = 108
 \newline
 \underbrace{0002:0004:0000:0000:0000:FFF0:00}_{104 \text{ bit}}\underbrace{1}_{0001}0:0000 / 108
-$$
+```
 
 <!-- New subsection -->
 

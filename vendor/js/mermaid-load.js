@@ -30,10 +30,7 @@ function mermaidParser() {
         try {
             const { svg } = await mermaid.render(`graph-${index}`, graphCode);
             mermaidDiv.innerHTML = uniqueIds(svg, index);
-            item.parentNode.parentNode.insertBefore(
-                mermaidDiv,
-                item.parentNode
-            );
+            item.parentNode.parentNode.insertBefore(mermaidDiv, item.parentNode);
             item.parentNode.remove();
         } catch (err) {
             console.error(`Cannot render diagram ${index}\n${graphCode}`);
@@ -42,13 +39,25 @@ function mermaidParser() {
     });
 }
 
+function mathEnvParser() {
+    const maths = document.getElementsByClassName("math");
+    maths.forEach(async (item) => {
+        const mathDiv = document.createElement("p");
+        const mathCode = item.textContent.trim();
+        mathDiv.classList.add("math");
+        mathDiv.innerText = `$$\n${mathCode}\n$$`;
+
+        item.parentNode.parentNode.insertBefore(mathDiv, item.parentNode);
+        item.parentNode.remove();
+    });
+}
+
 function mathParser() {
     const maths = document.evaluate('//p[starts-with(., "$$")]', document, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
     for (let i = 0; i < maths.snapshotLength; i++) {
         // Substitute any <em> tags with _ to avoid conflicts with markdown
         maths.snapshotItem(i).innerHTML = maths.snapshotItem(i).innerHTML.replace(/<em>/g, "_").replace(/<\/em>/g, "_");
-        console.log(maths.snapshotItem(i).innerHTML);
-        
+
         const codeEl = document.createElement("code");
         codeEl.innerHTML = maths.snapshotItem(i).textContent;
         maths.snapshotItem(i).innerHTML = "";
@@ -63,6 +72,7 @@ function loadMermaid() {
         flowchart: { htmlLabels: false },
     });
     Reveal.addEventListener("ready", (event) => {
+        mathEnvParser();
         mermaidParser();
         mathParser();
     });
