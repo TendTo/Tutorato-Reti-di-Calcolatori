@@ -1,0 +1,6 @@
+0	Eterogermina	47
+1	Xanax	85
+2	Aspirina	109
+3	Mascherina	203
+4	Cortisone	42
+5	Durex	69
