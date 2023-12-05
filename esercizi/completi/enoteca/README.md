@@ -277,10 +277,10 @@ ip link set enp0s9 up
 # Indirizzi ip del router
 ip -6 addr add 2:3::7ff/118 dev enp0s3
 ip -6 addr add 2:3::3ff/119 dev enp0s8
-ip -6 addr add 2:3::1fff/119 dev enp0s9
+ip -6 addr add 2:3::11ff/119 dev enp0s9
 # Tabella di routing
 ip -6 route add 2:3::0/120 via 2:3::3fe
-ip -6 route add 2:3::800/117 via 2:3::1ffe
+ip -6 route add 2:3::800/117 via 2:3::11fe
 # Forwarding
 sysctl -w net.ipv6.conf.all.forwarding=1
 ```
@@ -302,8 +302,8 @@ iface enp0s8 inet6 static
 
 auto enp0s8
 iface enp0s8 inet6 static
-    address 2:3::1fff/119
-    up ip -6 route add 2:3::800/117 via 2:3::1ffe
+    address 2:3::11ff/119
+    up ip -6 route add 2:3::800/117 via 2:3::11fe
 ```
 
 ```py
@@ -319,9 +319,9 @@ net.ipv6.conf.all.forwarding=1
 ip link set enp0s8 up
 # Indirizzi ip del router
 ip -6 addr add 2:3::fff/117 dev enp0s3
-ip -6 addr add 2:3::1ffe/119 dev enp0s8
+ip -6 addr add 2:3::11fe/119 dev enp0s8
 # Tabella di routing
-ip -6 route add default via 2:3::1fff
+ip -6 route add default via 2:3::11ff
 # Forwarding
 sysctl -w net.ipv6.conf.all.forwarding=1
 ```
@@ -338,8 +338,8 @@ iface enp0s3 inet6 static
 
 auto enp0s8
 iface enp0s8 inet6 static
-    address 2:3::1ff3/119
-    gateway 2:3::1fff
+    address 2:3::11fe/119
+    gateway 2:3::11ff
 ```
 
 ```py

@@ -57,16 +57,16 @@ function setup() {
     vboxmanage guestcontrol "${vms[4]}" run --exe /sbin/ip $credentials --wait-stdout -- link set enp0s9 up
     vboxmanage guestcontrol "${vms[4]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 addr add 2:3::7ff/118 dev enp0s3
     vboxmanage guestcontrol "${vms[4]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 addr add 2:3::3ff/119 dev enp0s8
-    vboxmanage guestcontrol "${vms[4]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 addr add 2:3::1fff/119 dev enp0s9
+    vboxmanage guestcontrol "${vms[4]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 addr add 2:3::11ff/119 dev enp0s9
     vboxmanage guestcontrol "${vms[4]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 route add 2:3::0/120 via 2:3::3fe
-    vboxmanage guestcontrol "${vms[4]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 route add 2:3::800/117 via 2:3::1ffe
+    vboxmanage guestcontrol "${vms[4]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 route add 2:3::800/117 via 2:3::11fe
     vboxmanage guestcontrol "${vms[4]}" run --exe /usr/sbin/sysctl $credentials  --wait-stdout -- -w net.ipv6.conf.all.forwarding=1
 
     echo "Configurazione router ${vms[5]}"
     vboxmanage guestcontrol "${vms[5]}" run --exe /sbin/ip $credentials --wait-stdout -- link set enp0s8 up
     vboxmanage guestcontrol "${vms[5]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 addr add 2:3::fff/117 dev enp0s3
-    vboxmanage guestcontrol "${vms[5]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 addr add 2:3::1ffe/119 dev enp0s8
-    vboxmanage guestcontrol "${vms[5]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 route add default via 2:3::1fff
+    vboxmanage guestcontrol "${vms[5]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 addr add 2:3::11fe/119 dev enp0s8
+    vboxmanage guestcontrol "${vms[5]}" run --exe /sbin/ip $credentials --wait-stdout -- -6 route add default via 2:3::11ff
     vboxmanage guestcontrol "${vms[5]}" run --exe /usr/sbin/sysctl $credentials  --wait-stdout -- -w net.ipv6.conf.all.forwarding=1
 
     # Copia il file client.c e server.c in tutti i nodi
