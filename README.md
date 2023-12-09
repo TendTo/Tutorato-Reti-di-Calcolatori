@@ -75,7 +75,8 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [tris](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/tris)                               | Simulazione di compito + Networking | TCP       | IPv6 |
 | [forza4](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/forza4)                           | Simulazione di compito + Networking | TCP       | IPv4 |
 | [impiccato](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/impiccato)                     | Compito 10/07/2023                  | UDP       | IPv4 |
-| [enoteca](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/enoteca)                       | Compito 06/09/2023                  | TCP       | IPv6 |
+| [enoteca](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/enoteca)                         | Compito 06/09/2023                  | TCP       | IPv6 |
+| [christmas](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/christmas)                     | Compito 06/12/2023                  | UDP       | IPv4 |
 
 <!-- New section -->
 
