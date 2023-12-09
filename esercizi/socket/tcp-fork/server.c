@@ -102,20 +102,20 @@ int main(int argc, char *argv[])
         }
 
         int pid = fork();
-        if (pid == -1)
+        if (pid == -1) // Errore
         {
             perror("Error while forking");
             close(sockfd_conn);
             continue;
         }
-        else if (pid == 0)
+        else if (pid == 0) // Figlio
         {
             close(sockfd);
             child_process(sockfd_conn, &client_addr);
             close(sockfd_conn);
             exit(0);
         }
-        else
+        else // Padre
         {
             close(sockfd_conn);
             continue;
