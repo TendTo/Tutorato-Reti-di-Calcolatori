@@ -37,7 +37,7 @@ I **client-azienda** dovranno inviare i prodotti disponibili della propria azien
 In particolare, utilizzando un'apposita struttura articolo composta dai seguenti campi (_Nome Azienda, id_articolo, Nome Vino, Quantità, Costo_), per ogni articolo dovrà essere inviato
 un pacchetto contenente le seguenti informazioni: _Nome Azienda, Nome Vino, Quantità, Costo_
 
-> **Note**  
+> [!Note]  
 > Il campo _id_articolo_ (non presente nella lista di cui sopra) dovrà essere aggiunto dal **server** secondo una qualsiasi euristica definita a piacere
 > Ogni azienda potrà richiedere al **sever** la propria lista dei vini disponibili, nonché aggiornare la quantità di un singolo articolo specificando l'_id_articolo_ e la _Quantità_.
 
@@ -46,11 +46,11 @@ Enoteca. Quando il client deciderà di acquistare un articolo specifico, dovrà 
 In questo caso, il **server** dovrà verificare la quantità disponibile e, in caso positivo, decrementa quest'ultima dello specifico articolo.
 Nel caso in cui la quantità richiesta non sia disponibile, il **server** invierà al **client** la quantità disponibile.
 
-> **Note**  
+> [!Note]  
 > Lo studente può definire qualsiasi approccio al fine di distinguere i **client-client**
 > dai **client-azienda**
 
-> **Note**  
+> [!Note]  
 > È consigliato l'uso di un File di testo come _memoria condivisa_ per aggiornare e gestire tutte le operazioni sugli articoli di tutte le aziende.
 > Ad ogni operazione di aggiunta e/o aggiornamento di quantità di un prodotto, verrà aggiornata la struttura articolo e di conseguenza il file di testo.
 > Quindi, ogni volta che un client fa una richiesta, il Server- Enoteca aggiornerà la propria struttura con le informazioni disponibili nel file!
@@ -61,7 +61,7 @@ Nel caso in cui la quantità richiesta non sia disponibile, il **server** invier
 
 ## Soluzioni
 
-> **Note**  
+> [!Note]  
 > Prima di leggere le soluzioni, provare a risolvere l'esercizio da soli.
 > Dopo averlo fatto, confrontare la propria soluzione con quella proposta.
 > Ci sono tantissimi modi per risolvere le varie consegne, quindi non c'è da preoccuparsi se la propria soluzione è diversa da quella proposta.

@@ -114,7 +114,7 @@ end
 
 ## Soluzioni
 
-> **Note**  
+> [!Note]  
 > Prima di leggere le soluzioni, provare a risolvere l'esercizio da soli.
 > Dopo averlo fatto, confrontare la propria soluzione con quella proposta.
 > Ci sono tantissimi modi per risolvere le varie consegne, quindi non c'è da preoccuparsi se la propria soluzione è diversa da quella proposta.
