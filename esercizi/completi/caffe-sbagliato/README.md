@@ -89,9 +89,11 @@ Un generico client (che sarà associato a una specifica LAN in base al blocco di
 Calcolo delle maschere necessarie per soddisfare i requisiti di ciascuna lan:
 
 $$
-\text{Lan1}: \lceil \log_2(4000000) \rceil = 22 \rightarrow 128 - 22 = 106 \\
-\text{Lan2}: \lceil \log_2(1000000) \rceil = 20 \rightarrow 128 - 20 = 108 \\
+\begin{align*}
+\text{Lan1}: \lceil \log_2(4000000) \rceil = 22 \rightarrow 128 - 22 = 106 \newline
+\text{Lan2}: \lceil \log_2(1000000) \rceil = 20 \rightarrow 128 - 20 = 108 \newline
 \text{Lan3}: \lceil \log_2(2000000) \rceil = 21 \rightarrow 128 - 21 = 107
+\end{align*}
 $$
 
 ```mermaid
