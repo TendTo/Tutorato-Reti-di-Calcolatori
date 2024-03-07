@@ -10,12 +10,12 @@ Gli indirizzi IPv4 sono dei numeri lunghi 32 bit che identificano univocamente u
 Generalmente sono scritti in notazione puntata, dove ogni numero rappresenta un byte (8 bit).
 
 ```math
-\begin{align*}
+\begin{gather*}
 \underbrace{192}_{8\ bit}.\underbrace{168}_{8\ bit}.\underbrace{1}_{8\ bit}.\underbrace{1}_{8\ bit}
 \newline \space
 \newline
 \underbrace{\underbrace{11000000}_{8\ bit}.\underbrace{10101000}_{8\ bit}.\underbrace{00000001}_{8\ bit}.\underbrace{00000001}_{8\ bit}}_{32\ bit}
-\end{align*}
+\end{gather*}
 ```
 
 <!-- New subsection -->
@@ -38,12 +38,12 @@ Queste determinano la lunghezza del prefisso che identifica la rete.
 Il CIDR è un sistema di notazione che permette di specificare la lunghezza del prefisso che identifica la rete in maniera più flessibile.
 
 ```math
-\begin{align*}
+\begin{gather*}
 \underbrace{192.168.1}_{24\ \text{bit di mask}}.1\ /\underbrace{24}_{\text{mask}} \newline
 \newline \space
 \newline
 \underbrace{11000000.10101000.00000001}_{24\ \text{bit di mask}}.\underbrace{00000001}_{8\ \text{bit liberi}}\ /\underbrace{24}_{\text{mask}}
-\end{align*}
+\end{gather*}
 ```
 
 <!-- New subsection -->
@@ -129,7 +129,7 @@ Questi sono alcuni degli indirizzi speciali più comuni.
 Gli indirizzi IPv6 sono dei numeri lunghi 128 bit che identificano univocamente un dispositivo all'interno di una rete.
 
 ```math
-\begin{align*}
+\begin{gather*}
 \underbrace{\underbrace{\underbrace{2}_{4 \ bit}001}_{16\ bit}:0db8:85a3:0000:0000:8a2e:0370:7334}_{128\ bit}
 \newline \space
 \newline
@@ -149,7 +149,7 @@ Gli indirizzi IPv6 sono dei numeri lunghi 128 bit che identificano univocamente 
 \underbrace{d}_{1101}
 \underbrace{e}_{1110}
 \underbrace{f}_{1111}
-\end{align*}
+\end{gather*}
 ```
 
 <!-- New subsection -->
@@ -159,21 +159,21 @@ Gli indirizzi IPv6 sono dei numeri lunghi 128 bit che identificano univocamente 
 La notazione compressa permette di omettere gli zeri iniziali di ogni gruppo di 4 cifre.
 
 $$
-\begin{align*}
+\begin{gather*}
 2001:0db8:85a3:0000:0000:8a2e:0370:7334
 \newline
 2001:db8:85a3:0:0:8a2e:370:7334
-\end{align*}
+\end{gather*}
 $$
 
 Inoltre, è possibile omettere una sola sequenza di zeri consecutivi.
 
 $$
-\begin{align*}
+\begin{gather*}
 2001:0db8:85a3:0000:0000:8a2e:0370:7334
 \newline
 2001:db8:85a3::8a2e:370:7334
-\end{align*}
+\end{gather*}
 $$
 
 <!-- New subsection -->
@@ -253,19 +253,19 @@ Si vuole dividere la rete 2:4::FFF0:0:0/96 in 4 reti con 500.000, 50.000, 2.500.
 $0002:0004:0000:0000:0000:FFF0:0000:0000$
 
 ```math
-\begin{align*}
+\begin{gather*}
 \lceil\log_2{500000}\rceil = 19 \to 128 - 19 = 109
 \newline
 \underbrace{0002:0004:0000:0000:0000:FFF0:000}_{108 \text{ bit}}\underbrace{8}_{1000}:0000 / 109
-\end{align*}
+\end{gather*}
 ```
 
 ```math
-\begin{align*}
+\begin{gather*}
 \lceil\log_2{50000}\rceil = 16 \to 128 - 16 = 112
 \newline
 \underbrace{0002:0004:0000:0000:0000:FFF0:000}_{108 \text{ bit}}\underbrace{1}_{0001}:0000 / 112
-\end{align*}
+\end{gather*}
 ```
 
 <!-- New subsection -->
@@ -273,19 +273,19 @@ $0002:0004:0000:0000:0000:FFF0:0000:0000$
 #### Esempio - continuazione
 
 ```math
-\begin{align*}
+\begin{gather*}
 \lceil\log_2{2500000}\rceil = 22 \to 128 - 22 = 106
 \newline
 \underbrace{0002:0004:0000:0000:0000:FFF0:00}_{104 \text{ bit}}\underbrace{4}_{0100}0:0000 / 106
-\end{align*}
+\end{gather*}
 ```
 
 ```math
-\begin{align*}
+\begin{gather*}
 \lceil\log_2{700000}\rceil = 20 \to 128 - 20 = 108
 \newline
 \underbrace{0002:0004:0000:0000:0000:FFF0:00}_{104 \text{ bit}}\underbrace{1}_{0001}0:0000 / 108
-\end{align*}
+\end{gather*}
 ```
 
 <!-- New subsection -->
