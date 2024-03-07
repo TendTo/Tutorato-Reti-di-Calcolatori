@@ -310,5 +310,4 @@ net.ipv6.conf.all.forwarding=1
 ### Soluzione: Programmazione Socket
 
 [server.c](./server.c)  
-[client.c](./client.c)  
-[azienda.c](./azienda.c)
+[client.c](./client.c)
