@@ -961,6 +961,14 @@ export class InfoManager {
 }
 
 window.onload = () => {
+  console.log(
+    "%c There is not much to see here. Just a canvas and a bunch of inputs.\nIf you are just curious about how its made, you can find everything at https://github.com/TendTo/Tutorato-Reti-di-Calcolatori.",
+    "color:lime;background:black;"
+  );
+  console.log(
+    "%c If you think you can improve the repulsive visual presentation, you are more than welcome to do so.",
+    "font-weight: bold; font-size: 32px;color: red; text-shadow: 2px 2px 0 rgb(217,31,38) , 4px 4px 0 rgb(226,91,14) , 6px 6px 0 rgb(245,221,8) , 8px 8px 0 rgb(5,148,68) , 10px 10px 0 rgb(2,135,206) , 12px 12px 0 rgb(4,77,145) , 14px 14px 0 rgb(42,21,113)"
+  );
   const inputManager = new InputManager();
   const canvas = new CanvasDrawer();
   const infoManager = new InfoManager();
