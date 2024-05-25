@@ -81,6 +81,18 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 <!-- New section -->
 
+## Ip Tree Visualizer
+
+L'[IP Tree Visualiser](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/ip) è una utility che permette di visualizzare l'indirizzamento IP in modo gerarchico tramite un albero binario.
+
+Supporta sia IPv4 che IPv6.
+
+Poiché non è stato testato a sufficienza, si consiglia di utilizzarlo con cautela e riportare [eventuali bug](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/issues).
+
+<!-- .element: class="fragment" -->
+
+<!-- New section -->
+
 ## Stars
 
 ## [![Star History Chart](https://api.star-history.com/svg?repos=TendTo/Tutorato-Reti-di-Calcolatori&type=Date)](https://star-history.com/#TendTo/Tutorato-Reti-di-Calcolatori&Date)
@@ -89,6 +101,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 ## Risorse
 
+- [Ip Tree Visualizer](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/ip)
 - [Syllabus](https://web.dmi.unict.it/corsi/l-31/insegnamenti/?cod=19084)
 - [CIDR visualizer IPv4](https://cidr.xyz/)
 
