@@ -6,7 +6,7 @@ function assert(
   if (!condition) throw new error(message || "Assertion failed");
 }
 
-function querySelector<K extends HTMLElement>(
+export function querySelector<K extends HTMLElement>(
   selector: string,
   type: { new (): K }
 ): K {
@@ -17,13 +17,13 @@ function querySelector<K extends HTMLElement>(
   return el;
 }
 
-type WordSize = 8 | 16 | 32;
-type OnUpdateIpCallback = (
+export type WordSize = 8 | 16 | 32;
+export type OnUpdateIpCallback = (
   ip: IP,
   treeHeight: number,
   toNetwork: boolean
 ) => void;
-type TextOptions = {
+export type TextOptions = {
   font?: string;
   fill?: string;
   align?: CanvasTextAlign;
@@ -149,12 +149,6 @@ export class BitArray {
     return Math.floor(idx / this.wordSize);
   }
 
-  /**
-   * Sets the bit at index to a value (boolean.)
-   * @param {number} idx index of the bit to set
-   * @param {boolean} value value to set the bit to
-   * @throws {RangeError} if index is out of range
-   */
   set(idx: number, value: boolean) {
     assert(
       idx >= 0 && idx < this.length,
@@ -307,7 +301,7 @@ export class BitArray {
   }
 }
 
-abstract class IP {
+export abstract class IP {
   protected _bits: BitArray;
   protected _mask: number;
 
@@ -331,8 +325,8 @@ abstract class IP {
     return typeof mask === "number" && mask >= 1 && mask <= this.maxMask;
   }
 
-  constructor(value: BitArray | Uint8Array, mask: number) {
-    if (value instanceof Uint8Array) {
+  constructor(value: BitArray | Uint8Array | Uint16Array, mask: number) {
+    if (value instanceof Uint8Array || value instanceof Uint16Array) {
       this._bits = new BitArray(value);
     } else if (value instanceof BitArray) {
       this._bits = value.copy();
@@ -397,11 +391,15 @@ abstract class IP {
   abstract ipToString(): string;
 }
 
-class IPv4 extends IP {
+export class IPv4 extends IP {
   static readonly ipv4PartRegex = "(0*(?:25[0-5]|(?:2[0-4]|1\\d|[1-9]|)\\d))";
   static readonly ipRegex = new RegExp(
     `^${this.ipv4PartRegex}\\.${this.ipv4PartRegex}\\.${this.ipv4PartRegex}\\.${this.ipv4PartRegex}$`
   );
+
+  static isIPv4(value: string) {
+    return IPv4.ipRegex.test(value);
+  }
 
   constructor(value: string | number[] | Uint8Array | BitArray, mask: number) {
     if (value instanceof Uint8Array) {
@@ -502,7 +500,139 @@ class IPv4 extends IP {
   }
 }
 
-class IpNode {
+export class IPv6 extends IP {
+  static readonly ipv6Regex =
+    /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
+
+  static isIPv6(value: string) {
+    return IPv6.ipv6Regex.test(value);
+  }
+
+  constructor(value: string | number[] | Uint16Array | BitArray, mask: number) {
+    if (value instanceof Uint16Array) {
+      assert(
+        value.length === 8,
+        "Uint16Array must have 8 elements",
+        RangeError
+      );
+    } else if (value instanceof BitArray) {
+      assert(
+        value.length === 128,
+        "BitArray must have 128 elements",
+        RangeError
+      );
+    } else if (Array.isArray(value)) {
+      value = IPv6._parseArray(value);
+    } else if (typeof value === "string") {
+      value = IPv6._parseString(value);
+    }
+    super(value, mask);
+  }
+
+  static _parseString(value: string) {
+    assert(
+      IPv6.ipv6Regex.test(value),
+      `Invalid IPv6 address: ${value}`,
+      TypeError
+    );
+    const groups = new Uint16Array(8);
+    const halves = value.split("::");
+
+    if (halves.length === 2) {
+      let first = halves[0].split(":");
+      let last = halves[1].split(":");
+      if (first.length === 1 && first[0] === "") first = [];
+      if (last.length === 1 && last[0] === "") last = [];
+
+      const remaining = 8 - (first.length + last.length);
+      for (let i = 0; i < first.length; i++) {
+        groups[i] = parseInt(first[i], 16);
+      }
+      for (let i = 0; i < last.length; i++) {
+        groups[remaining + i] = parseInt(last[i], 16);
+      }
+    } else if (halves.length === 1) {
+      const address = value.split(":");
+      assert(address.length === 8, "Invalid IPv6 address", TypeError);
+      for (let i = 0; i < address.length; i++) {
+        const val = parseInt(address[i], 16);
+        assert(
+          !isNaN(val) && 0 <= val && val <= 0xffff,
+          `Invalid IPv6 address: ${value}`,
+          TypeError
+        );
+        groups[i] = val;
+      }
+    } else {
+      throw new TypeError(`Invalid IPv6 address: ${value}`);
+    }
+    return groups;
+  }
+
+  static _parseArray(value: number[]) {
+    assert(value.length === 8, "Array must have 4 elements", RangeError);
+    assert(
+      value.every((octet) => octet >= 0 && octet <= 0xffff),
+      "Elements of the array must be between 0 and 0xffff",
+      RangeError
+    );
+    return new Uint16Array(value);
+  }
+
+  get network() {
+    const networkBits = this._bits.copy();
+    networkBits.setToFalseAfter(this._mask);
+    return new IPv6(networkBits, this._mask);
+  }
+
+  get broadcast(): IPv6 {
+    throw new Error("No broadcast address for IPv6");
+  }
+
+  get numHosts() {
+    return this.numIPs;
+  }
+
+  get left() {
+    return new IPv6(this._left, this._mask + 1);
+  }
+
+  get right() {
+    return new IPv6(this._right, this._mask + 1);
+  }
+
+  get first(): IPv6 {
+    if (this._mask === this.maxMask) return this;
+    const firstBits = this._bits.copy();
+    firstBits.setToFalseAfter(this._mask);
+    return new IPv6(firstBits, this._mask);
+  }
+
+  get last(): IPv6 {
+    if (this._mask === this.maxMask) return this;
+    const lastBits = this._bits.copy();
+    lastBits.setToTrueAfter(this._mask);
+    return new IPv6(lastBits, this._mask);
+  }
+
+  getChildren() {
+    return [this.left, this.right] as [this, this];
+  }
+
+  toString() {
+    return `${this.ipToString()}/${this._mask}`;
+  }
+  ipToString() {
+    const groups = [];
+    const bits = this._bits.toUint16Array();
+    for (let i = 0; i < bits.length; i++) {
+      groups.push(bits[i].toString(16));
+    }
+    return `${groups.join(":")}`;
+  }
+}
+
+export class IpNode {
   constructor(
     private readonly _value: IP,
     private readonly _x: number,
@@ -563,7 +693,7 @@ class IpNode {
   }
 }
 
-class CanvasDrawer {
+export class CanvasDrawer {
   private readonly _canvas: HTMLCanvasElement;
   private readonly _ctx: CanvasRenderingContext2D;
   public onMouseClick?: (ip: IP) => void;
@@ -670,13 +800,12 @@ class CanvasDrawer {
   }
 }
 
-class InputManager {
+export class InputManager {
   private readonly _ipRoot: HTMLInputElement;
   private readonly _maskRoot: HTMLInputElement;
   private readonly _treeHeight: HTMLInputElement;
   private readonly _toNetwork: HTMLInputElement;
   public onUpdateIp?: OnUpdateIpCallback;
-  public mode: "ipv4" | "ipv6" = "ipv4";
   private _ip: IP;
   private _treeHeightValue: number;
   private _toNetworkValue: boolean;
@@ -714,16 +843,20 @@ class InputManager {
   private _onIpRootInput(ev: Event) {
     if (!(ev.target instanceof HTMLInputElement)) return;
     if (!ev.target.validity.valid) return;
+    let mask = this._ip.mask;
 
-    if (ev.target instanceof HTMLInputElement) {
-      if (IPv4.ipRegex.test(ev.target.value)) {
-        this._maskRoot.max = "32";
-        if (this._maskRoot.valueAsNumber > 32) this._maskRoot.value = "32";
-      } else if (ev.target.validity.valid) {
-        this._maskRoot.max = "128";
+    if (IPv4.isIPv4(ev.target.value)) {
+      this._maskRoot.max = "32";
+      if (this._maskRoot.valueAsNumber > 32) {
+        this._maskRoot.value = "32";
+        mask = 32;
       }
+      this._ip = new IPv4(ev.target.value, mask);
+    } else {
+      this._maskRoot.max = "128";
+      this._ip = new IPv6(ev.target.value, mask);
     }
-    this._ip = new IPv4(ev.target.value, this._ip.mask);
+
     this.onUpdateIp?.(this._ip, this._treeHeightValue, this._toNetworkValue);
   }
 
@@ -760,7 +893,7 @@ class InputManager {
   }
 }
 
-class InfoManager {
+export class InfoManager {
   private readonly _showIp: HTMLSpanElement;
   private readonly _showNetmask: HTMLSpanElement;
   private readonly _showNetwork: HTMLSpanElement;
@@ -804,13 +937,26 @@ class InfoManager {
       return;
     }
     this._showIp.textContent = ip.toString();
-    this._showNetmask.textContent = ip.netmask.join(".");
-    this._showNetwork.textContent = ip.network.ipToString();
-    this._showBroadcast.textContent = ip.broadcast.ipToString();
+    if (ip instanceof IPv4) {
+      this._showNetmask.textContent = ip.netmask.join(".");
+      this._showNetwork.textContent = ip.network.ipToString();
+      this._showBroadcast.textContent = ip.broadcast.ipToString();
+    } else {
+      const netmask: string[] = [];
+      ip.netmask.forEach((val) => netmask.push(val.toString(16)));
+      this._showNetmask.textContent = netmask.join(":");
+    }
     this._showMinIp.textContent = ip.first.ipToString();
     this._showMaxIp.textContent = ip.last.ipToString();
-    this._showNumIp.textContent = ip.numIPs.toString();
-    this._showNumHost.textContent = ip.numHosts.toString();
+    if (ip.maxMask - ip.mask < 31) {
+      this._showNumIp.textContent = ip.numIPs.toLocaleString();
+      this._showNumHost.textContent = ip.numHosts.toLocaleString();
+    } else {
+      this._showNumIp.textContent = "2^" + (ip.maxMask - ip.mask);
+      this._showNumHost.textContent = `2^${ip.maxMask - ip.mask} ${
+        ip instanceof IPv4 ? " - 2" : ""
+      }`;
+    }
   }
 }
 

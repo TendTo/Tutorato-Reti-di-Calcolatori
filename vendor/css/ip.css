@@ -6,6 +6,12 @@ body {
   margin: 0;
 }
 
+.wrapper {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -48,9 +54,22 @@ div:has(> #canvas) {
 }
 
 #show {
-  display: grid;
+  display: flex;
   min-width: 200px;
-  grid-template-columns: 1fr;
+  flex-direction: column;
+}
+
+footer {
+  padding: 8px;
+  background-color: #f3f3f3;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.warn {
+  color: red;
 }
 
 input:invalid {

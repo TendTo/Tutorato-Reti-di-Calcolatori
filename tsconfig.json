@@ -5,7 +5,7 @@
             "dom"
         ],
         "target": "ES6",
-        "module": "CommonJS",
+        "module": "ES6",
         "declaration": true,
         "declarationMap": true,
         "strict": true,
@@ -17,5 +17,5 @@
     },
     "include": [
         "vendor/**/*.ts"
-    ],
+, "vendor/ts/ip.test.ts"    ],
 }
