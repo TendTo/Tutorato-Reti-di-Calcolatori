@@ -367,6 +367,102 @@ Ricordatevi di cambiare il MAC address delle VM clonate.
 
 <!-- .element: class="fragment" -->
 
+<!-- New subsection -->
+
+### Eseguire più comandi contemporaneamente
+
+Quando si lancia un comando da terminale, il terminale rimane occupato fino a che il comando non termina.
+
+Questo può essere scomodo se si vuole eseguire più comandi che rimangono in esecuzione contemporaneamente, come ad esempio un server e un client.
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+#### Più terminali
+
+Il modo più semplice per eseguire più comandi contemporaneamente è quello di aprire più terminali:
+
+- **VsCode**: `Terminal` -> `New Terminal` (o `Split terminal`)
+- **ssh**: Lanciare una nuova connessione ssh in un nuovo terminale
+
+<!-- New subsection -->
+
+#### Comandi in background
+
+Un comando può essere eseguito in background aggiungendo `&` alla fine del comando.  
+I programmi in background non ricevono input da tastiera e non mostrano output sul terminale.
+
+```shell
+user@vm:~$ ./server 2000 & ./client 127.0.0.1 2000
+```
+
+Per vedere i comandi in background, si può usare il comando `jobs`.
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+```shell
+user@vm:~$ jobs
+[1]+  Running                 ./server &
+```
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+Per riportare un comando in background in foreground, si può usare il comando `fg`, potendolo poi interrompere con `Ctrl+C`.
+
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+```shell
+user@vm:~$ fg %1
+```
+
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+<!-- New subsection -->
+
+#### Terminal multiplexer
+
+Un terminal multiplexer è un software che permette di dividere una finestra di terminale in più parti, o pannelli indipendenti.
+
+Alcuni esempi sono:
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+- [tmux](httèps://github.com/tmux/tmux)
+- [screen](https://www.gnu.org/software/screen/)
+- [byobu](https://byobu.org/)
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!-- New subsection -->
+
+##### byobu
+
+Byobu è un frontend per tmux o screen, che permette di avere una serie di comandi predefiniti per la gestione delle sessioni.
+
+Per installarlo, basta usare il comando `apt`.
+
+```shell
+root@vm:~$ apt install byobu
+```
+
+Per avviarlo, basta digitare `byobu` da terminale.
+
+<!-- .element: class="fragment" -->
+
+<!-- New subsection -->
+
+##### byobu keybindings
+
+Byobu offre una serie di keybindings per la gestione delle sessioni.
+Ecco i più comuni:
+
+- `F2`: crea una nuova finestra
+- `F3` e `F4`: naviga tra le finestre
+- `shift + F2`: divide la finestra orizzontalmente
+- `shift + F3 / F4`: naviga tra i pannelli orizzontali
+- comando `exit`: chiude la finestra corrente
+
 <!-- New section -->
 
 ## Comandi shell utili
