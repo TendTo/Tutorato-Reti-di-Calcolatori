@@ -428,7 +428,7 @@ Alcuni esempi sono:
 
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
-- [tmux](httèps://github.com/tmux/tmux)
+- [tmux](https://github.com/tmux/tmux)
 - [screen](https://www.gnu.org/software/screen/)
 - [byobu](https://byobu.org/)
 
