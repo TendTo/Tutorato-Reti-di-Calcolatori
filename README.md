@@ -78,6 +78,7 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [enoteca](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/enoteca)                         | Compito 06/09/2023                  | TCP       | IPv6 |
 | [christmas](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/christmas)                     | Compito 06/12/2023                  | UDP       | IPv4 |
 | [caffe-sbagliato](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/caffe-sbagliato)         | Compito 14/02/2024                  | TCP       | IPv6 |
+| [cocco-bello](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/cocco-bello)                 | Compito 29/07/2024                  | TCP       | IPv4 |
 
 <!-- New section -->
 

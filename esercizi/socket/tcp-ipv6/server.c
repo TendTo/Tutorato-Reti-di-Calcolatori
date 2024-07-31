@@ -33,6 +33,8 @@ int main(int argc, char *argv[])
     local_addr.sin6_family = AF_INET6;
     inet_pton(AF_INET6, "::", &local_addr.sin6_addr);
     local_addr.sin6_port = htons(atoi(argv[1]));
+    // Se si utilizzano ip link local (che iniziano con fe80::) bisogna specificare l'interfaccia
+    // server_addr.sin6_scope_id = if_nametoindex("enp0s3"); // dove enp0s3 è il nome dell'interfaccia
 
     if ((bind(sockfd, (struct sockaddr *)&local_addr, len)) < 0)
         handle_error("Error bind\n");

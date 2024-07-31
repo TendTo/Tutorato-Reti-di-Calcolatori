@@ -29,6 +29,13 @@
 #include <unistd.h>
 #include "definitions.h"
 
+/**
+ * @brief Mostra un @p prompt all'utente e salva la risposta in @p response.
+ * @note La funzione rimuove il carattere di newline dalla stringa.
+ * @pre @p response deve essere in grado di contenere almeno @c MAX_BUFFER_SIZE caratteri.
+ * @param response[out] risposta scritta dall'utente
+ * @param prompt messaggio da mostrare all'utente
+ */
 void prompt(char response[MAX_BUFFER_SIZE], const char prompt[])
 {
     memset(response, '\0', MAX_BUFFER_SIZE);

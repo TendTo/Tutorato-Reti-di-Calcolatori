@@ -232,5 +232,5 @@ net.ipv4.ip_forward=1
 ### Soluzione: Programmazione Socket
 
 [server.c](./server.c)  
-[client.c](./client.c)
+[client.c](./client.c)  
 [definitions.h](./definitions.h)

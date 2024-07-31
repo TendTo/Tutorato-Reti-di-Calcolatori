@@ -64,6 +64,8 @@ int main(int argc, char *argv[])
     server_addr.sin6_family = AF_INET6;
     server_addr.sin6_port = htons(atoi(argv[2]));
     inet_pton(AF_INET6, argv[1], &server_addr.sin6_addr);
+    // Se si utilizzano ip link local (che iniziano con fe80::) bisogna specificare l'interfaccia
+    // server_addr.sin6_scope_id = if_nametoindex("enp0s3"); // dove enp0s3 è il nome dell'interfaccia
 
     while (1)
     {
