@@ -638,11 +638,21 @@ export class IpNode {
     private readonly _x: number,
     private readonly _y: number,
     private readonly _width: number,
-    private readonly _height: number
+    private readonly _height: number,
+    private _selected: boolean = false,
+    private _hidden: boolean = false
   ) {}
 
   get value() {
     return this._value;
+  }
+
+  get selected() {
+    return this._selected;
+  }
+
+  get hidden() {
+    return this._hidden;
   }
 
   isClicked(x: number, y: number) {
@@ -654,13 +664,29 @@ export class IpNode {
     );
   }
 
+  setSelected(value: boolean, canvas?: CanvasDrawer) {
+    this._selected = value;
+    if (value) this._hidden = false;
+    if (canvas) this.draw(canvas);
+  }
+
+  setHidden(value: boolean, canvas?: CanvasDrawer) {
+    this._hidden = value;
+    if (value) this._selected = false;
+    if (canvas) this.draw(canvas);
+  }
+
   draw(canvas: CanvasDrawer) {
+    if (this._hidden) {
+      canvas.clearRect(this._x, this._y, this._width, this._height);
+      return;
+    }
     canvas.drawRect(
       this._x,
       this._y,
       this._width,
       this._height,
-      "white",
+      this._selected ? "lightblue" : "white",
       "black"
     );
     const fontSize = Math.ceil(Math.min(16, this._width / 10));
@@ -714,13 +740,38 @@ export class CanvasDrawer {
 
   private _addListeners() {
     this._canvas.addEventListener("click", this._onMouseClick.bind(this));
+    this._canvas.addEventListener(
+      "contextmenu",
+      this._onMouseRightClick.bind(this)
+    );
   }
 
   private _onMouseClick(ev: MouseEvent) {
     for (const node of this._ipNodes) {
-      if (node.isClicked(ev.offsetX, ev.offsetY)) {
+      if (node.isClicked(ev.offsetX, ev.offsetY) && !node.hidden) {
         this.onMouseClick?.(node.value);
         break;
+      }
+    }
+  }
+
+  private _onMouseRightClick(ev: MouseEvent) {
+    ev.preventDefault();
+    for (let i = this._ipNodes.length - 1; i >= 0; i--) {
+      const node = this._ipNodes[i];
+      if (node.isClicked(ev.offsetX, ev.offsetY) && !node.hidden) {
+        const selected = !node.selected;
+        if (selected) this.onMouseClick?.(node.value);
+        node.setSelected(selected, this);
+
+        const queue = [(i + 1) * 2 - 1, (i + 1) * 2];
+
+        while (queue.length > 0) {
+          const idx = queue.shift();
+          if (idx === undefined || idx > this._ipNodes.length) continue;
+          this._ipNodes[idx].setHidden(selected, this);
+          queue.push((idx + 1) * 2 - 1, (idx + 1) * 2);
+        }
       }
     }
   }
@@ -735,6 +786,10 @@ export class CanvasDrawer {
 
   clear() {
     this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
+  }
+
+  clearRect(x: number, y: number, width: number, height: number) {
+    this._ctx.clearRect(x, y, width, height);
   }
 
   drawRect(

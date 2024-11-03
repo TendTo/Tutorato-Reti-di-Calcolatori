@@ -113,9 +113,15 @@ export declare class IpNode {
     private readonly _y;
     private readonly _width;
     private readonly _height;
-    constructor(_value: IP, _x: number, _y: number, _width: number, _height: number);
+    private _selected;
+    private _hidden;
+    constructor(_value: IP, _x: number, _y: number, _width: number, _height: number, _selected?: boolean, _hidden?: boolean);
     get value(): IP;
+    get selected(): boolean;
+    get hidden(): boolean;
     isClicked(x: number, y: number): boolean;
+    setSelected(value: boolean, canvas?: CanvasDrawer): void;
+    setHidden(value: boolean, canvas?: CanvasDrawer): void;
     draw(canvas: CanvasDrawer): void;
     getChildren(): [IpNode, IpNode];
 }
@@ -127,9 +133,11 @@ export declare class CanvasDrawer {
     constructor(selector?: string);
     private _addListeners;
     private _onMouseClick;
+    private _onMouseRightClick;
     get canvas(): HTMLCanvasElement;
     get context(): CanvasRenderingContext2D;
     clear(): void;
+    clearRect(x: number, y: number, width: number, height: number): void;
     drawRect(x: number, y: number, width: number, height: number, fill?: string, stroke?: string): void;
     drawText(text: string, x: number, y: number, { align, baseline, fill, font }?: TextOptions): void;
     drawLine(x1: number, y1: number, x2: number, y2: number, stroke?: string): void;
