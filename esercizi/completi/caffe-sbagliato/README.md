@@ -98,23 +98,23 @@ $$
 
 ```mermaid
 graph TD
-r{{rete\n2:4::0/64\n2^64 hosts}}
-s1{{sotto-rete\n2:4::0/65\n2^63 hosts}}
-s2{{sotto-rete\n2:4:0:0:8::0/65\n2^63 hosts}}
+r{{"`rete<br>2:4::0/64<br>2^64 hosts`"}}
+s1{{"`sotto-rete<br>2:4::0/65<br>2^63 hosts`"}}
+s2{{"`sotto-rete<br>2:4:0:0:8::0/65<br>2^63 hosts`"}}
 
 skip{{...molte maschere dopo...}}
 
-s3{{sotto-rete\n2:4::00:0/105\n8M hosts}}
-s4{{sotto-rete\n2:4::80:0/105\n8M hosts}}
+s3{{"`sotto-rete<br>2:4::00:0/105<br>8M hosts`"}}
+s4{{"`sotto-rete<br>2:4::80:0/105<br>8M hosts`"}}
 
-s5{{sotto-rete\n2:4::00:0/106\n4M hosts}}
-s6{{sotto-rete\n2:4::40:0/106\n4M hosts}}
+s5{{"`sotto-rete<br>2:4::00:0/106<br>4M hosts`"}}
+s6{{"`sotto-rete<br>2:4::40:0/106<br>4M hosts`"}}
 
-s7{{sotto-rete\n2:4::00:0/107\n2M hosts}}
-s8{{sotto-rete\n2:4::20:0/107\n2M hosts}}
+s7{{"`sotto-rete<br>2:4::00:0/107<br>2M hosts`"}}
+s8{{"`sotto-rete<br>2:4::20:0/107<br>2M hosts`"}}
 
-s9{{sotto-rete\n2:4::00:0/108\n1M hosts}}
-s10{{sotto-rete\n2:4::10:0/108\n1M hosts}}
+s9{{"`sotto-rete<br>2:4::00:0/108<br>1M hosts`"}}
+s10{{"`sotto-rete<br>2:4::10:0/108<br>1M hosts`"}}
 
 
 style s6 stroke:#f00,stroke-width:4px
@@ -142,17 +142,17 @@ flowchart TB
 r{{router}}
 
 subgraph l1[Lan1 - 2:4::40:0/106]
-    c11[Client 11\n2:4::40:1]
-    c12[Client 12\n2:4::40:2]
+    c11["`Client 11<br>2:4::40:1`"]
+    c12["`Client 12<br>2:4::40:2`"]
 end
 
 subgraph l2[Lan2 - 2:4::00:0/108]
-    c21[Client 21\n2:4::00:1]
-    c22[Client 22\n2:4::00:2]
+    c21["`Client 21<br>2:4::00:1`"]
+    c22["`Client 22<br>2:4::00:2`"]
 end
 
 subgraph l3[Lan3 - 2:4::20:0/107]
-    s[Server\n2:4::20:1]
+    s["`Server<br>2:4::20:1`"]
 end
 
 style l1 stroke:#f00

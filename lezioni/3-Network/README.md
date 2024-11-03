@@ -69,24 +69,24 @@ Se invece viene scritta da sola, si usa la notazione puntata.
 Una rete, individuata dalla parte dell'ip fissata dalla maschera, può essere ulteriormente divisa in sotto-reti che condividono la stessa sequenza iniziale, ma con una maschera più lunga.
 
 ```mermaid
-graph TD
-r{{rete\n192.168.1.0/24}}
-s1{{sotto-rete\n192.168.1.0/25}}
-s2{{sotto-rete\n192.168.1.128/25}}
-s3{{sotto-rete\n192.168.1.0/26}}
-s4{{sotto-rete\n192.168.1.64/26}}
-s5{{sotto-rete\n192.168.1.128/26}}
-s6{{sotto-rete\n192.168.1.192/26}}
-s7{{sotto-rete\n192.168.1.0/27}}
-s8{{sotto-rete\n192.168.1.32/27}}
-s9{{sotto-rete\n192.168.1.64/27}}
-s10{{sotto-rete\n192.168.1.96/27}}
-s11{{sotto-rete\n192.168.1.128/27}}
-s12{{sotto-rete\n192.168.1.160/27}}
-s13{{sotto-rete\n192.168.1.192/27}}
-s14{{sotto-rete\n192.168.1.224/27}}
-s15{{sotto-rete\n192.168.1.0/28}}
-s16{{sotto-rete\n192.168.1.16/28}}
+flowchart TD
+r{{rete<br>92.168.1.0/24}}
+s1{{"`sotto-rete<br>192.168.1.0/25`"}}
+s2{{"`sotto-rete<br>192.168.1.128/25`"}}
+s3{{"`sotto-rete<br>192.168.1.0/26`"}}
+s4{{"`sotto-rete<br>192.168.1.64/26`"}}
+s5{{"`sotto-rete<br>192.168.1.128/26`"}}
+s6{{"`sotto-rete<br>192.168.1.192/26`"}}
+s7{{"`sotto-rete<br>192.168.1.0/27`"}}
+s8{{"`sotto-rete<br>192.168.1.32/27`"}}
+s9{{"`sotto-rete<br>192.168.1.64/27`"}}
+s10{{"`sotto-rete<br>192.168.1.96/27`"}}
+s11{{"`sotto-rete<br>192.168.1.128/27`"}}
+s12{{"`sotto-rete<br>192.168.1.160/27`"}}
+s13{{"`sotto-rete<br>192.168.1.192/27`"}}
+s14{{"`sotto-rete<br>192.168.1.224/27`"}}
+s15{{"`sotto-rete<br>192.168.1.0/28`"}}
+s16{{"`sotto-rete<br>192.168.1.16/28`"}}
 
     r -- 0 --> s1
     r -- 1 --> s2
@@ -201,7 +201,7 @@ Anche in IPv6 è possibile dividere una rete in sotto-reti, seguendo le stesse r
 
 ```mermaid
 graph TD
-r{{rete\n2:4::FFF0:0000:0000/96}}
+r{{"`rete<br>2:4::FFF0:0000:0000/96`"}}
 s1{{2:4::FFF0:0000:0000/97}}
 s2{{2:4::FFF0:8000:0000/97}}
 
@@ -311,15 +311,15 @@ Per fare un po' di pratica e vedere i concetti base, effettueremo il setup di un
 ```mermaid
 flowchart LR
 
-r{{router\n10.0.1.254\n192.168.1.254}}
+r{{"`router<br>10.0.1.254<br>92.168.1.254`"}}
 
 subgraph Lan1_10.0.1.0/24
-    c[client\n10.0.1.1]
+    c["`client<br>10.0.1.1`"]
 end
 
 
 subgraph Lan2_192.168.1.0/24
-    s[server\n192.168.1.1]
+    s["`server<br>192.168.1.1`"]
 end
 
 r --10.0.1.254--- Lan1_10.0.1.0/24

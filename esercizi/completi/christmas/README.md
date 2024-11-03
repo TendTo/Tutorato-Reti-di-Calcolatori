@@ -74,21 +74,21 @@ Si utilizzino le Socket **UDP** per la comunicazione.
 
 ```mermaid
 graph TD
-r{{rete\n165.64.0.0/16\n64k hosts}}
-s1{{sotto-rete\n165.64.0.0/17\n32k hosts}}
-s2{{sotto-rete\n165.64.128.0/17\n32k hosts}}
-s3{{sotto-rete\n165.64.0.0/18\n16k hosts}}
-s4{{sotto-rete\n165.64.64.0/18\n16k hosts}}
-s5{{sotto-rete\n165.64.0.0/19\n8k hosts}}
-s6{{sotto-rete\n165.64.32.0/19\n8k hosts}}
-s7{{sotto-rete\n165.64.0.0/20\n4k hosts}}
-s8{{sotto-rete\n165.64.16.0/20\n4k hosts}}
-s9{{sotto-rete\n165.64.0.0/21\n2046 hosts}}
-s10{{sotto-rete\n165.64.8.0/21\n2046 hosts}}
-s11{{sotto-rete\n165.64.8.0/22\n1022 hosts}}
-s12{{sotto-rete\n165.64.12.0/22\n1022 hosts}}
-s13{{sotto-rete\n165.64.8.0/23\n510 hosts}}
-s14{{sotto-rete\n165.64.10.0/23\n510 hosts}}
+r{{"`rete<br>165.64.0.0/16<br>64k hosts`"}}
+s1{{"`sotto-rete<br>165.64.0.0/17<br>32k hosts`"}}
+s2{{"`sotto-rete<br>165.64.128.0/17<br>32k hosts`"}}
+s3{{"`sotto-rete<br>165.64.0.0/18<br>16k hosts`"}}
+s4{{"`sotto-rete<br>165.64.64.0/18<br>16k hosts`"}}
+s5{{"`sotto-rete<br>165.64.0.0/19<br>8k hosts`"}}
+s6{{"`sotto-rete<br>165.64.32.0/19<br>8k hosts`"}}
+s7{{"`sotto-rete<br>165.64.0.0/20<br>4k hosts`"}}
+s8{{"`sotto-rete<br>165.64.16.0/20<br>4k hosts`"}}
+s9{{"`sotto-rete<br>165.64.0.0/21<br>2046 hosts`"}}
+s10{{"`sotto-rete<br>165.64.8.0/21<br>2046 hosts`"}}
+s11{{"`sotto-rete<br>165.64.8.0/22<br>1022 hosts`"}}
+s12{{"`sotto-rete<br>165.64.12.0/22<br>1022 hosts`"}}
+s13{{"`sotto-rete<br>165.64.8.0/23<br>510 hosts`"}}
+s14{{"`sotto-rete<br>165.64.10.0/23<br>510 hosts`"}}
 
 style s9 stroke:#f00,stroke-width:4px
 style s13 stroke:#0f0,stroke-width:4px
@@ -118,12 +118,12 @@ flowchart TB
 r{{router}}
 
 subgraph l1[Lan1 165.64.0.0/21]
-    c1[Client 1\n165.64.0.1]
-    c2[Client 2\n165.64.0.2]
+    c1["`Client 1<br>165.64.0.1`"]
+    c2["`Client 2<br>165.64.0.2`"]
 end
 
 subgraph l2[Lan2 165.64.8.0/23]
-    s[Server\n165.64.8.1]
+    s["`Server<br>165.64.8.1`"]
 end
 
 style l1 stroke:#f00

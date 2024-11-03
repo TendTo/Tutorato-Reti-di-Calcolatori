@@ -94,15 +94,15 @@ s ->> c2: game result
 
 ```mermaid
 graph TD
-r{{rete\n172.0.0.0/20\n4k hosts}}
-s1{{sotto-rete\n172.0.0.0/21\n2k hosts}}
-s2{{sotto-rete\n172.0.8.0/21\n2k hosts}}
-s3{{sotto-rete\n172.0.0.0/22\n1022 hosts}}
-s4{{sotto-rete\n172.0.4.0/22\n1022 hosts}}
-s5{{sotto-rete\n172.0.0.0/23\n510 hosts}}
-s6{{sotto-rete\n172.0.2.0/23\n510 hosts}}
-s7{{sotto-rete\n172.0.0.0/24\n254 hosts}}
-s8{{sotto-rete\n172.0.1.0/24\n254 hosts}}
+r{{"`rete<br>172.0.0.0/20<br>4k hosts`"}}
+s1{{"`sotto-rete<br>172.0.0.0/21<br>2k hosts`"}}
+s2{{"`sotto-rete<br>172.0.8.0/21<br>2k hosts`"}}
+s3{{"`sotto-rete<br>172.0.0.0/22<br>1022 hosts`"}}
+s4{{"`sotto-rete<br>172.0.4.0/22<br>1022 hosts`"}}
+s5{{"`sotto-rete<br>172.0.0.0/23<br>510 hosts`"}}
+s6{{"`sotto-rete<br>172.0.2.0/23<br>510 hosts`"}}
+s7{{"`sotto-rete<br>172.0.0.0/24<br>254 hosts`"}}
+s8{{"`sotto-rete<br>172.0.1.0/24<br>254 hosts`"}}
 
 
 style s6 stroke:#f00,stroke-width:4px
@@ -128,15 +128,15 @@ flowchart TB
 r{{router}}
 
 subgraph lA[LanA 172.0.2.0/23]
-    s[server\n172.0.2.1]
+    s["`server<br>172.0.2.1`"]
 end
 
 subgraph lB[LanB 172.0.0.0/24]
-    c1[client1\n172.0.0.1]
+    c1["`client1<br>172.0.0.1`"]
 end
 
 subgraph lC[LanC 172.0.1.0/24]
-    c2[client2\n172.0.1.1]
+    c2["`client2<br>172.0.1.1`"]
 end
 
 style lA stroke:#f00

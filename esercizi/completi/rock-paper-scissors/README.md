@@ -100,25 +100,25 @@ s ->> c2: game result
 
 ```mermaid
 graph TD
-r{{rete\n10.0.0.0/16\n64k hosts}}
-s1{{sotto-rete\n10.0.0.0/17\n32k hosts}}
-s2{{sotto-rete\n10.0.128.0/17\n32k hosts}}
-s3{{sotto-rete\n10.0.0.0/18\n16k hosts}}
-s4{{sotto-rete\n10.0.64.0/18\n16k hosts}}
-s5{{sotto-rete\n10.0.0.0/19\n8k hosts}}
-s6{{sotto-rete\n10.0.32.0/19\n8k hosts}}
-s7{{sotto-rete\n10.0.0.0/20\n4k hosts}}
-s8{{sotto-rete\n10.0.16.0/20\n4k hosts}}
-s9{{sotto-rete\n10.0.0.0/21\n2k hosts}}
-s10{{sotto-rete\n10.0.8.0/21\n2k hosts}}
-s11{{sotto-rete\n10.0.0.0/22\n1022 hosts}}
-s12{{sotto-rete\n10.0.4.0/22\n1022 hosts}}
-s13{{sotto-rete\n10.0.0.0/23\n510 hosts}}
-s14{{sotto-rete\n10.0.2.0/23\n510 hosts}}
-s15{{sotto-rete\n10.0.0.0/24\n254 hosts}}
-s16{{sotto-rete\n10.0.1.0/24\n254 hosts}}
-s17{{sotto-rete\n10.0.0.0/25\n126 hosts}}
-s18{{sotto-rete\n10.0.0.128/25\n126 hosts}}
+r{{"`rete<br>10.0.0.0/16<br>64k hosts`"}}
+s1{{"`sotto-rete<br>10.0.0.0/17<br>32k hosts`"}}
+s2{{"`sotto-rete<br>10.0.128.0/17<br>32k hosts`"}}
+s3{{"`sotto-rete<br>10.0.0.0/18<br>16k hosts`"}}
+s4{{"`sotto-rete<br>10.0.64.0/18<br>16k hosts`"}}
+s5{{"`sotto-rete<br>10.0.0.0/19<br>8k hosts`"}}
+s6{{"`sotto-rete<br>10.0.32.0/19<br>8k hosts`"}}
+s7{{"`sotto-rete<br>10.0.0.0/20<br>4k hosts`"}}
+s8{{"`sotto-rete<br>10.0.16.0/20<br>4k hosts`"}}
+s9{{"`sotto-rete<br>10.0.0.0/21<br>2k hosts`"}}
+s10{{"`sotto-rete<br>10.0.8.0/21<br>2k hosts`"}}
+s11{{"`sotto-rete<br>10.0.0.0/22<br>1022 hosts`"}}
+s12{{"`sotto-rete<br>10.0.4.0/22<br>1022 hosts`"}}
+s13{{"`sotto-rete<br>10.0.0.0/23<br>510 hosts`"}}
+s14{{"`sotto-rete<br>10.0.2.0/23<br>510 hosts`"}}
+s15{{"`sotto-rete<br>10.0.0.0/24<br>254 hosts`"}}
+s16{{"`sotto-rete<br>10.0.1.0/24<br>254 hosts`"}}
+s17{{"`sotto-rete<br>10.0.0.0/25<br>126 hosts`"}}
+s18{{"`sotto-rete<br>10.0.0.128/25<br>126 hosts`"}}
 
 
 style s12 stroke:#f00,stroke-width:4px
@@ -154,15 +154,15 @@ flowchart TB
 r{{router}}
 
 subgraph lA[LanA 10.0.4.0/22]
-    s[server\n10.0.4.1]
+    s["`server<br>10.0.4.1`"]
 end
 
 subgraph lB[LanB 10.0.2.0/23]
-    c1[client1\n10.0.2.1]
+    c1["`client1<br>10.0.2.1`"]
 end
 
 subgraph lC[LanC 10.0.0.0/25]
-    c2[client2\n10.0.0.1]
+    c2["`client2<br>10.0.0.1`"]
 end
 
 style lA stroke:#f00

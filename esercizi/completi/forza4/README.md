@@ -132,21 +132,21 @@ end
 
 ```mermaid
 graph TD
-r{{rete\n134.16.0.0/16\n64k hosts}}
-s1{{sotto-rete\n134.16.0.0/17\n32k hosts}}
-s2{{sotto-rete\n134.16.128.0/17\n32k hosts}}
-s3{{sotto-rete\n134.16.0.0/18\n16k hosts}}
-s4{{sotto-rete\n134.16.64.0/18\n16k hosts}}
-s5{{sotto-rete\n134.16.0.0/19\n8k hosts}}
-s6{{sotto-rete\n134.16.32.0/19\n8k hosts}}
-s7{{sotto-rete\n134.16.0.0/20\n4k hosts}}
-s8{{sotto-rete\n134.16.16.0/20\n4k hosts}}
-s9{{sotto-rete\n134.16.0.0/21\n2k hosts}}
-s10{{sotto-rete\n134.16.8.0/21\n2k hosts}}
-s11{{sotto-rete\n134.16.16.0/21\n2k hosts}}
-s12{{sotto-rete\n134.16.24.0/21\n2k hosts}}
-s13{{sotto-rete\n134.16.16.0/22\n1022 hosts}}
-s14{{sotto-rete\n134.16.20.0/22\n1022 hosts}}
+r{{"`rete<br>134.16.0.0/16<br>64k hosts`"}}
+s1{{"`sotto-rete<br>134.16.0.0/17<br>32k hosts`"}}
+s2{{"`sotto-rete<br>134.16.128.0/17<br>32k hosts`"}}
+s3{{"`sotto-rete<br>134.16.0.0/18<br>16k hosts`"}}
+s4{{"`sotto-rete<br>134.16.64.0/18<br>16k hosts`"}}
+s5{{"`sotto-rete<br>134.16.0.0/19<br>8k hosts`"}}
+s6{{"`sotto-rete<br>134.16.32.0/19<br>8k hosts`"}}
+s7{{"`sotto-rete<br>134.16.0.0/20<br>4k hosts`"}}
+s8{{"`sotto-rete<br>134.16.16.0/20<br>4k hosts`"}}
+s9{{"`sotto-rete<br>134.16.0.0/21<br>2k hosts`"}}
+s10{{"`sotto-rete<br>134.16.8.0/21<br>2k hosts`"}}
+s11{{"`sotto-rete<br>134.16.16.0/21<br>2k hosts`"}}
+s12{{"`sotto-rete<br>134.16.24.0/21<br>2k hosts`"}}
+s13{{"`sotto-rete<br>134.16.16.0/22<br>1022 hosts`"}}
+s14{{"`sotto-rete<br>134.16.20.0/22<br>1022 hosts`"}}
 
 style s9 stroke:#f00,stroke-width:4px
 style s10 stroke:#0f0,stroke-width:4px
@@ -177,15 +177,15 @@ flowchart TB
 r{{router}}
 
 subgraph l1[Lan1 134.16.0.0/21]
-    c1[Client 1\n134.16.0.1]
+    c1["`Client 1<br>134.16.0.1`"]
 end
 
 subgraph l2[Lan2 134.16.8.0/21]
-    c2[Client 2\n134.16.8.1]
+    c2["`Client 2<br>134.16.8.1`"]
 end
 
 subgraph l3[Lan3 134.16.16.0/22]
-    s[Server\n134.16.16.1]
+    s["`Server<br>134.16.16.1`"]
 end
 
 style l1 stroke:#f00

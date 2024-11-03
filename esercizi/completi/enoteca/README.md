@@ -70,30 +70,30 @@ Nel caso in cui la quantità richiesta non sia disponibile, il **server** invier
 
 ```mermaid
 graph TD
-r{{rete\n2:3::0/64\n2^64 hosts}}
-s1{{sotto-rete\n2:3::0/65\n2^63 hosts}}
-s2{{sotto-rete\n2:3:0:0:8::0/65\n2^63 hosts}}
+r{{"`rete<br>2:3::0/64<br>2^64 hosts`"}}
+s1{{"`sotto-rete<br>2:3::0/65<br>2^63 hosts`"}}
+s2{{"`sotto-rete<br>2:3:0:0:8::0/65<br>2^63 hosts`"}}
 
 skip{{...molte maschere dopo...}}
 
-s3{{sotto-rete\n2:3::0/116\n4096 hosts}}
-s4{{sotto-rete\n2:3::1000/116\n4096 hosts}}
+s3{{"`sotto-rete<br>2:3::0/116<br>4096 hosts`"}}
+s4{{"`sotto-rete<br>2:3::1000/116<br>4096 hosts`"}}
 
-s5{{sotto-rete\n2:3::0/117\n2048 hosts}}
-s6{{sotto-rete\n2:3::800/117\n2048 hosts}}
-s7{{sotto-rete\n2:3::0/118\n1024 hosts}}
-s8{{sotto-rete\n2:3::400/118\n1024 hosts}}
-s9{{sotto-rete\n2:3::0/119\n512 hosts}}
-s10{{sotto-rete\n2:3::200/119\n512 hosts}}
-s11{{sotto-rete\n2:3::0/120\n256 hosts}}
-s12{{sotto-rete\n2:3::100/120\n256 hosts}}
+s5{{"`sotto-rete<br>2:3::0/117<br>2048 hosts`"}}
+s6{{"`sotto-rete<br>2:3::800/117<br>2048 hosts`"}}
+s7{{"`sotto-rete<br>2:3::0/118<br>1024 hosts`"}}
+s8{{"`sotto-rete<br>2:3::400/118<br>1024 hosts`"}}
+s9{{"`sotto-rete<br>2:3::0/119<br>512 hosts`"}}
+s10{{"`sotto-rete<br>2:3::200/119<br>512 hosts`"}}
+s11{{"`sotto-rete<br>2:3::0/120<br>256 hosts`"}}
+s12{{"`sotto-rete<br>2:3::100/120<br>256 hosts`"}}
 
-ss5{{sotto-rete\n2:3::1000/117\n2048 hosts}}
-ss6{{sotto-rete\n2:3::1800/117\n2048 hosts}}
-ss7{{sotto-rete\n2:3::1000/118\n1024 hosts}}
-ss8{{sotto-rete\n2:3::1400/118\n1024 hosts}}
-ss9{{sotto-rete\n2:3::1000/119\n512 hosts}}
-ss10{{sotto-rete\n2:3::1200/119\n512 hosts}}
+ss5{{"`sotto-rete<br>2:3::1000/117<br>2048 hosts`"}}
+ss6{{"`sotto-rete<br>2:3::1800/117<br>2048 hosts`"}}
+ss7{{"`sotto-rete<br>2:3::1000/118<br>1024 hosts`"}}
+ss8{{"`sotto-rete<br>2:3::1400/118<br>1024 hosts`"}}
+ss9{{"`sotto-rete<br>2:3::1000/119<br>512 hosts`"}}
+ss10{{"`sotto-rete<br>2:3::1200/119<br>512 hosts`"}}
 
 
 style s11 stroke:#f00,stroke-width:4px

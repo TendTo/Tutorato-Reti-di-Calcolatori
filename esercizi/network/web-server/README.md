@@ -16,19 +16,19 @@ Il server deve quindi essere in grado di decidere dove inviare i pacchetti, vers
 flowchart LR
 
 subgraph Internet_192.168.1.0/24
-    c[client\n192.168.1.1]
+    c["`client<br>192.168.1.1`"]
 end
 
 subgraph Lan1_10.0.1.0/24
-    s[server\n10.0.1.1]
+    s["`server<br>10.0.1.1`"]
 end
 
 subgraph Lan2_172.16.0.0/16
-    db[database\n172.16.2.2]
+    db["`database<br>172.16.2.2`"]
 end
 
-re{{router ISP\n192.168.1.254\n10.0.1.254}}
-rb{{router interno\n10.0.1.253\n172.16.1.253}}
+re{{"`router ISP<br>192.168.1.254<br>10.0.1.254`"}}
+rb{{"`router interno<br>10.0.1.253<br>172.16.1.253`"}}
 
 re --192.168.1.254--- Internet_192.168.1.0/24
 re --10.0.1.254--- Lan1_10.0.1.0/24
