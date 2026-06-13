@@ -6,7 +6,7 @@
 }
 
 .scrollable {
-  overflow-y: scroll !important;
+  overflow-y: auto !important;
   overflow-x: hidden !important;
   height: 100vh;
 }

@@ -13,17 +13,7 @@ Tutorato del corso di [Reti di Calcolatori](http://web.dmi.unict.it/corsi/l-31/i
 
 ### Orario
 
-Il tutorato verrà erogato
-
-- **Lunedì, 15:00 - 18:00**
-- **Mercoledì, 15:00 - 18:00**
-
-Ci sarà inoltre ricevimento
-
-- **Lunedì, 08:00 - 10:00 e 14:00 - 15:00**
-- **Mercoledì, 08:00 - 10:00 e 14:00 - 15:00**
-
-Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5NDc8).
+Il tutorato si è concluso, ma il materiale rimarrà disponibile per chiunque voglia consultarlo.
 
 <!-- New section -->
 
@@ -46,6 +36,8 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 
 ## Esercizi
 
+<div class="scrollable">
+
 | Esercizio                                                                                                                                     | Descrizione                                                                                                                  | Trasporto | Ip   | Data       |
 | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------- | ---- | ---------- |
 | [udp](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/udp)                                                 | Semplice client-server                                                                                                       | UDP       | IPv4 | 12/05/2023 |
@@ -65,9 +57,13 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [rock-paper-scissors-threads](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/rock-paper-scissors-threads) | Esercitazione con thread e semafori                                                                                          | TCP       | IPv4 |            |
 | [dijkstra](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/socket/dijkstra)                                       | Tabelle di routing con Dijkstra                                                                                              | /         | /    |            |
 
+</div>
+
 <!-- New section -->
 
 ## Esercizi completi
+
+<div class="scrollable">
 
 | Esercizio                                                                                                                       | Descrizione                         | Trasporto | Ip   |
 | ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | --------- | ---- |
@@ -80,6 +76,8 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 | [caffe-sbagliato](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/caffe-sbagliato)         | Compito 14/02/2024                  | TCP       | IPv6 |
 | [cocco-bello](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/blob/master/esercizi/completi/cocco-bello)                 | Compito 29/07/2024                  | TCP       | IPv4 |
 
+</div>
+
 <!-- New section -->
 
 ## Ip Tree Visualizer
@@ -87,8 +85,6 @@ Per eventuali cambi, verificare il [gruppo telegram](https://t.me/+atIlrFYsi3I5N
 L'[IP Tree Visualiser](https://tendto.github.io/Tutorato-Reti-di-Calcolatori/ip) è una utility che permette di visualizzare l'indirizzamento IP in modo gerarchico tramite un albero binario.
 
 Supporta sia IPv4 che IPv6.
-
-Poiché non è stato testato a sufficienza, si consiglia di utilizzarlo con cautela e riportare [eventuali bug](https://github.com/TendTo/Tutorato-Reti-di-Calcolatori/issues).
 
 <!-- .element: class="fragment" -->
 
